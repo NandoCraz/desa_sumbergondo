@@ -1,0 +1,54 @@
+<?php
+
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DashboardUserController;
+use App\Http\Controllers\DataBarangController;
+use App\Http\Controllers\DataKategoriController;
+use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+// ==== Login and Register Routes ====
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+Route::post('/register', [RegisterController::class, 'register'])->middleware('guest');
+
+
+// ==== Admin Routes ====
+Route::get('/dashboard-admin', [DashboardAdminController::class, 'index'])->middleware('admin');
+Route::get('/master/data-kategori/list/{kategori:id}', [DataKategoriController::class, 'list'])->middleware('admin');
+Route::resource('/master/data-kategori', DataKategoriController::class)->middleware('admin');
+Route::resource('/master/data-barang', DataBarangController::class)->middleware('admin');
+
+
+// ==== User Routes ====
+Route::get('/', [DashboardUserController::class, 'index']);
+Route::get('/produk', [DashboardUserController::class, 'getProduk']);
+Route::get('/single-produk/{barang:uuid}', [DashboardUserController::class, 'singleProduk']);
+Route::get('/produk/kategori/{kategori:id}', [DashboardUserController::class, 'getProdukByKategori']);
+Route::get('/keranjang', [KeranjangController::class, 'index'])->middleware('auth');
+Route::post('/keranjang/{barang:id}', [KeranjangController::class, 'addToCart'])->middleware('auth');
+Route::post('/keranjang/{keranjang:id}/update', [KeranjangController::class, 'updateCart'])->middleware('auth');
+Route::delete('/keranjang/hapus/{keranjang:id}', [KeranjangController::class, 'hapus'])->middleware('auth');
+Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('auth');
