@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('stok');
             $table->foreignId('kategori_id');
             $table->string('deskripsi');
+            $table->double('berat');
             $table->string('picture_barang');
             $table->timestamps();
         });

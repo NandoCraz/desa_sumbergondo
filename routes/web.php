@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DaftarAlamatController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\DataKategoriController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OngkirController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,16 +35,25 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'register'])->middleware('guest');
+// ==== End Login and Register Routes ====
 
 
 // ==== Admin Routes ====
+
+// Manual Route
 Route::get('/dashboard-admin', [DashboardAdminController::class, 'index'])->middleware('admin');
 Route::get('/master/data-kategori/list/{kategori:id}', [DataKategoriController::class, 'list'])->middleware('admin');
+
+// Resource Route
 Route::resource('/master/data-kategori', DataKategoriController::class)->middleware('admin');
 Route::resource('/master/data-barang', DataBarangController::class)->middleware('admin');
 
+// ==== End Admin Routes ====
+
 
 // ==== User Routes ====
+
+// Manual Route
 Route::get('/', [DashboardUserController::class, 'index']);
 Route::get('/produk', [DashboardUserController::class, 'getProduk']);
 Route::get('/single-produk/{barang:uuid}', [DashboardUserController::class, 'singleProduk']);
@@ -52,3 +63,9 @@ Route::post('/keranjang/{barang:id}', [KeranjangController::class, 'addToCart'])
 Route::post('/keranjang/{keranjang:id}/update', [KeranjangController::class, 'updateCart'])->middleware('auth');
 Route::delete('/keranjang/hapus/{keranjang:id}', [KeranjangController::class, 'hapus'])->middleware('auth');
 Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('auth');
+Route::get('/checkout/get_data', [OngkirController::class, 'provinces'])->name('checkout.get_data')->middleware('auth');
+
+// Resource Route
+Route::resource('/daftar-alamat', DaftarAlamatController::class)->middleware('auth');
+
+// ==== End User Routes ====

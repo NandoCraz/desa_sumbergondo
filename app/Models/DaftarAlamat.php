@@ -11,4 +11,19 @@ class DaftarAlamat extends Model
     use HasFactory, Uuid;
 
     protected $guarded = ["uuid"];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function provinsi()
+    {
+        return $this->belongsTo(Provinsi::class);
+    }
+
+    public function kota()
+    {
+        return $this->belongsTo(Kota::class);
+    }
 }

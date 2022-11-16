@@ -48,7 +48,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Selamat Datang Kembali!</h1>
                                     </div>
-                                    <form action="/login" method="POST" class="user" autocomplete="off">
+                                    <form action="/login" method="POST" class="user">
                                         @csrf
                                         <div class="form-group">
                                             <input type="email"

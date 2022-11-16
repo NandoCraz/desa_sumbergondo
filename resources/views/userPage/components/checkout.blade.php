@@ -1,3 +1,4 @@
+{{-- @dd($keranjangs->subtotal) --}}
 @extends('userPage.layouts.main')
 @section('container')
     <!-- breadcrumb-section -->
@@ -17,6 +18,12 @@
 
     <!-- check out section -->
     <div class="checkout-section mt-150 mb-150">
+        @if (session('berhasil'))
+            <div class="alert alert-success mb-3 col-lg-10" role="alert">
+                {{ session('berhasil') }}
+            </div>
+        @endif
+        <form action="" method="post"></form>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -27,7 +34,7 @@
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" type="button" data-toggle="collapse"
                                             data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Billing Address
+                                            Pengiriman
                                         </button>
                                     </h5>
                                 </div>
@@ -36,15 +43,19 @@
                                     data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="billing-address-form">
-                                            <form action="index.html">
-                                                <p><input type="text" placeholder="Name"></p>
-                                                <p><input type="email" placeholder="Email"></p>
-                                                <p><input type="text" placeholder="Address"></p>
-                                                <p><input type="tel" placeholder="Phone"></p>
-                                                <p>
-                                                    <textarea name="bill" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea>
-                                                </p>
-                                            </form>
+                                            <div class="mb-3">
+                                                <label for="">Ekspedia</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>-- Pilih Ekspedia --</option>
+                                                    <option value="1">JNE</option>
+                                                    <option value="2">TIKI</option>
+                                                    <option value="3">POS</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="catatan" class="form-label">Catatan :</label>
+                                                <textarea class="form-control" id="catatan" name="catatan" rows="3" style="resize: none"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +65,7 @@
                                     <h5 class="mb-0">
                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                             data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Shipping Address
+                                            Daftar Alamat
                                         </button>
                                     </h5>
                                 </div>
@@ -62,18 +73,35 @@
                                     data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="shipping-address-form">
-                                            <p>Your shipping address form is here.</p>
+                                            <button type="button" class="btn btn-success" data-toggle="modal"
+                                                data-target="#exampleModal">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> Tambah Daftar Alamat
+                                            </button>
+                                            @include('userPage.partials.modal.daftar_alamat')
+                                            @if ($daftar_alamats->count() > 0)
+                                                <div class="mt-5">
+                                                    <label for="">Alamat Tujuan</label>
+                                                    <select class="form-select">
+                                                        <option>-- Pilih Alamat Tujuan --</option>
+                                                        @foreach ($daftar_alamats as $daftar_alamat)
+                                                            <option value="{{ $daftar_alamat->id }}">{{ $daftar_alamat->alamat }},
+                                                                {{ $daftar_alamat->kode_pos }}, {{ $daftar_alamat->provinsi->nama_provinsi }}, {{ $daftar_alamat->kota->nama_kab_kota }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card single-accordion">
+                            <div class="card
+                                                        single-accordion">
                                 <div class="card-header" id="headingThree">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                             data-target="#collapseThree" aria-expanded="false"
                                             aria-controls="collapseThree">
-                                            Card Details
+                                            Detail Pesanan
                                         </button>
                                     </h5>
                                 </div>
@@ -81,7 +109,38 @@
                                     data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="card-details">
-                                            <p>Your card details goes here.</p>
+                                            <table class="cart-table">
+                                                <thead class="cart-table-head">
+                                                    <tr class="table-head-row">
+                                                        <th class="product-image">Picture</th>
+                                                        <th class="product-name">Nama Barang</th>
+                                                        <th class="product-price">Harga</th>
+                                                        <th class="product-quantity">Kuantitas</th>
+                                                        <th class="product-total">Subtotal</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($keranjangs as $keranjang)
+                                                        <tr class="table-body-row">
+                                                            <td class="product-image"><img
+                                                                    src="{{ asset('storage/' . $keranjang->barang->picture_barang) }}"
+                                                                    alt=""></td>
+                                                            <td class="product-name">
+                                                                {{ $keranjang->barang->nama_barang }}
+                                                            </td>
+                                                            <td class="product-price">Rp.
+                                                                {{ number_format($keranjang->barang->harga) }}
+                                                            </td>
+                                                            <td class="product-quantity text-center">
+                                                                {{ $keranjang->kuantitas }}
+                                                            </td>
+                                                            <td class="product-total">Rp.
+                                                                {{ number_format($keranjang->subtotal) }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -96,48 +155,37 @@
                         <table class="order-details">
                             <thead>
                                 <tr>
-                                    <th>Your order Details</th>
-                                    <th>Price</th>
+                                    <th>Detail Pesanan</th>
+                                    <th>Harga</th>
+                                    <th>Kuantitas</th>
                                 </tr>
                             </thead>
                             <tbody class="order-details-body">
-                                <tr>
-                                    <td>Product</td>
-                                    <td>Total</td>
-                                </tr>
-                                <tr>
-                                    <td>Strawberry</td>
-                                    <td>$85.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Berry</td>
-                                    <td>$70.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Lemon</td>
-                                    <td>$35.00</td>
-                                </tr>
+                                @foreach ($keranjangs as $keranjang)
+                                    <tr>
+                                        <td>{{ $keranjang->barang->nama_barang }}</td>
+                                        <td>Rp. {{ number_format($keranjang->barang->harga) }}</td>
+                                        <td>{{ $keranjang->kuantitas }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
-                            <tbody class="checkout-details">
-                                <tr>
-                                    <td>Subtotal</td>
-                                    <td>$190</td>
-                                </tr>
+                            <tbody class="checkout-details" style="background-color: rgb(224, 224, 224)">
                                 <tr>
                                     <td>Shipping</td>
-                                    <td>$50</td>
+                                    <td colspan="2">$50</td>
                                 </tr>
                                 <tr>
                                     <td>Total</td>
-                                    <td>$240</td>
+                                    <td colspan="2">Rp. {{ number_format($total) }}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <a href="#" class="boxed-btn">Place Order</a>
+                        <a href="#" class="boxed-btn">Pesan</a>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
     </div>
     <!-- end check out section -->
 @endsection

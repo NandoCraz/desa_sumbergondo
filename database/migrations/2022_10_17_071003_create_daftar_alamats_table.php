@@ -18,11 +18,11 @@ return new class extends Migration
             $table->uuid()->unique();
             $table->foreignId('user_id');
             $table->string('nama_penerima');
+            $table->string('no_hp');
             $table->string('alamat');
             $table->char('kode_pos', 5);
             $table->foreignId('provinsi_id');
             $table->foreignId('kota_id');
-            $table->foreignId('kecamatan_id');
             $table->timestamps();
         });
     }

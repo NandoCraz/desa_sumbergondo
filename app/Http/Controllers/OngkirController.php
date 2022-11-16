@@ -9,20 +9,24 @@ use Illuminate\Support\Facades\Http;
 
 class OngkirController extends Controller
 {
-    public function provinces()
+    public function provinces(Request $request)
     {
-        $province = Provinsi::all();
-        return $province;
-    }
-
-    public function cities($province_id)
-    {
-        $cities = Kota::where('province_id', $province_id)->get();
-        return $cities;
+        if (isset($request->provinsi)) {
+            $data = new Kota();
+            $data = $data->where('province_id', $request->provinsi)->get();
+            if ($data) {
+                return response()->json($data, 200);
+            }
+            return response()->json([], 200);
+        } else {
+            $data = new Kota();
+            return response()->json($data->get(), 200);
+        }
     }
 
     public function cost(Request $request)
     {
+
         $response = Http::post('https://api.rajaongkir.com/starter/cost', [
             'key' => getenv('RAJA_ONGKIR_API_KEY'),
             'origin' => '444',

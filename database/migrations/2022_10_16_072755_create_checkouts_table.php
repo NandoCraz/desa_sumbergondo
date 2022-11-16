@@ -18,8 +18,9 @@ return new class extends Migration
             $table->uuid()->unique();
             $table->foreignId('user_id');
             $table->foreignId('daftar_alamat_id');
-            $table->string('status')->default('Pending');
+            $table->enum('status', ['Pending', 'Dikirim', 'Diterima'])->default('Pending');
             $table->double('total');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }
