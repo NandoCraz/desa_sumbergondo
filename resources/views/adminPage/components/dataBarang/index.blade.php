@@ -17,6 +17,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Nama</th>
+                            <th>Berat (Gram)</th>
                             <th>Harga</th>
                             <th>Stok</th>
                             <th>Kategori</th>
@@ -28,6 +29,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="text-center">{{ $barang->nama_barang }}</td>
+                                <td class="text-center">{{ $barang->berat }}</td>
                                 <td class="text-center">{{ $barang->harga }}</td>
                                 <td class="text-center">{{ $barang->stok }}</td>
                                 <td class="text-center">{{ $barang->kategori->nama_kategori }}</td>

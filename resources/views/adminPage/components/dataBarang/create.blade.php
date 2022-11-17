@@ -25,6 +25,23 @@
                             @enderror
                         </div>
                         <div class="mb-4">
+                            <label for="berat">Berat Barang</label>
+                            <div class="input-group">
+                                <input name="berat" id="berat" type="number"
+                                    class="form-control @error('berat') is-invalid @enderror" value="{{ old('berat') }}" min="0" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        Gram
+                                    </span>
+                                </div>
+                            </div>
+                            @error('berat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
                             <label for="harga">Harga</label>
                             <input class="form-control @error('harga') is-invalid @enderror" id="harga" type="text"
                                 name="harga" value="{{ old('harga') }}" required autocomplete="off">

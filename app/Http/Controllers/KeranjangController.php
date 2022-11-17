@@ -22,10 +22,16 @@ class KeranjangController extends Controller
     }
     public function addToCart(Barang $barang, Request $request)
     {
+        $request->validate([
+            'type' => 'string|in:many,single'
+        ]);
+
         $barang = Barang::findOrFail($barang->id);
         $keranjang = Keranjang::where('barang_id', $barang->id)->where('user_id', auth()->user()->id)->first();
-        if (isset($request->kuantitas)) {
-            if ($request->kuantitas !== 0) {
+        if ($request->type == "single") {
+            if ($request->kuantitas == null || $request->kuantitas == 0) {
+                return back()->with('error', 'Kuantitas tidak boleh 0');
+            } else {
                 if ($keranjang) {
                     $keranjang->update([
                         'kuantitas' => $keranjang->kuantitas + $request->kuantitas
@@ -39,10 +45,8 @@ class KeranjangController extends Controller
                     ]);
                     return back()->with('success', 'Berhasil menambahkan ke keranjang');
                 }
-            } else {
-                return back()->with('error', 'Kuantitas tidak boleh 0');
             }
-        } else {
+        } else if ($request->type == "many") {
             if ($keranjang) {
                 $keranjang->update([
                     'kuantitas' => $keranjang->kuantitas + 1

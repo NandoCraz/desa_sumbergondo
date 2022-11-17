@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DaftarAlamat;
+use App\Models\Keranjang;
 use App\Models\Provinsi;
 use App\Models\Kota;
 use Illuminate\Http\Request;
@@ -26,13 +28,20 @@ class OngkirController extends Controller
 
     public function cost(Request $request)
     {
-
+        $alamat = DaftarAlamat::find($request->daftar_alamat_id);
+        $keranjang = Keranjang::where('user_id', auth()->user()->id)->with(['barang'])->get();
+        $weight = 0;
+        foreach ($keranjang as $item) {
+            $weight += $item->barang->berat * $item->kuantitas;
+        }
         $response = Http::post('https://api.rajaongkir.com/starter/cost', [
             'key' => getenv('RAJA_ONGKIR_API_KEY'),
             'origin' => '444',
-            'destination' => $request->kota_id,
-            'weight' => $request->berat,
-            'courier' => $request->kurir
+            'destination' => $alamat->kota_id,
+            'weight' => $weight,
+            'courier' => $request->courier,
         ]);
+
+        return response()->json($response->json()['rajaongkir'], $response->status());
     }
 }

@@ -19,14 +19,53 @@
     <!-- check out section -->
     <div class="checkout-section mt-150 mb-150">
         @if (session('berhasil'))
-            <div class="alert alert-success mb-3 col-lg-10" role="alert">
-                {{ session('berhasil') }}
+            <div class="container">
+                <div class="alert alert-success mb-3 col-lg-12" role="alert">
+                    {{ session('berhasil') }}
+                </div>
             </div>
         @endif
         <form action="" method="post"></form>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
+                    <div class="card single-accordion">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Daftar Alamat
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                            data-parent="#accordionExample">
+                            <div class="card-body">
+                                <div class="shipping-address-form">
+                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        <i class="fa fa-plus" aria-hidden="true"></i> Tambah Daftar Alamat
+                                    </button>
+                                    @include('userPage.partials.modal.daftar_alamat')
+                                    @if ($daftar_alamats->count() > 0)
+                                        <div class="mt-5">
+                                            <label for="">Alamat Tujuan</label>
+                                            <select class="form-select" name="daftar_alamat_id">
+                                                <option>-- Pilih Alamat Tujuan --</option>
+                                                @foreach ($daftar_alamats as $daftar_alamat)
+                                                    <option value="{{ $daftar_alamat->id }}">
+                                                        {{ $daftar_alamat->nama_penerima }} | {{ $daftar_alamat->alamat }},
+                                                        {{ $daftar_alamat->kode_pos }},
+                                                        {{ $daftar_alamat->provinsi->nama_provinsi }},
+                                                        {{ $daftar_alamat->kota->nama_kab_kota }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="checkout-accordion-wrap">
                         <div class="accordion" id="accordionExample">
                             <div class="card single-accordion">
@@ -38,18 +77,23 @@
                                         </button>
                                     </h5>
                                 </div>
-
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
                                     data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="billing-address-form">
                                             <div class="mb-3">
                                                 <label for="">Ekspedia</label>
-                                                <select class="form-select" aria-label="Default select example">
+                                                <select class="form-select"" name="courier" id="courier">
                                                     <option selected>-- Pilih Ekspedia --</option>
-                                                    <option value="1">JNE</option>
-                                                    <option value="2">TIKI</option>
-                                                    <option value="3">POS</option>
+                                                    <option value="jne">JNE</option>
+                                                    <option value="tiki">TIKI</option>
+                                                    <option value="pos">POS</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="">Layanan</label>
+                                                <select class="form-select" name="layanan" id="layanan">
+                                                    <option selected>-- Pilih Layanan --</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
@@ -61,41 +105,6 @@
                                 </div>
                             </div>
                             <div class="card single-accordion">
-                                <div class="card-header" id="headingTwo">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Daftar Alamat
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="shipping-address-form">
-                                            <button type="button" class="btn btn-success" data-toggle="modal"
-                                                data-target="#exampleModal">
-                                                <i class="fa fa-plus" aria-hidden="true"></i> Tambah Daftar Alamat
-                                            </button>
-                                            @include('userPage.partials.modal.daftar_alamat')
-                                            @if ($daftar_alamats->count() > 0)
-                                                <div class="mt-5">
-                                                    <label for="">Alamat Tujuan</label>
-                                                    <select class="form-select">
-                                                        <option>-- Pilih Alamat Tujuan --</option>
-                                                        @foreach ($daftar_alamats as $daftar_alamat)
-                                                            <option value="{{ $daftar_alamat->id }}">{{ $daftar_alamat->alamat }},
-                                                                {{ $daftar_alamat->kode_pos }}, {{ $daftar_alamat->provinsi->nama_provinsi }}, {{ $daftar_alamat->kota->nama_kab_kota }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card
-                                                        single-accordion">
                                 <div class="card-header" id="headingThree">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
@@ -172,7 +181,7 @@
                             <tbody class="checkout-details" style="background-color: rgb(224, 224, 224)">
                                 <tr>
                                     <td>Shipping</td>
-                                    <td colspan="2">$50</td>
+                                    <td colspan="2" id="ongkir">0</td>
                                 </tr>
                                 <tr>
                                     <td>Total</td>
@@ -188,4 +197,33 @@
         </form>
     </div>
     <!-- end check out section -->
+
+    <script>
+        $('#courier').on('change', function(e) {
+            const inp = $('#layanan')
+            const ongkir = $('#ongkir')
+            inp.prop("disabled", true);
+            $.ajax({
+                url: "/checkout/cek_ongkir",
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: {
+                    daftar_alamat_id: $('[name="daftar_alamat_id"]').val(),
+                    courier: $('[name="courier"]').val(),
+                },
+                dataType: 'json',
+                success: function({
+                    results
+                }) {
+                    const data = results[0];
+                    inp.empty()
+                    inp.append(new Option('-- Pilih Layanan --', ''))
+                    data.costs.forEach(cost => inp.append(new Option(cost.description, cost.service)))
+                    inp.prop("disabled", false);
+                }
+            })
+        });
+    </script>
 @endsection

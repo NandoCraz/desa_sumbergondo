@@ -46,6 +46,7 @@ class DataBarangController extends Controller
         // return $request;
         $validateData = $request->validate([
             'nama_barang' => 'required|max:255',
+            'berat' => 'required',
             'kategori_id' => 'required',
             'harga' => 'required|numeric',
             'stok' => 'required',

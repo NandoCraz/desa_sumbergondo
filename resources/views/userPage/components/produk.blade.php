@@ -63,6 +63,7 @@
                                     to Cart</a> --}}
                                 <form action="/keranjang/{{ $barang->id }}" method="post">
                                     @csrf
+                                    <input type="hidden" name="type" value="many">
                                     <button type="submit" class="btn btn-lg btn-warning text-light"><i
                                             class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
                                 </form>

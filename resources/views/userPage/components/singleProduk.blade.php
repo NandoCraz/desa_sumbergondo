@@ -22,7 +22,7 @@
             </div>
         @endif
         @if (session('error'))
-            <div class="alert alert-success mb-3 col-lg-10" role="alert">
+            <div class="alert alert-danger mb-3 col-lg-10" role="alert">
                 {{ session('error') }}
             </div>
         @endif
@@ -47,6 +47,7 @@
                         <div class="single-product-form">
                             <form action="/keranjang/{{ $barang->id }}" method="POST">
                                 @csrf
+                                <input type="hidden" name="type" value="single">
                                 <input type="number" placeholder="0" min="0" max="{{ $barang->stok }}"
                                     name="kuantitas"><br>
                                 {{-- <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a> --}}
