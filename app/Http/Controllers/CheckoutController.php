@@ -25,4 +25,19 @@ class CheckoutController extends Controller
             'daftar_alamats' => $daftar_alamats,
         ]);
     }
+
+    public function pembayaran(Request $request)
+    {
+        $keranjangs = Keranjang::where('user_id', auth()->user()->id)->with(['barang', 'user'])->get();
+        $total = 0;
+        foreach ($keranjangs as $keranjang) {
+            $total += $keranjang->subtotal;
+        }
+        $daftar_alamats = DaftarAlamat::with(['user', 'provinsi', 'kota'])->find($request->daftar_alamat_id);
+        return view('userPage.components.pembayaran', [
+            'keranjangs' => $keranjangs,
+            'daftar_alamats' => $daftar_alamats,
+            'total' => $total
+        ]);
+    }
 }

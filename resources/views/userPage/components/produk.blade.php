@@ -75,5 +75,6 @@
                 <h1 class="text-center mb-5">Barang Tidak Tersedia...</h1>
             @endif
         </div>
-        <!-- end products -->
-    @endsection
+    </div>
+    <!-- end products -->
+@endsection

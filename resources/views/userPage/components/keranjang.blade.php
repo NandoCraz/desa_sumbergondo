@@ -83,9 +83,11 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="cart-buttons">
-                            <a href="/checkout" class="boxed-btn black">Check Out</a>
-                        </div>
+                        @if ($keranjangs->count() > 0)
+                            <div class="cart-buttons">
+                                <a href="/checkout" class="boxed-btn black">Check Out</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

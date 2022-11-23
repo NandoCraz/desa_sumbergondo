@@ -19,8 +19,12 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('daftar_alamat_id');
             $table->enum('status', ['Pending', 'Dikirim', 'Diterima'])->default('Pending');
+            $table->enum('courier', ['jne', 'tiki', 'pos']);
+            $table->string('layanan');
             $table->double('total');
-            $table->text('notes')->nullable();
+            $table->double('ongkir');
+            $table->integer('estimasi');
+            $table->text('catatan')->nullable();
             $table->timestamps();
         });
     }

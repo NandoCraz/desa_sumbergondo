@@ -25,7 +25,6 @@
                 </div>
             </div>
         @endif
-        <form action="" method="post"></form>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -47,21 +46,24 @@
                                         <i class="fa fa-plus" aria-hidden="true"></i> Tambah Daftar Alamat
                                     </button>
                                     @include('userPage.partials.modal.daftar_alamat')
-                                    @if ($daftar_alamats->count() > 0)
-                                        <div class="mt-5">
-                                            <label for="">Alamat Tujuan</label>
-                                            <select class="form-select" name="daftar_alamat_id">
-                                                <option>-- Pilih Alamat Tujuan --</option>
-                                                @foreach ($daftar_alamats as $daftar_alamat)
-                                                    <option value="{{ $daftar_alamat->id }}">
-                                                        {{ $daftar_alamat->nama_penerima }} | {{ $daftar_alamat->alamat }},
-                                                        {{ $daftar_alamat->kode_pos }},
-                                                        {{ $daftar_alamat->provinsi->nama_provinsi }},
-                                                        {{ $daftar_alamat->kota->nama_kab_kota }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    @endif
+                                    <form action="/pembayaran" method="post">
+                                        @csrf
+                                        @if ($daftar_alamats->count() > 0)
+                                            <div class="mt-5">
+                                                <label for="">Alamat Tujuan</label>
+                                                <select class="form-select" name="daftar_alamat_id">
+                                                    <option>-- Pilih Alamat Tujuan --</option>
+                                                    @foreach ($daftar_alamats as $daftar_alamat)
+                                                        <option value="{{ $daftar_alamat->id }}">
+                                                            {{ $daftar_alamat->nama_penerima }} |
+                                                            {{ $daftar_alamat->alamat }},
+                                                            {{ $daftar_alamat->kode_pos }},
+                                                            {{ $daftar_alamat->provinsi->nama_provinsi }},
+                                                            {{ $daftar_alamat->kota->nama_kab_kota }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
                                 </div>
                             </div>
                         </div>
@@ -95,11 +97,14 @@
                                                 <select class="form-select" name="layanan" id="layanan">
                                                     <option selected>-- Pilih Layanan --</option>
                                                 </select>
+
                                             </div>
                                             <div class="mb-3">
                                                 <label for="catatan" class="form-label">Catatan :</label>
                                                 <textarea class="form-control" id="catatan" name="catatan" rows="3" style="resize: none"></textarea>
                                             </div>
+                                            <input type="hidden" name="ongkir" />
+                                            <input type="hidden" name="estimasi" />
                                         </div>
                                     </div>
                                 </div>
@@ -185,11 +190,11 @@
                                 </tr>
                                 <tr>
                                     <td>Total</td>
-                                    <td colspan="2">Rp. {{ number_format($total) }}</td>
+                                    <td colspan="2" id="total">Rp. {{ number_format($total) }}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <a href="#" class="boxed-btn">Pesan</a>
+                        <button type="submit" class="btn btn-warning btn-lg text-light mt-3">Bayar</button>
                     </div>
                 </div>
             </div>
@@ -202,6 +207,7 @@
         $('#courier').on('change', function(e) {
             const inp = $('#layanan')
             const ongkir = $('#ongkir')
+            let total = document.querySelector('#total').innerText.replaceAll("Rp. ", "").replaceAll(",", "");
             inp.prop("disabled", true);
             $.ajax({
                 url: "/checkout/cek_ongkir",
@@ -220,7 +226,25 @@
                     const data = results[0];
                     inp.empty()
                     inp.append(new Option('-- Pilih Layanan --', ''))
-                    data.costs.forEach(cost => inp.append(new Option(cost.description, cost.service)))
+                    data.costs.forEach(cost => {
+                        inp.append(new Option(cost.service + ' | ' + cost
+                            .description + ' | ' + cost.cost[0].value, cost.service));
+                        // console.log(cost);
+                        // console.log(cost);
+                    })
+                    inp.on('change', function(e) {
+                        // ongkir.html(cost);
+                        const selected = data.costs.find(cost => cost.service === e.target
+                            .value);
+                        ongkir.html(selected.cost[0].value);
+                        document.querySelector('[name="ongkir"]').value = selected.cost[0]
+                            .value;
+                        document.querySelector('[name="estimasi"]').value = selected.cost[0]
+                            .etd;
+                        document.querySelector('#total').innerText =
+                            'Rp. ' + (parseInt(total) + parseInt(selected.cost[0].value))
+                            .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    })
                     inp.prop("disabled", false);
                 }
             })
