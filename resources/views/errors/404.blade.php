@@ -154,6 +154,7 @@
             color: #092532;
         }
     </style>
+    <link rel="shortcut icon" href="{{ asset('assets/img/logo_ukk.png') }}" type="image/x-icon">
 </head>
 
 <body>

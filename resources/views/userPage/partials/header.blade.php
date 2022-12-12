@@ -6,7 +6,7 @@
                     <!-- logo -->
                     <div class="site-logo">
                         <a href="/">
-                            <img src="{{ asset('assets/img/logo.png') }}" alt="">
+                            <img src="{{ asset('assets/img/logo_ukk.png') }}" width="60" alt="">
                         </a>
                     </div>
                     <!-- logo -->
@@ -26,7 +26,7 @@
                                     <ul class="sub-menu">
                                         <li><a href="">Profil Saya</a></li>
                                         <li><a href="">Pengaturan</a></li>
-                                        <li><a href="">Pesanan Saya</a></li>
+                                        <li><a href="/pesanan">Pesanan Saya</a></li>
                                         <li><a href="">Layanan Saya</a></li>
                                         <li>
                                             <form action="/logout" method="post">

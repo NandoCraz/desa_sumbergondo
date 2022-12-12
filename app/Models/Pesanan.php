@@ -11,4 +11,14 @@ class Pesanan extends Model
     use HasFactory, Uuid;
 
     protected $guarded = ["uuid"];
+
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class);
+    }
+
+    public function checkout()
+    {
+        return $this->belongsTo(Checkout::class);
+    }
 }

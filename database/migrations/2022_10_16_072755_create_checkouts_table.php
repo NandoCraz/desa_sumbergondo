@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
             $table->uuid()->unique();
             $table->foreignId('user_id');
+            $table->string('snap_token')->nullable();
             $table->foreignId('daftar_alamat_id');
-            $table->enum('status', ['Pending', 'Dikirim', 'Diterima'])->default('Pending');
+            $table->enum('payment_status', ['1', '2', '3', '4'])->default('1')->comment('1=Menunggu Pembayaran, 2=Sudah Dibayar, 3=Kadaluarsa');
+            $table->enum('status', ['1', '2', '3', '4'])->comment('1=Menunggu Konfirmasi, 2=Sedang Diproses, 3=Dikirim, 4=Selesai')->nullable();
             $table->enum('courier', ['jne', 'tiki', 'pos']);
             $table->string('layanan');
             $table->double('total');

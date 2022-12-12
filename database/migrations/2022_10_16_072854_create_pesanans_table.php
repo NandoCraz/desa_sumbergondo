@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
-            $table->foreignId('produk_id');
+            $table->foreignId('barang_id');
             $table->foreignId('checkout_id');
             $table->integer('kuantitas');
             $table->double('sub_total');

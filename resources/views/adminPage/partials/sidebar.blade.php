@@ -4,7 +4,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
         <div class="sidebar-brand-icon">
-            <img src="{{ asset('assets/img/favicon.png') }}" alt="ZachMovie" width="35" class="rounded-circle">
+            <img src="{{ asset('assets/img/logo_ukk.png') }}" alt="ZachMovie" width="35" class="rounded-circle">
         </div>
         <div class="sidebar-brand-text mx-3">NS<sub>parkel</sub></div>
     </a>

@@ -1,4 +1,4 @@
-{{-- @dd(Request::all()) --}}
+{{-- @dd($checkout) --}}
 @extends('userPage.layouts.main')
 @section('container')
     <!-- breadcrumb-section -->
@@ -8,7 +8,7 @@
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
                         <p>Perbaiki & Modifikasi</p>
-                        <h1>Pembayaran</h1>
+                        <h1>Detail Pesanan</h1>
                     </div>
                 </div>
             </div>
@@ -27,13 +27,14 @@
                                     <h3 class="text-center">Alamat Pengiriman</h3>
                                 </div>
                                 <div class="card-body">
-                                    <h5>Nama Penerima : <p>{{ $daftar_alamats->nama_penerima }}</p>
+                                    <h5>Nama Penerima : <p>{{ $checkout->daftarAlamat->nama_penerima }}</p>
                                     </h5>
-                                    <h5>No. Handphone : <p>{{ $daftar_alamats->no_hp }}</p>
+                                    <h5>No. Handphone : <p>{{ $checkout->daftarAlamat->no_hp }}</p>
                                     </h5>
-                                    <h5>Alamat : <p>{{ $daftar_alamats->alamat }},
-                                            {{ $daftar_alamats->kode_pos }}, {{ $daftar_alamats->provinsi->nama_provinsi }},
-                                            {{ $daftar_alamats->kota->nama_kab_kota }}.
+                                    <h5>Alamat : <p>{{ $checkout->daftarAlamat->alamat }},
+                                            {{ $checkout->daftarAlamat->kode_pos }},
+                                            {{ $checkout->daftarAlamat->provinsi->nama_provinsi }},
+                                            {{ $checkout->daftarAlamat->kota->nama_kab_kota }}.
                                         </p>
                                     </h5>
                                 </div>
@@ -53,39 +54,40 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($keranjangs as $keranjang)
+                                                @foreach ($checkout->pesanans as $pesanan)
                                                     <tr class="table-body-row">
                                                         <td class="product-name">
-                                                            {{ $keranjang->barang->nama_barang }}
+                                                            {{ $pesanan->barang->nama_barang }}
                                                         </td>
                                                         <td class="product-price">Rp.
-                                                            {{ number_format($keranjang->barang->harga) }}
+                                                            {{ number_format($pesanan->barang->harga) }}
                                                         </td>
                                                         <td class="product-quantity text-center">
-                                                            {{ $keranjang->kuantitas }}
+                                                            {{ $pesanan->kuantitas }}
                                                         </td>
                                                         <td class="product-total">Rp.
-                                                            {{ number_format($keranjang->subtotal) }}
+                                                            {{ number_format($pesanan->sub_total) }}
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                             <tfoot>
                                                 <tr>
+                                                    <td colspan="3" class="text-center">Ongkos Kirim</td>
+                                                    <td>Rp. {{ number_format($checkout->ongkir) }}</td>
+                                                </tr>
+                                                <tr>
                                                     <td colspan="3" class="text-center">Total</td>
-                                                    <td>Rp. {{ number_format($total) }}</td>
+                                                    <td>Rp. {{ number_format($checkout->total) }}</td>
                                                 </tr>
                                             </tfoot>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-lg btn-warning text-light mt-4" id="bayar">Bayar</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 mt-5 text-center">
-                            <h3 class="pesan"></h3>
+                            @if ($checkout->payment_status == '1')
+                                <button class="btn btn-lg btn-warning text-light mt-4" id="bayar">Bayar</button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -98,33 +100,18 @@
 @section('script')
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
     </script>
-    <script>
-        $('#bayar').on('click', function(e) {
-            const pesan = $('.pesan');
-            e.preventDefault();
-            $.ajax({
-                url: "{{ route('checkout.charger') }}",
-                method: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                },
-                data: {
-                    daftar_alamat_id: "{{ request()->daftar_alamat_id }}",
-                    courier: "{{ request()->courier }}",
-                    layanan: "{{ request()->layanan }}",
-                    catatan: "{{ request()->catatan }}",
-                    ongkir: "{{ request()->ongkir }}",
-                    estimasi: "{{ request()->estimasi }}"
-                },
-                success: function(response) {
-                    snap.pay(response.snap_token, {
-                        onSuccess: function(result) {
-                            console.log(result);
-                            window.location.href = '/pesanan'
-                        }
-                    })
-                }
+
+    @if ($checkout->payment_status == '1')
+        <script>
+            $('#bayar').on('click', function(e) {
+                e.preventDefault();
+                snap.pay('{{ $checkout->snap_token }}', {
+                    onSuccess: function(result) {
+                        console.log(result);
+                        window.location.href = '/pesanan'
+                    }
+                });
             })
-        })
-    </script>
+        </script>
+    @endif
 @endsection

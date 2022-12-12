@@ -42,7 +42,6 @@
                     </div>
                 </div>
             </div>
-
             @if ($barangs->count())
                 <div class="row product-lists mb-5">
                     @foreach ($barangs as $barang)
