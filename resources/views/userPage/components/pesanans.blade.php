@@ -40,7 +40,9 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $checkout->daftarAlamat->nama_penerima }}</td>
-                                <td>{{ $checkout->daftarAlamat->alamat }}</td>
+                                <td>{{ $checkout->daftarAlamat->alamat }},
+                                    {{ $checkout->daftarAlamat->provinsi->nama_provinsi }},
+                                    {{ $checkout->daftarAlamat->kota->nama_kab_kota }}</td>
                                 <td>Rp. {{ number_format($checkout->total) }}</td>
                                 @if ($checkout->payment_status == '1' && $checkout->status == '5')
                                     <td>
@@ -74,12 +76,17 @@
                                     </td>
                                 @endif
                                 <td class="d-flex justify-content-center">
-                                    @if ($checkout->payment_status == '1' && $checkout->status != '5')
+                                    @if ($checkout->payment_status != '4' && $checkout->status != '5')
                                         <a href="/pesanan/{{ $checkout->uuid }}" class="btn btn-primary">Detail</a>
                                         <form action="/changeStatus/{{ $checkout->uuid }}" method="post" class="ms-2">
                                             @csrf
                                             <input type="hidden" name="action" value="batal">
                                             <button type="submit" class="btn btn-danger">Batalkan</button>
+                                        </form>
+                                    @elseif(($checkout->payment_status == '4' && $checkout->status == '5') || $checkout->payment_status == '3')
+                                        <form action="/changeStatus/{{ $checkout->uuid }}" method="post" class="ms-2">
+                                            <input type="hidden" name="action" value="hapus">
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
                                         </form>
                                     @elseif ($checkout->status == '3')
                                         <form action="/changeStatus/{{ $checkout->uuid }}" method="post" class="ms-2">

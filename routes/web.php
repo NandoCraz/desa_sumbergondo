@@ -45,6 +45,12 @@ Route::post('/register', [RegisterController::class, 'register'])->middleware('g
 // Manual Route
 Route::get('/dashboard-admin', [DashboardAdminController::class, 'index'])->middleware('admin');
 Route::get('/master/data-kategori/list/{kategori:id}', [DataKategoriController::class, 'list'])->middleware('admin');
+Route::get('/pesanan/belum-dibayar', [PesananController::class, 'belumDibayar'])->middleware('admin');
+Route::get('/pesanan/menunggu-konfirmasi', [PesananController::class, 'menungguKonfirmasi'])->middleware('admin');
+Route::get('/pesanan/diproses', [PesananController::class, 'diproses'])->middleware('admin');
+Route::get('/pesanan/dikirim', [PesananController::class, 'dikirim'])->middleware('admin');
+Route::get('/pesanan/selesai', [PesananController::class, 'selesai'])->middleware('admin');
+Route::get('/pesanan/dibatalkan', [PesananController::class, 'dibatalkan'])->middleware('admin');
 
 // Resource Route
 Route::resource('/master/data-kategori', DataKategoriController::class)->middleware('admin');
