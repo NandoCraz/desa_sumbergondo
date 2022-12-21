@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('snap_token')->nullable();
             $table->foreignId('daftar_alamat_id');
             $table->enum('payment_status', ['1', '2', '3', '4'])->default('1')->comment('1=Menunggu Pembayaran, 2=Sudah Dibayar, 3=Kadaluarsa');
-            $table->enum('status', ['1', '2', '3', '4'])->comment('1=Menunggu Konfirmasi, 2=Sedang Diproses, 3=Dikirim, 4=Selesai')->nullable();
+            $table->enum('status', ['1', '2', '3', '4', '5'])->comment('1=Menunggu Konfirmasi, 2=Sedang Diproses, 3=Dikirim, 4=Selesai, 5=Dibatalkan')->nullable();
             $table->enum('courier', ['jne', 'tiki', 'pos']);
             $table->string('layanan');
             $table->double('total');

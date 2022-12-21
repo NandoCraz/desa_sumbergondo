@@ -48,7 +48,7 @@ class DataBarangController extends Controller
             'nama_barang' => 'required|max:255',
             'berat' => 'required',
             'kategori_id' => 'required',
-            'harga' => 'required|numeric',
+            'harga' => 'required|numeric|min:1',
             'stok' => 'required',
             'deskripsi' => 'required',
             'picture_barang' => 'required|image|max:2048'

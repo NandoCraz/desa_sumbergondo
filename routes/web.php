@@ -66,6 +66,7 @@ Route::post('/keranjang/{keranjang:id}/update', [KeranjangController::class, 'up
 Route::delete('/keranjang/hapus/{keranjang:id}', [KeranjangController::class, 'hapus'])->middleware('auth');
 Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('auth');
 Route::post('/pembayaran', [CheckoutController::class, 'pembayaran'])->middleware('auth');
+Route::post('/changeStatus/{checkout:uuid}', [PesananController::class, 'changeStatus'])->middleware('auth');
 Route::get('/checkout/get_data', [OngkirController::class, 'provinces'])->name('checkout.get_data')->middleware('auth');
 Route::post('/checkout/cek_ongkir', [OngkirController::class, 'cost'])->middleware('auth');
 Route::post('/checkout/charger', [CheckoutController::class, 'charger'])->name('checkout.charger')->middleware('auth');

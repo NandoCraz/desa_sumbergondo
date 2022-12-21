@@ -13,8 +13,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
-        <a class="nav-link" href="/dashboard">
+    <li class="nav-item {{ Request::is('dashboard-admin') ? 'active' : '' }}">
+        <a class="nav-link" href="/dashboard-admin">
             <i class="fas fa-fw fa-th-large"></i>
             <span>Dashboard</span>
         </a>
@@ -39,11 +39,22 @@
             </div>
         </div>
     </li>
-    <li class="nav-item {{ Request::Is('pesanan-admin') ? 'active' : '' }}">
-        <a class="nav-link" href="/users">
+    <li class="nav-item {{ Request::Is('pesanan*') ? 'active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pesananUtilities"
+            aria-expanded="true" aria-controls="pesananUtilities">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             <span>Pesanan</span>
         </a>
+        <div id="pesananUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/pesanan/belum-dibayar">Belum Dibayar</a>
+                <a class="collapse-item" href="/pesanan/menunggu-konfirmasi">Menunggu Konfirmasi</a>
+                <a class="collapse-item" href="/pesanan/diproses">Sedang Diproses</a>
+                <a class="collapse-item" href="/pesanan/dikirim">Dikirim</a>
+                <a class="collapse-item" href="/pesanan/selesai">Selesai</a>
+                <a class="collapse-item" href="/pesanan/dibatalkan">Dibatalkan</a>
+            </div>
+        </div>
     </li>
     <li class="nav-item {{ Request::Is('layanan-booking') ? 'active' : '' }}">
         <a class="nav-link" href="/users">

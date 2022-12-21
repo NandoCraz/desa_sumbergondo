@@ -19,13 +19,28 @@ class PesananController extends Controller
     public function detailPesanan(Checkout $checkout)
     {
         $checkout = Checkout::where('uuid', $checkout->uuid)->with(['daftarAlamat', 'user', 'pesanans'])->first();
-        // $daftar_alamat = $checkout->daftarAlamat->with(['provinsi', 'kota'])->first();
-        // $barang = $checkout->pesanans->with(['barang'])->first();
 
         return view('userPage.components.detailPesanan', [
             'checkout' => $checkout,
-            // 'daftar_alamat' => $daftar_alamat,
-            // 'barang' => $barang,
         ]);
+    }
+
+    public function changeStatus(Request $request, Checkout $checkout)
+    {
+        // return $request;
+
+        $checkout = Checkout::where('uuid', $checkout->uuid)->first();
+
+        if ($request->action == 'batal') {
+            $checkout->update([
+                'status' => '5',
+            ]);
+            return back()->with('success', 'Pesanan berhasil dibatalkan');
+        } else if ($request->action == 'terima') {
+            $checkout->update([
+                'status' => '4',
+            ]);
+            return back()->with('success', 'Pesanan Telah diterima');
+        }
     }
 }

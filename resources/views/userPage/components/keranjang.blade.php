@@ -19,6 +19,11 @@
     <!-- cart -->
     <div class="cart-section mt-150 mb-150">
         <div class="container">
+            @if (session('error'))
+                <div class="alert alert-danger mb-3 col-lg-12" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-8 col-md-12">
                     <div class="cart-table-wrap">

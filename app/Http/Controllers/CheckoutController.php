@@ -15,7 +15,22 @@ class CheckoutController extends Controller
 {
     public function index()
     {
+        $is_tersedia = true;
         $keranjangs = Keranjang::where('user_id', auth()->user()->id)->with(['barang', 'user'])->get();
+
+        foreach ($keranjangs as $keranjang) {
+            if ($keranjang->kuantitas > $keranjang->barang->stok) {
+                $is_tersedia = false;
+            }
+        }
+
+        if (!$is_tersedia) {
+            return back()->with('error', 'Kuantitas melebihi stok!');
+        }
+
+        if ($keranjangs->isEmpty()) {
+            return back()->with('error', 'Keranjang kosong');
+        }
         $total = 0;
         foreach ($keranjangs as $keranjang) {
             $total += $keranjang->subtotal;

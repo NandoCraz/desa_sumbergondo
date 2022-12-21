@@ -27,8 +27,16 @@
                         </div>
                         <div class="mb-4">
                             <label for="harga">Harga</label>
-                            <input class="form-control @error('harga') is-invalid @enderror" id="harga" type="text"
-                                name="harga" value="{{ old('harga', $barang->harga) }}" required autocomplete="off">
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        Rp.
+                                    </span>
+                                </div>
+                                <input class="form-control @error('harga') is-invalid @enderror" id="harga"
+                                    type="text" name="harga" value="{{ old('harga', $barang->harga) }}" required
+                                    autocomplete="off">
+                            </div>
                             @error('harga')
                                 <div class="invalid-feedback">
                                     {{ $message }}

@@ -28,7 +28,8 @@
                             <label for="berat">Berat Barang</label>
                             <div class="input-group">
                                 <input name="berat" id="berat" type="number"
-                                    class="form-control @error('berat') is-invalid @enderror" value="{{ old('berat') }}" min="0" />
+                                    class="form-control @error('berat') is-invalid @enderror" value="{{ old('berat') }}"
+                                    min="0" />
                                 <div class="input-group-append">
                                     <span class="input-group-text">
                                         Gram
@@ -43,8 +44,15 @@
                         </div>
                         <div class="mb-4">
                             <label for="harga">Harga</label>
-                            <input class="form-control @error('harga') is-invalid @enderror" id="harga" type="text"
-                                name="harga" value="{{ old('harga') }}" required autocomplete="off">
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        Rp.
+                                    </span>
+                                </div>
+                                <input class="form-control @error('harga') is-invalid @enderror" id="harga"
+                                    type="text" name="harga" value="{{ old('harga') }}" required autocomplete="off">
+                            </div>
                             @error('harga')
                                 <div class="invalid-feedback">
                                     {{ $message }}

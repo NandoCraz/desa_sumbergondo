@@ -59,7 +59,8 @@
                                                             {{ $daftar_alamat->alamat }},
                                                             {{ $daftar_alamat->kode_pos }},
                                                             {{ $daftar_alamat->provinsi->nama_provinsi }},
-                                                            {{ $daftar_alamat->kota->nama_kab_kota }}</option>
+                                                            {{ $daftar_alamat->kota->nama_kab_kota }} |
+                                                            {{ $daftar_alamat->no_hp }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -236,7 +237,7 @@
                         // ongkir.html(cost);
                         const selected = data.costs.find(cost => cost.service === e.target
                             .value);
-                        ongkir.html(selected.cost[0].value);
+                        ongkir.html('Rp. ' + selected.cost[0].value);
                         document.querySelector('[name="ongkir"]').value = selected.cost[0]
                             .value;
                         document.querySelector('[name="estimasi"]').value = selected.cost[0]
