@@ -1,8 +1,8 @@
 @extends('adminPage.layouts.main')
 @section('content')
-    @if (session('berhasil'))
+    @if (session('success'))
         <div class="alert alert-success mb-3 col-lg-10" role="alert">
-            {{ session('berhasil') }}
+            {{ session('success') }}
         </div>
     @endif
     <div class="card shadow mb-4">
@@ -33,13 +33,15 @@
                                 <td>Rp. {{ number_format($checkout->total) }}</td>
                                 @if ($checkout->status == '1')
                                     <td>
-                                        <h5><span class="badge bg-warning text-light">Menunggu Konfirmasi</span></h5>
+                                        <h5><span class="badge bg-dark text-light">Menunggu Konfirmasi</span></h5>
                                     </td>
                                 @endif
                                 <td>
+                                    <a href="/pesanan/admin/{{ $checkout->id }}" class="btn btn-primary btn-sm">Detail</a>
                                     <form action="/changeStatus/{{ $checkout->uuid }}" method="post" class="ms-2">
+                                        @csrf
                                         <input type="hidden" name="action" value="konfirmasi">
-                                        <button type="submit" class="btn btn-success">Konfirmasi</button>
+                                        <button type="submit" class="btn btn-success btn-sm">Konfirmasi</button>
                                     </form>
                                 </td>
                             </tr>

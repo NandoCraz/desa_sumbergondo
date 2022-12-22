@@ -41,23 +41,40 @@ class PesananController extends Controller
     }
     public function diproses()
     {
-        $checkout = Checkout::where('status', '2')->latest();
-        return view('');
+        $checkouts = Checkout::where('status', '2')->latest()->get();
+        return view('adminPage.components.pesananStatus.diproses', [
+            'checkouts' => $checkouts
+        ]);
     }
     public function dikirim()
     {
-        $checkout = Checkout::where('status', '3')->latest();
-        return view('');
+        $checkouts = Checkout::where('status', '3')->latest()->get();
+        return view('adminPage.components.pesananStatus.dikirim', [
+            'checkouts' => $checkouts
+        ]);
     }
     public function selesai()
     {
-        $checkout = Checkout::where('status', '4')->latest();
-        return view('');
+        $checkouts = Checkout::withTrashed()->where('status', '4')->latest()->get();
+        return view('adminPage.components.pesananStatus.selesai', [
+            'checkouts' => $checkouts,
+        ]);
     }
     public function dibatalkan()
     {
-        $checkout = Checkout::where('status', '5')->latest();
-        return view('');
+        $checkouts = Checkout::withTrashed()->where('status', '5')->latest()->get();
+        return view('adminPage.components.pesananStatus.batal', [
+            'checkouts' => $checkouts,
+        ]);
+    }
+
+    public function detailPesananAdmin(Checkout $checkout)
+    {
+        $checkout = Checkout::where('id', $checkout->id)->with(['daftarAlamat', 'user', 'pesanans'])->first();
+
+        return view('adminPage.components.pesananAdmin.detailPesanan', [
+            'checkout' => $checkout,
+        ]);
     }
 
     public function changeStatus(Request $request, Checkout $checkout)
@@ -68,7 +85,6 @@ class PesananController extends Controller
 
         if ($request->action == 'batal') {
             $checkout->update([
-                'payment_status' => '4',
                 'status' => '5',
             ]);
             return back()->with('success', 'Pesanan berhasil dibatalkan');

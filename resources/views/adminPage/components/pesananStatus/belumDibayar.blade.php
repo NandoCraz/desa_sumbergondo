@@ -36,7 +36,9 @@
                                         <h5><span class="badge bg-warning text-light">Belum Dibayar</span></h5>
                                     </td>
                                 @endif
-                                <td>-</td>
+                                <td>
+                                    <a href="/pesanan/admin/{{ $checkout->id }}" class="btn btn-primary btn-sm">Detail</a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -51,6 +51,7 @@ Route::get('/pesanan/diproses', [PesananController::class, 'diproses'])->middlew
 Route::get('/pesanan/dikirim', [PesananController::class, 'dikirim'])->middleware('admin');
 Route::get('/pesanan/selesai', [PesananController::class, 'selesai'])->middleware('admin');
 Route::get('/pesanan/dibatalkan', [PesananController::class, 'dibatalkan'])->middleware('admin');
+Route::get('/pesanan/admin/{checkout:id}', [PesananController::class, 'detailPesananAdmin'])->middleware('admin');
 
 // Resource Route
 Route::resource('/master/data-kategori', DataKategoriController::class)->middleware('admin');
