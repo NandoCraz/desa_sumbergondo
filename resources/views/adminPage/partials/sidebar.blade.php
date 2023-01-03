@@ -34,8 +34,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="/master/data-kategori">Data Kategori</a>
                 <a class="collapse-item" href="/master/data-barang">Data Barang</a>
-                <a class="collapse-item" href="/master/">Data Montir</a>
-                <a class="collapse-item" href="/master/">Data Pelayanan</a>
+                <a class="collapse-item" href="/master/data-montir">Data Montir</a>
+                <a class="collapse-item" href="/master/data-pelayanan">Data Pelayanan</a>
             </div>
         </div>
     </li>
@@ -60,12 +60,6 @@
         <a class="nav-link" href="/users">
             <i class="fa fa-calendar" aria-hidden="true"></i>
             <span>Layanan Booking</span>
-        </a>
-    </li>
-    <li class="nav-item {{ Request::Is('history') ? 'active' : '' }}">
-        <a class="nav-link" href="/users">
-            <i class="fas fa-solid fa-business-time"></i>
-            <span>History Penjualan</span>
         </a>
     </li>
     <li class="nav-item {{ Request::Is('users') ? 'active' : '' }}">

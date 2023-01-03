@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\Checkout;
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
@@ -84,9 +85,19 @@ class PesananController extends Controller
         $checkout = Checkout::where('uuid', $checkout->uuid)->first();
 
         if ($request->action == 'batal') {
+            $checkout = Checkout::where('id', $request->id)->with(['pesanans'])->first();
+
+            foreach ($checkout->pesanans as $pesanan) {
+                $barang = Barang::where('id', $pesanan->barang_id)->first();
+                $barang->update([
+                    'stok' => $barang->stok + $pesanan->kuantitas
+                ]);
+            }
+
             $checkout->update([
                 'status' => '5',
             ]);
+
             return back()->with('success', 'Pesanan berhasil dibatalkan');
         } else if ($request->action == 'terima') {
             $checkout->update([

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->uuid()->unique();
             $table->string('nama');
+            $table->string('picture_montir');
+            $table->boolean('is_tersedia')->default(true)->nullable();
             $table->timestamps();
         });
     }

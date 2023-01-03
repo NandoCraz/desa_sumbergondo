@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="text-primary">
-                        Buat Kategori
+                        Tambah Kategori
                     </h4>
                 </div>
                 <div class="card-body">
@@ -24,6 +24,7 @@
                                 </div>
                             @enderror
                         </div>
+                        
                         <div class="mb-4 mt-5">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>

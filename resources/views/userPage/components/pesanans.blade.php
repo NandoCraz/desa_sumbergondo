@@ -90,6 +90,7 @@
                                         <form action="/changeStatus/{{ $checkout->uuid }}" method="post" class="ms-2">
                                             @csrf
                                             <input type="hidden" name="action" value="batal">
+                                            <input type="hidden" name="id" value="{{ $checkout->id }}">
                                             <button type="submit" class="btn btn-danger">Batalkan</button>
                                         </form>
                                     @endif

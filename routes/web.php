@@ -8,8 +8,10 @@ use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\DataKategoriController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MontirController;
 use App\Http\Controllers\OngkirController;
 use App\Http\Controllers\PaymentCallbackController;
+use App\Http\Controllers\PelayananController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +58,8 @@ Route::get('/pesanan/admin/{checkout:id}', [PesananController::class, 'detailPes
 // Resource Route
 Route::resource('/master/data-kategori', DataKategoriController::class)->middleware('admin');
 Route::resource('/master/data-barang', DataBarangController::class)->middleware('admin');
+Route::resource('/master/data-montir', MontirController::class)->middleware('admin');
+Route::resource('/master/data-pelayanan', PelayananController::class)->middleware('admin');
 
 // ==== End Admin Routes ====
 
