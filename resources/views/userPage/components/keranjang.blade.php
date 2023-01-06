@@ -39,34 +39,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($keranjangs as $keranjang)
-                                    <tr class="table-body-row">
-                                        <td class="product-remove">
-                                            <form action="/keranjang/hapus/{{ $keranjang->id }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
-                                                        aria-hidden="true"></i></button>
-                                            </form>
-                                        </td>
-                                        <td class="product-image"><img
-                                                src="{{ asset('storage/' . $keranjang->barang->picture_barang) }}"
-                                                alt=""></td>
-                                        <td class="product-name">{{ $keranjang->barang->nama_barang }}</td>
-                                        <td class="product-price">Rp. {{ number_format($keranjang->barang->harga) }}</td>
-                                        <td class="product-quantity">
-                                            <form action="/keranjang/update/{{ $keranjang->barang->id }}" method="post">
-                                                @csrf
-                                                @method('patch')
-                                                <input type="number" name="kuantitas" class="kuantitas" id="kuantitas"
-                                                    data-id="{{ $keranjang->id }}" value="{{ $keranjang->kuantitas }}">
-                                            </form>
-                                        </td>
-                                        <td class="product-total">Rp.
-                                            {{ number_format($keranjang->subtotal) }}
-                                        </td>
+                                @if ($keranjangs->count() > 0)
+                                    @foreach ($keranjangs as $keranjang)
+                                        <tr class="table-body-row">
+                                            <td class="product-remove">
+                                                <form action="/keranjang/hapus/{{ $keranjang->id }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                                                            aria-hidden="true"></i></button>
+                                                </form>
+                                            </td>
+                                            <td class="product-image"><img
+                                                    src="{{ asset('storage/' . $keranjang->barang->picture_barang) }}"
+                                                    alt=""></td>
+                                            <td class="product-name">{{ $keranjang->barang->nama_barang }}</td>
+                                            <td class="product-price">Rp. {{ number_format($keranjang->barang->harga) }}
+                                            </td>
+                                            <td class="product-quantity">
+                                                <form action="/keranjang/update/{{ $keranjang->barang->id }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('patch')
+                                                    <input type="number" name="kuantitas" class="kuantitas" id="kuantitas"
+                                                        data-id="{{ $keranjang->id }}" value="{{ $keranjang->kuantitas }}">
+                                                </form>
+                                            </td>
+                                            <td class="product-total">Rp.
+                                                {{ number_format($keranjang->subtotal) }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="6" class="text-center">Keranjang masih kosong...</td>
                                     </tr>
-                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

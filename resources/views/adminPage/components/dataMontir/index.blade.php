@@ -17,6 +17,8 @@
                         <tr>
                             <th>No.</th>
                             <th>Nama</th>
+                            <th>Alamat</th>
+                            <th>No. Telepon</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -25,6 +27,8 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="text-center">{{ $montir->nama }}</td>
+                                <td class="text-center">{{ $montir->alamat }}</td>
+                                <td class="text-center">{{ $montir->no_telp }}</td>
                                 <td class="text-center">
                                     <a href="/master/data-montir/{{ $montir->id }}/edit" class="btn btn-success btn-sm"><i
                                             class="fas fa-solid fa-pen"></i></a>

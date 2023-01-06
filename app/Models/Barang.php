@@ -16,4 +16,9 @@ class Barang extends Model
     {
         return $this->belongsTo(Kategori::class);
     }
+
+    public function booking()
+    {
+        return $this->belongsToMany(Booking::class, 'barang_bookings');
+    }
 }

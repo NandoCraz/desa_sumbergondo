@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('booking_pelayanans', function (Blueprint $table) {
+        Schema::create('barang_bookings', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
             $table->foreignId('booking_id')->nullable();
-            $table->foreignId('pelayanan_id')->nullable();
+            $table->foreignId('barang_id')->nullable();
+            $table->integer('kuantitas')->default('1')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('booking_pelayanans');
+        Schema::dropIfExists('barang_bookings');
     }
 };

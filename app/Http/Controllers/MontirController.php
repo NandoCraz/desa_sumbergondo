@@ -41,7 +41,9 @@ class MontirController extends Controller
         // return $request;
         $validateData = $request->validate([
             'nama' => 'required|max:255',
-            'picture_montir' => 'required|image|max:2048'
+            'picture_montir' => 'required|image|max:2048',
+            'alamat' => 'required|max:255',
+            'no_telp' => 'required|numeric'
         ]);
 
         $validateData['picture_montir'] = $request->file('picture_montir')->store('montirPicture', 'public');
@@ -89,7 +91,9 @@ class MontirController extends Controller
         $montir = Montir::findOrFail($id);
         $validateData = $request->validate([
             'nama' => 'required|max:255',
-            'picture_montir' => 'image|max:2048'
+            'picture_montir' => 'image|max:2048',
+            'alamat' => 'required|max:255',
+            'no_telp' => 'required|numeric'
         ]);
 
         if ($request->file('picture_montir')) {

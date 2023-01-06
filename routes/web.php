@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DaftarAlamatController;
 use App\Http\Controllers\DashboardAdminController;
@@ -84,6 +85,10 @@ Route::post('/checkout/charger', [CheckoutController::class, 'charger'])->name('
 Route::get('/pesanan', [PesananController::class, 'index'])->middleware('auth');
 Route::get('/pesanan/{checkout:uuid}', [PesananController::class, 'detailPesanan'])->middleware('auth');
 Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
+Route::get('/booking', [BookingController::class, 'index'])->middleware('auth');
+Route::post('/booking', [BookingController::class, 'booking'])->middleware('auth');
+Route::get('/layanans', [BookingController::class, 'layananPerbaikan'])->middleware('auth');
+Route::get('/layanan/{booking:uuid}', [BookingController::class, 'detailLayanan'])->middleware('auth');
 
 // Resource Route
 Route::resource('/daftar-alamat', DaftarAlamatController::class)->middleware('auth');

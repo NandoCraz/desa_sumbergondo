@@ -24,6 +24,26 @@
                             @enderror
                         </div>
                         <div class="mb-4">
+                            <label for="alamat">Alamat</label>
+                            <input class="form-control @error('alamat') is-invalid @enderror" id="alamat" type="text"
+                                name="alamat" value="{{ old('alamat', $montir->alamat) }}" required>
+                            @error('alamat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="no_telp">No. Telepon</label>
+                            <input class="form-control @error('no_telp') is-invalid @enderror" id="no_telp" type="text"
+                                name="no_telp" value="{{ old('no_telp', $montir->no_telp) }}" required>
+                            @error('no_telp')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
                             <label for="imageFile" class="form-label">Foto Montir</label>
                             @if ($montir->picture_montir)
                                 <img src="{{ asset('storage/' . $montir->picture_montir) }}"

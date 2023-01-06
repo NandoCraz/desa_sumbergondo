@@ -36,74 +36,83 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($checkouts as $checkout)
+                        @if ($checkouts->count() > 0)
+                            @foreach ($checkouts as $checkout)
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $checkout->daftarAlamat->nama_penerima }}</td>
+                                    <td>{{ $checkout->daftarAlamat->alamat }},
+                                        {{ $checkout->daftarAlamat->provinsi->nama_provinsi }},
+                                        {{ $checkout->daftarAlamat->kota->nama_kab_kota }}</td>
+                                    <td>Rp. {{ number_format($checkout->total) }}</td>
+                                    @if ($checkout->payment_status == '1' && $checkout->status == '5')
+                                        <td>
+                                            <h5><span class="badge bg-danger">Dibatalkan</span></h5>
+                                        </td>
+                                    @elseif ($checkout->payment_status == '1')
+                                        <td>
+                                            <h5><span class="badge bg-warning">Belum Dibayar</span></h5>
+                                        </td>
+                                    @elseif($checkout->payment_status == '2')
+                                        @if ($checkout->status == '1')
+                                            <td>
+                                                <h5><span class="badge bg-dark">Menunggu Konfirmasi</span></h5>
+                                            </td>
+                                        @elseif($checkout->status == '2')
+                                            <td>
+                                                <h5><span class="badge bg-secondary">Diproses</span></h5>
+                                            </td>
+                                        @elseif($checkout->status == '3')
+                                            <td>
+                                                <h5><span class="badge bg-info text-light">Dikirim</span></h5>
+                                            </td>
+                                        @elseif($checkout->status == '4')
+                                            <td>
+                                                <h5><span class="badge bg-success">Selesai</span></h5>
+                                            </td>
+                                        @endif
+                                    @else
+                                        <td>
+                                            <h5><span class="badge bg-danger">Kadaluarsa</span></h5>
+                                        </td>
+                                    @endif
+                                    <td class="d-flex justify-content-center">
+                                        @if ($checkout->payment_status != '3' && $checkout->status != '5')
+                                            <a href="/pesanan/{{ $checkout->uuid }}" class="btn btn-primary">Detail</a>
+                                        @endif
+                                        @if ($checkout->status == '5' || $checkout->payment_status == '3' || $checkout->status == '4')
+                                            <form action="/changeStatus/{{ $checkout->uuid }}" method="post"
+                                                class="ms-2">
+                                                @csrf
+                                                <input type="hidden" name="action" value="hapus">
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                            </form>
+                                        @endif
+                                        @if ($checkout->payment_status == '1' && $checkout->status != '5')
+                                            <form action="/changeStatus/{{ $checkout->uuid }}" method="post"
+                                                class="ms-2">
+                                                @csrf
+                                                <input type="hidden" name="action" value="batal">
+                                                <input type="hidden" name="id" value="{{ $checkout->id }}">
+                                                <button type="submit" class="btn btn-danger">Batalkan</button>
+                                            </form>
+                                        @endif
+                                        @if ($checkout->status == '3')
+                                            <form action="/changeStatus/{{ $checkout->uuid }}" method="post"
+                                                class="ms-2">
+                                                @csrf
+                                                <input type="hidden" name="action" value="terima">
+                                                <button type="submit" class="btn btn-success">Diterima</button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
                             <tr>
-                                <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $checkout->daftarAlamat->nama_penerima }}</td>
-                                <td>{{ $checkout->daftarAlamat->alamat }},
-                                    {{ $checkout->daftarAlamat->provinsi->nama_provinsi }},
-                                    {{ $checkout->daftarAlamat->kota->nama_kab_kota }}</td>
-                                <td>Rp. {{ number_format($checkout->total) }}</td>
-                                @if ($checkout->payment_status == '1' && $checkout->status == '5')
-                                    <td>
-                                        <h5><span class="badge bg-danger">Dibatalkan</span></h5>
-                                    </td>
-                                @elseif ($checkout->payment_status == '1')
-                                    <td>
-                                        <h5><span class="badge bg-warning">Belum Dibayar</span></h5>
-                                    </td>
-                                @elseif($checkout->payment_status == '2')
-                                    @if ($checkout->status == '1')
-                                        <td>
-                                            <h5><span class="badge bg-dark">Menunggu Konfirmasi</span></h5>
-                                        </td>
-                                    @elseif($checkout->status == '2')
-                                        <td>
-                                            <h5><span class="badge bg-secondary">Diproses</span></h5>
-                                        </td>
-                                    @elseif($checkout->status == '3')
-                                        <td>
-                                            <h5><span class="badge bg-info text-light">Dikirim</span></h5>
-                                        </td>
-                                    @elseif($checkout->status == '4')
-                                        <td>
-                                            <h5><span class="badge bg-success">Selesai</span></h5>
-                                        </td>
-                                    @endif
-                                @else
-                                    <td>
-                                        <h5><span class="badge bg-danger">Kadaluarsa</span></h5>
-                                    </td>
-                                @endif
-                                <td class="d-flex justify-content-center">
-                                    @if ($checkout->payment_status != '3' && $checkout->status != '5')
-                                        <a href="/pesanan/{{ $checkout->uuid }}" class="btn btn-primary">Detail</a>
-                                    @endif
-                                    @if ($checkout->status == '5' || $checkout->payment_status == '3' || $checkout->status == '4')
-                                        <form action="/changeStatus/{{ $checkout->uuid }}" method="post" class="ms-2">
-                                            @csrf
-                                            <input type="hidden" name="action" value="hapus">
-                                            <button type="submit" class="btn btn-danger">Hapus</button>
-                                        </form>
-                                    @endif
-                                    @if ($checkout->payment_status == '1' && $checkout->status != '5')
-                                        <form action="/changeStatus/{{ $checkout->uuid }}" method="post" class="ms-2">
-                                            @csrf
-                                            <input type="hidden" name="action" value="batal">
-                                            <input type="hidden" name="id" value="{{ $checkout->id }}">
-                                            <button type="submit" class="btn btn-danger">Batalkan</button>
-                                        </form>
-                                    @endif
-                                    @if ($checkout->status == '3')
-                                        <form action="/changeStatus/{{ $checkout->uuid }}" method="post" class="ms-2">
-                                            @csrf
-                                            <input type="hidden" name="action" value="terima">
-                                            <button type="submit" class="btn btn-success">Diterima</button>
-                                        </form>
-                                    @endif
-                                </td>
+                                <td colspan="6" class="text-center">Anda Belum Memesan..</td>
                             </tr>
-                        @endforeach
+                        @endif
                     </tbody>
                     <tfoot>
                         <tr>

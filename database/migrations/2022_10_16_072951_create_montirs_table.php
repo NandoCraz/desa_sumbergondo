@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->uuid()->unique();
             $table->string('nama');
+            $table->string('alamat');
+            $table->string('no_telp');
             $table->string('picture_montir');
             $table->boolean('is_tersedia')->default(true)->nullable();
             $table->timestamps();

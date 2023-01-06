@@ -27,11 +27,11 @@
                                         <li><a href="">Profil Saya</a></li>
                                         <li><a href="">Pengaturan</a></li>
                                         <li><a href="/pesanan">Pesanan Saya</a></li>
-                                        <li><a href="">Layanan Saya</a></li>
+                                        <li><a href="/layanans">Layanan Saya</a></li>
                                         <li>
                                             <form action="/logout" method="post">
                                                 @csrf
-                                                <button type="submit" class="btn btn-light text-dark fw-bold">
+                                                <button type="submit" class="btn text-dark fw-bold">
                                                     Logout
                                                 </button>
                                             </form>

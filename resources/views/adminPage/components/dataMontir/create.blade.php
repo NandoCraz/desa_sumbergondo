@@ -13,10 +13,30 @@
                     <form method="POST" action="/master/data-montir" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-4">
-                            <label for="nama_kategori">Nama</label>
+                            <label for="nama">Nama</label>
                             <input class="form-control @error('nama') is-invalid @enderror" id="nama" type="text"
                                 name="nama" value="{{ old('nama') }}" required autocomplete="off">
                             @error('nama')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="alamat">Alamat</label>
+                            <input class="form-control @error('alamat') is-invalid @enderror" id="alamat" type="text"
+                                name="alamat" value="{{ old('alamat') }}" required autocomplete="off">
+                            @error('alamat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="no_telp">No. Telepon</label>
+                            <input class="form-control @error('no_telp') is-invalid @enderror" id="no_telp" type="text"
+                                name="no_telp" value="{{ old('no_telp') }}" required autocomplete="off">
+                            @error('no_telp')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

@@ -11,4 +11,9 @@ class Pelayanan extends Model
     use HasFactory, Uuid;
 
     protected $guarded = ["uuid"];
+
+    public function booking()
+    {
+        return $this->belongsToMany(Booking::class, 'booking_pelayanans');
+    }
 }
