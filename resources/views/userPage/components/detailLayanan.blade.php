@@ -45,7 +45,7 @@
                                     </h5>
                                     <h5>
                                         Montir Pengerjaan :
-                                        <p>{{ $booking->montir->nama }}</p>
+                                        <p>{{ $booking->montir->nama }} | {{ $booking->montir->no_telp }}</p>
                                         <p><img src="{{ asset('storage/' . $booking->montir->picture_montir) }}"
                                                 alt="{{ $booking->montir->nama }}" class="rounded" width="120"></p>
                                     </h5>
@@ -72,6 +72,7 @@
                                                     <th scope="col">#</th>
                                                     <th scope="col">Nama Pelayanan</th>
                                                     <th scope="col">Harga</th>
+                                                    <th scope="col">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -80,13 +81,29 @@
                                                         <th scope="row">{{ $loop->iteration }}</th>
                                                         <td>{{ $pelayanan->nama_pelayanan }}</td>
                                                         <td>Rp. {{ number_format($pelayanan->harga) }}</td>
+                                                        <td>
+                                                            <form action="/pelayanan/hapus/{{ $pelayanan->id }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $booking->id }}">
+                                                                <button class="btn btn-sm btn-danger"><i
+                                                                        class="fas fa-solid fa-trash"></i></button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                             <tfoot class="mt-4">
                                                 <tr>
-                                                    <td colspan="3"><span class="fw-bold fs-6">Kendala Lain</span>
-                                                        : {{ $booking->kendala }}</td>
+                                                    <td colspan="4"><span class="fw-bold fs-6">Kendala Lain</span>
+                                                        : {{ $booking->kendala == null ? '-' : $booking->kendala }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4"><span class="fw-bold fs-6">Total Biaya Pelayanan
+                                                            (Sementara)</span> : Rp. {{ number_format($booking->total) }}
+                                                    </td>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -110,13 +127,47 @@
                                                                 alt="{{ $booking->nama_barang }}" width="40"></th>
                                                         <td>{{ $barang->nama_barang }}</td>
                                                         <td>Rp. {{ number_format($barang->harga) }}</td>
-                                                        <td>{{ $barang->pivot->kuantitas }}</td>
-                                                        <td>Hapus</td>
+                                                        <td>
+                                                            <form action="/layananBarang/{{ $barang->id }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('patch')
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $booking->id }}">
+                                                                <input type="number" name="kuantitas" class="kuantitas"
+                                                                    id="kuantitas" data-id="{{ $barang->id }}"
+                                                                    value="{{ $barang->pivot->kuantitas }}">
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="/layananBarang/hapus/{{ $barang->id }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $booking->id }}">
+                                                                <button class="btn btn-sm btn-danger"><i
+                                                                        class="fas fa-solid fa-trash"></i></button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="5"><span class="fw-bold fs-6">Total Harga Barang</span>
+                                                        : Rp. {{ number_format($booking->total_harga_barang) }}
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
+                                </div>
+                                <div class="card-footer mt-3">
+                                    <h4>
+                                        Total Biaya (Sementara) : Rp.
+                                        {{ number_format($booking->total + $booking->total_harga_barang) }}
+                                    </h4>
                                 </div>
                             </div>
                             {{-- @if ($checkout->payment_status == '1')
@@ -134,7 +185,9 @@
 @section('script')
     {{-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
     </script>
+    
 
+    
     @if ($checkout->payment_status == '1')
         <script>
             $('#bayar').on('click', function(e) {
@@ -148,4 +201,39 @@
             })
         </script>
     @endif --}}
+
+    <script>
+        function debounce(func, timeout = 1000) {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    func.apply(this, args);
+                }, timeout);
+            };
+        }
+
+        document.querySelectorAll('.kuantitas').forEach(item => {
+            item.addEventListener('input', debounce(function() {
+                const id = item.dataset.id;
+                const kuantitas = item.value;
+                const idBooking = $('input[name="id"]').val();
+                const url = `/layananBarang/${id}`;
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ @csrf_token() }}'
+                    },
+                    data: {
+                        kuantitas: kuantitas,
+                        id: idBooking
+                    },
+                    success: function(response) {
+                        window.location.reload();
+                    }
+                });
+            }, 1000));
+        });
+    </script>
 @endsection

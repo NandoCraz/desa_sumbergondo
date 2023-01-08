@@ -27,11 +27,14 @@ return new class extends Migration
             $table->dateTime('waktu');
             $table->string('tempat_perbaikan')->nullable();
             $table->string('tipe_bayar')->nullable();
+            $table->double('total')->nullable();
+            $table->double('total_harga_barang')->nullable();
             $table->string('status');
             $table->enum('payment_status', ['1', '2', '3', '4'])->default('1')->comment('1=Menunggu Pembayaran, 2=Sudah Dibayar, 3=Kadaluarsa, 4=Batal');
-            $table->double('penawaran')->nullable();
+            $table->double('penawaran_1')->nullable();
+            $table->double('penawaran_2')->nullable();
+            $table->double('penawaran_3')->nullable();
             $table->string('status_penawaran')->nullable();
-            $table->double('total')->nullable();
             $table->string('lampiran_1')->nullable();
             $table->string('lampiran_2')->nullable();
             $table->string('lampiran_3')->nullable();

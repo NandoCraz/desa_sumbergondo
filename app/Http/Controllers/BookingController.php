@@ -59,6 +59,10 @@ class BookingController extends Controller
             'lampiran_4' => 'nullable|image|max:2048',
         ]);
 
+        if ($data['tempat_perbaikan'] == 'dibengkel') {
+            $data['alamat'] = null;
+        }
+
         $data['user_id'] = auth()->user()->id;
         $data['status'] = 'Menunggu Konfirmasi';
 
@@ -82,6 +86,7 @@ class BookingController extends Controller
         ]);
 
         $total = 0;
+        $totalBarang = 0;
 
         foreach ($request->pelayanan_id as $pelayanan_id) {
             BookingPelayanan::create([
@@ -104,14 +109,89 @@ class BookingController extends Controller
                 'stok' => $barang->stok - 1
             ]);
 
-            $total += $barang->harga;
+            $totalBarang += $barang->harga;
         }
 
         Booking::where('id', $createBooking->id)->update([
-            'total' => $total
+            'total' => $total,
+            'total_harga_barang' => $totalBarang
         ]);
 
 
         return redirect('/layanans')->with('success', 'Booking berhasil');
+    }
+
+    public function updateBarangLayanan(Request $request, BarangBooking $barang_booking)
+    {
+        // dd($request);
+        $barangBooking = BarangBooking::findOrFail($barang_booking->id);
+        $barangBooking->update([
+            'kuantitas' => $request->kuantitas
+        ]);
+
+        $barangBooking =  BarangBooking::where('booking_id', $request->id)->get();
+        // dd($barangBooking);
+
+        $total = 0;
+
+        foreach ($barangBooking as $barang) {
+            $barangD = Barang::where('id', $barang->barang_id)->first();
+            $total += $barangD->harga * $barang->kuantitas;
+        }
+
+        $booking = Booking::where('id', $request->id)->first();
+
+        $booking->update([
+            'total_harga_barang' => $total
+        ]);
+
+        return back();
+    }
+
+    public function hapusBarangLayanan(Request $request, BarangBooking $barang_booking)
+    {
+        $barangBooking = BarangBooking::findOrFail($barang_booking->id);
+        $barangBooking->delete();
+
+        $barangBooking =  BarangBooking::where('booking_id', $request->id)->get();
+        // dd($barangBooking);
+
+        $total = 0;
+
+        foreach ($barangBooking as $barang) {
+            $barangD = Barang::where('id', $barang->barang_id)->first();
+            $total += $barangD->harga * $barang->kuantitas;
+        }
+
+        $booking = Booking::where('id', $request->id)->first();
+
+        $booking->update([
+            'total_harga_barang' => $total
+        ]);
+
+        return back();
+    }
+
+    public function hapusPelayanan(Request $request, BookingPelayanan $booking_pelayanan)
+    {
+        $bookingPelayanan = BookingPelayanan::findOrFail($booking_pelayanan->id);
+        $bookingPelayanan->delete();
+
+        $bookingPelayanan =  BookingPelayanan::where('booking_id', $request->id)->get();
+
+        $total = 0;
+
+        foreach ($bookingPelayanan as $pelayanan) {
+            $pelayananD = Pelayanan::where('id', $pelayanan->pelayanan_id)->first();
+            $total += $pelayananD->harga;
+        }
+
+        $booking = Booking::where('id', $request->id)->first();
+
+        $booking->update([
+            'total' => $total
+        ]);
+
+        return back();
     }
 }

@@ -19,7 +19,7 @@ class Booking extends Model
 
     public function barang()
     {
-        return $this->belongsToMany(Barang::class, 'barang_bookings');
+        return $this->belongsToMany(Barang::class, 'barang_bookings')->withPivot('kuantitas');
     }
 
     public function montir()

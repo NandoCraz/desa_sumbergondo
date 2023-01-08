@@ -19,7 +19,7 @@
     <div class="product-section mt-150 mb-150">
         <div class="container">
             @if (session('success'))
-                <div class="alert alert-success mb-3 col-lg-10" role="alert">
+                <div class="alert alert-success mb-3 col-lg-12" role="alert">
                     {{ session('success') }}
                 </div>
             @endif

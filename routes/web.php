@@ -89,7 +89,9 @@ Route::get('/booking', [BookingController::class, 'index'])->middleware('auth');
 Route::post('/booking', [BookingController::class, 'booking'])->middleware('auth');
 Route::get('/layanans', [BookingController::class, 'layananPerbaikan'])->middleware('auth');
 Route::get('/layanan/{booking:uuid}', [BookingController::class, 'detailLayanan'])->middleware('auth');
-
+Route::post('/layananBarang/{barang_booking:id}', [BookingController::class, 'updateBarangLayanan'])->middleware('auth');
+Route::delete('/layananBarang/hapus/{barang_booking:id}', [BookingController::class, 'hapusBarangLayanan'])->middleware('auth');
+Route::delete('/pelayanan/hapus/{booking_pelayanan:id}', [BookingController::class, 'hapusPelayanan'])->middleware('auth');
 // Resource Route
 Route::resource('/daftar-alamat', DaftarAlamatController::class)->middleware('auth');
 
