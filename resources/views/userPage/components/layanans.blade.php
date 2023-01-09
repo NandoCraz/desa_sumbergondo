@@ -45,7 +45,14 @@
                                     <td>{{ $booking->tempat_perbaikan == 'dirumah' ? 'Di Rumah' : 'Di Bengkel' }}</td>
                                     <td>{{ $booking->alamat == null ? '-' : $booking->alamat }}</td>
                                     <td>Rp. {{ number_format($booking->total) }}</td>
-                                    <td><span class="badge bg-secondary p-1">{{ $booking->status }}</span></td>
+                                    <td>
+                                        @if ($booking->status == 'Konfirmasi Layanan')
+                                            <span class="badge bg-secondary p-1">{{ $booking->status }}</span>
+                                        @elseif($booking->status == 'Menunggu Konfirmasi Admin')
+                                            <span
+                                                class="badge fs-6 mt-2 bg-info text-light p-1">{{ $booking->status }}</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="/layanan/{{ $booking->uuid }}" class="btn btn-primary">Detail</a>
                                     </td>

@@ -46,12 +46,12 @@ class BookingController extends Controller
         $data = $request->validate([
             'nama_pemesan' => 'required|max:255',
             'montir_id' => 'required',
-            'alamat' => 'nullable|max:255',
+            'tempat_perbaikan' => 'required',
+            'alamat' => 'required_if:tempat_perbaikan,==,dirumah|nullable|max:255',
             'tipe_mobil' => 'required',
             'no_telp' => 'required|numeric',
             'kendala' => 'nullable',
             'waktu' => 'required',
-            'tempat_perbaikan' => 'required',
             'tipe_bayar' => 'required',
             'lampiran_1' => 'nullable|image|max:2048',
             'lampiran_2' => 'nullable|image|max:2048',
@@ -64,7 +64,7 @@ class BookingController extends Controller
         }
 
         $data['user_id'] = auth()->user()->id;
-        $data['status'] = 'Menunggu Konfirmasi';
+        $data['status'] = 'Konfirmasi Layanan';
 
         if (isset($request->lampiran_1)) {
             $validateData['lampiran_1'] = $request->file('lampiran_1')->store('lampiranLayanan', 'public');
@@ -123,14 +123,12 @@ class BookingController extends Controller
 
     public function updateBarangLayanan(Request $request, BarangBooking $barang_booking)
     {
-        // dd($request);
         $barangBooking = BarangBooking::findOrFail($barang_booking->id);
         $barangBooking->update([
             'kuantitas' => $request->kuantitas
         ]);
 
         $barangBooking =  BarangBooking::where('booking_id', $request->id)->get();
-        // dd($barangBooking);
 
         $total = 0;
 
@@ -193,5 +191,20 @@ class BookingController extends Controller
         ]);
 
         return back();
+    }
+
+    public function changeStatusBooking(Request $request, Booking $booking)
+    {
+        if ($request->status == 'konfirmasi') {
+            Booking::where('id', $booking->id)->update([
+                'status' => 'Menunggu Konfirmasi Admin'
+            ]);
+            return back()->with('success', 'Layanan Berhasil Dikonfirmasi');
+        } elseif ($request->status == 'konfirmasi-admin') {
+            Booking::where('id', $booking->id)->update([
+                'status' => 'Menunggu Persetujuan'
+            ]);
+            return back()->with('success', 'Layanan Berhasil Dikonfirmasi');
+        }
     }
 }

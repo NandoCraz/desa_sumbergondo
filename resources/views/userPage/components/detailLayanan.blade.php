@@ -1,4 +1,4 @@
-{{-- @dd($booking->barang) --}}
+{{-- @dd($booking->pelayanan) --}}
 @extends('userPage.layouts.main')
 @section('container')
     <!-- breadcrumb-section -->
@@ -17,16 +17,36 @@
     <!-- end breadcrumb section -->
     <!-- products -->
     <div class="product-section mt-150 mb-150">
+        @if (session('success'))
+            <div class="container">
+                <div class="alert alert-success mb-3 col-lg-12" role="alert">
+                    {{ session('success') }}
+                </div>
+            </div>
+        @endif
         <div class="container">
             <div class="card">
                 <div class="card-title">
                     <h3 class="text-center mt-2">Rincian Layanan</h3>
                 </div>
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row mb-4">
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-body">
+                                    <h5>
+                                        Status :
+                                        @if ($booking->status == 'Konfirmasi Layanan')
+                                            <p>
+                                                <span class="badge fs-6 mt-2 bg-secondary p-2">{{ $booking->status }}</span>
+                                            </p>
+                                        @elseif($booking->status == 'Menunggu Konfirmasi Admin')
+                                            <p>
+                                                <span
+                                                    class="badge fs-6 mt-2 bg-info text-light p-2">{{ $booking->status }}</span>
+                                            </p>
+                                        @endif
+                                    </h5>
                                     <h5>Nama Pemesan : <p>{{ $booking->nama_pemesan }}</p>
                                     </h5>
                                     <h5>No. Telepon : <p>{{ $booking->no_telp }}</p>
@@ -38,6 +58,10 @@
                                     <h5>Tempat Perbaikan : <p>
                                             {{ $booking->tempat_perbaikan == 'dirumah' ? 'Di Rumah' : ' Di Bengkel' }}</p>
                                     </h5>
+                                    @if ($booking->tempat_perbaikan == 'dibengkel')
+                                        <h5>Alamat Bengkel : <p>Jl. Rangkah VII/124B, Surabaya</p>
+                                        </h5>
+                                    @endif
                                     <h5>Waktu (Tanggal & Jam) : <p>{{ $booking->waktu }}</p>
                                     </h5>
                                     <h5>Tipe Pembayaran : <p>
@@ -48,15 +72,6 @@
                                         <p>{{ $booking->montir->nama }} | {{ $booking->montir->no_telp }}</p>
                                         <p><img src="{{ asset('storage/' . $booking->montir->picture_montir) }}"
                                                 alt="{{ $booking->montir->nama }}" class="rounded" width="120"></p>
-                                    </h5>
-                                    <h5>
-                                        Status :
-                                        @if ($booking->status == 'Menunggu Konfirmasi')
-                                            <p>
-                                                <span class="badge bg-secondary p-2">{{ $booking->status }}</span>
-                                            </p>
-                                        @endif
-
                                     </h5>
                                 </div>
                             </div>
@@ -72,7 +87,9 @@
                                                     <th scope="col">#</th>
                                                     <th scope="col">Nama Pelayanan</th>
                                                     <th scope="col">Harga</th>
-                                                    <th scope="col">Aksi</th>
+                                                    @if ($booking->status == 'Konfirmasi Layanan')
+                                                        <th scope="col">Aksi</th>
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -81,17 +98,19 @@
                                                         <th scope="row">{{ $loop->iteration }}</th>
                                                         <td>{{ $pelayanan->nama_pelayanan }}</td>
                                                         <td>Rp. {{ number_format($pelayanan->harga) }}</td>
-                                                        <td>
-                                                            <form action="/pelayanan/hapus/{{ $pelayanan->id }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <input type="hidden" name="id"
-                                                                    value="{{ $booking->id }}">
-                                                                <button class="btn btn-sm btn-danger"><i
-                                                                        class="fas fa-solid fa-trash"></i></button>
-                                                            </form>
-                                                        </td>
+                                                        @if ($booking->status == 'Konfirmasi Layanan')
+                                                            <td>
+                                                                <form action="/pelayanan/hapus/{{ $pelayanan->pivot->id }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $booking->id }}">
+                                                                    <button class="btn btn-sm btn-danger"><i
+                                                                            class="fas fa-solid fa-trash"></i></button>
+                                                                </form>
+                                                            </td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -117,7 +136,9 @@
                                                     <th scope="col">Nama Barang</th>
                                                     <th scope="col">Harga</th>
                                                     <th scope="col">Kuantitas</th>
-                                                    <th scope="col">Aksi</th>
+                                                    @if ($booking->status == 'Konfirmasi Layanan')
+                                                        <th scope="col">Aksi</th>
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -127,29 +148,36 @@
                                                                 alt="{{ $booking->nama_barang }}" width="40"></th>
                                                         <td>{{ $barang->nama_barang }}</td>
                                                         <td>Rp. {{ number_format($barang->harga) }}</td>
-                                                        <td>
-                                                            <form action="/layananBarang/{{ $barang->id }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('patch')
-                                                                <input type="hidden" name="id"
-                                                                    value="{{ $booking->id }}">
-                                                                <input type="number" name="kuantitas" class="kuantitas"
-                                                                    id="kuantitas" data-id="{{ $barang->id }}"
-                                                                    value="{{ $barang->pivot->kuantitas }}">
-                                                            </form>
-                                                        </td>
-                                                        <td>
-                                                            <form action="/layananBarang/hapus/{{ $barang->id }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <input type="hidden" name="id"
-                                                                    value="{{ $booking->id }}">
-                                                                <button class="btn btn-sm btn-danger"><i
-                                                                        class="fas fa-solid fa-trash"></i></button>
-                                                            </form>
-                                                        </td>
+                                                        @if ($booking->status == 'Konfirmasi Layanan')
+                                                            <td>
+                                                                <form action="/layananBarang/{{ $barang->pivot->id }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('patch')
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $booking->id }}">
+                                                                    <input type="number" name="kuantitas" class="kuantitas"
+                                                                        id="kuantitas" data-id="{{ $barang->pivot->id }}"
+                                                                        value="{{ $barang->pivot->kuantitas }}">
+                                                                </form>
+                                                            </td>
+                                                        @else
+                                                            <td>{{ $barang->kuantitas }}</td>
+                                                        @endif
+                                                        @if ($booking->status == 'Konfirmasi Layanan')
+                                                            <td>
+                                                                <form
+                                                                    action="/layananBarang/hapus/{{ $barang->pivot->id }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $booking->id }}">
+                                                                    <button class="btn btn-sm btn-danger"><i
+                                                                            class="fas fa-solid fa-trash"></i></button>
+                                                                </form>
+                                                            </td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -174,6 +202,53 @@
                                 <button class="btn btn-lg btn-warning text-light mt-4" id="bayar">Bayar</button>
                             @endif --}}
                         </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-lg-6">
+                            @if ($booking->status == 'Konfirmasi Layanan')
+                                <form action="/changeLayanan/{{ $booking->id }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="status" value="konfirmasi">
+                                    <button type="submit" class="btn btn-primary">Konfirmasi</button>
+                                </form>
+                            @endif
+                        </div>
+                        @if ($booking->status == 'persetujuan')
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form action="/penawaran/{{ $booking->id }}" method="post">
+                                            @csrf
+                                            <div class="mb-4">
+                                                <label for="penawaran" class="fw-bold">Ajukan Penawaran Total Biaya
+                                                    Layanan</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            Rp.
+                                                        </span>
+                                                    </div>
+                                                    <input class="form-control @error('penawaran') is-invalid @enderror"
+                                                        id="penawaran" type="text" name="penawaran"
+                                                        value="{{ old('penawaran') }}" required autocomplete="off">
+                                                </div>
+                                                @error('penawaran')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="d-flex">
+                                                <button type="submit" class="btn btn-dark">Ajukan</button>
+                                                <div class="text-danger ms-4 fw-bold fs-5">Ditolak</div>
+                                                <div class="text-success ms-4 fw-bold fs-5">Disetujui</div>
+                                                <div class="text-secondary ms-4 fw-bold fs-5">Diajukan</div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

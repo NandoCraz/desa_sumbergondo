@@ -14,12 +14,12 @@ class Booking extends Model
 
     public function pelayanan()
     {
-        return $this->belongsToMany(Pelayanan::class, 'booking_pelayanans');
+        return $this->belongsToMany(Pelayanan::class, 'booking_pelayanans')->withPivot('id');
     }
 
     public function barang()
     {
-        return $this->belongsToMany(Barang::class, 'barang_bookings')->withPivot('kuantitas');
+        return $this->belongsToMany(Barang::class, 'barang_bookings')->withPivot('kuantitas', 'id');
     }
 
     public function montir()

@@ -100,7 +100,7 @@
                                     <div class="input-group">
                                         <input class="form-control w-75 @error('alamat') is-invalid @enderror"
                                             id="alamat" type="text" name="alamat" value="{{ old('alamat') }}"
-                                            required autocomplete="off">
+                                            autocomplete="off">
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 Surabaya
@@ -229,7 +229,7 @@
                                 </div>
                                 <div class="mb-4 row">
                                     <div class="col-lg-8 mb-4">
-                                        <h5>Foto Lampiran (Bila Diperlukan)</h5>
+                                        <h5>Lampiran Foto Mobil (Bila Diperlukan)</h5>
                                     </div>
                                     <div class="col-lg-12 mb-3 row">
                                         <div class="col-lg-6 mb-3">

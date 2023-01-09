@@ -19,6 +19,6 @@ class Barang extends Model
 
     public function booking()
     {
-        return $this->belongsToMany(Booking::class, 'barang_bookings');
+        return $this->belongsToMany(Booking::class, 'barang_bookings')->withPivot('id');
     }
 }
