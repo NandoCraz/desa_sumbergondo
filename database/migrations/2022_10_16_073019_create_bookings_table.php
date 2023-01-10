@@ -39,6 +39,8 @@ return new class extends Migration
             $table->string('lampiran_2')->nullable();
             $table->string('lampiran_3')->nullable();
             $table->string('lampiran_4')->nullable();
+            $table->boolean('upd_biaya')->default(false)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

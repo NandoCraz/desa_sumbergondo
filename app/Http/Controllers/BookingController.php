@@ -200,11 +200,69 @@ class BookingController extends Controller
                 'status' => 'Menunggu Konfirmasi Admin'
             ]);
             return back()->with('success', 'Layanan Berhasil Dikonfirmasi');
-        } elseif ($request->status == 'konfirmasi-admin') {
+        } elseif ($request->status == 'konfirmasiAdmin') {
             Booking::where('id', $booking->id)->update([
-                'status' => 'Menunggu Persetujuan'
+                'status' => 'Persetujuan Layanan'
             ]);
             return back()->with('success', 'Layanan Berhasil Dikonfirmasi');
         }
+    }
+
+    public function updateHarga(Request $request, Booking $booking)
+    {
+        $booking = Booking::where('id', $booking->id)->first();
+        $booking->update([
+            'total' => $request->harga_akhir,
+            'upd_biaya' => true
+        ]);
+        return back()->with('success', 'Biaya Pelayanan Telah Ditetapkan');
+    }
+
+    public function penawaranBiaya(Request $request, Booking $booking)
+    {
+        $booking = Booking::where('id', $booking->id)->first();
+        $request->validate([
+            'penawaran' => 'numeric'
+        ]);
+
+        if ($booking->penawaran_1 == null) {
+            $booking->update([
+                'penawaran_1' => $request->penawaran,
+                'status_penawaran' => 'Diajukan'
+            ]);
+        } elseif ($booking->penawaran_1 != null && $booking->penawaran_2 == null) {
+            $booking->update([
+                'penawaran_2' => $request->penawaran,
+                'status_penawaran' => 'Diajukan'
+            ]);
+        } elseif ($booking->penawaran_2 != null && $booking->penawaran_3 == null) {
+            $booking->update([
+                'penawaran_3' => $request->penawaran,
+                'status_penawaran' => 'Diajukan'
+            ]);
+        }
+
+        return back()->with('success', 'Berhasil Mengajukan Tawaran');
+    }
+
+    public function hapusLayanan(Booking $booking)
+    {
+        $booking = Booking::where('id', $booking->id)->first();
+        Montir::where('id', $booking->montir_id)->update([
+            'is_tersedia' => true
+        ]);
+        BookingPelayanan::where('booking_id', $booking->id)->delete();
+        $barangBooking = BarangBooking::where('booking_id', $booking->id)->get();
+        foreach ($barangBooking as $barang) {
+            $barangD = Barang::where('id', $barang->barang_id)->first();
+            $barangD->update([
+                'stok' => $barangD->stok + $barang->kuantitas
+            ]);
+        }
+        $barangBooking->delete();
+
+
+        $booking->delete();
+        return redirect('/layanans')->with('success', 'Layanan Dibatalkan');
     }
 }

@@ -1,28 +1,15 @@
-{{-- @dd($bookings) --}}
-@extends('userPage.layouts.main')
-@section('container')
-    <!-- breadcrumb-section -->
-    <div class="breadcrumb-section breadcrumb-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2 text-center">
-                    <div class="breadcrumb-text">
-                        <p>Perbaiki & Modifikasi</p>
-                        <h1>Layanan Perbaikan Saya</h1>
-                    </div>
-                </div>
-            </div>
+@extends('adminPage.layouts.main')
+@section('content')
+    @if (session('berhasil'))
+        <div class="alert alert-success mb-3 col-lg-10" role="alert">
+            {{ session('berhasil') }}
         </div>
-    </div>
-    <!-- end breadcrumb section -->
-    <!-- products -->
-    <div class="product-section mt-150 mb-150">
-        <div class="container">
-            @if (session('success'))
-                <div class="alert alert-success mb-3 col-lg-12" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
+    @endif
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Pesanan Belum Dibayar</h6>
+        </div>
+        <div class="card-body">
             <div class="table-responsive">
                 <table class="table text-center">
                     <thead>
@@ -51,21 +38,11 @@
                                         @elseif($booking->status == 'Menunggu Konfirmasi Admin')
                                             <span
                                                 class="badge fs-6 mt-2 bg-info text-light p-1">{{ $booking->status }}</span>
-                                        @elseif($booking->status == 'Persetujuan Layanan')
-                                            <span
-                                                class="badge fs-6 mt-2 bg-primary text-light p-1">{{ $booking->status }}</span>
                                         @endif
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <a href="/layanan/{{ $booking->uuid }}" class="btn btn-primary">Detail</a>
-                                            @if ($booking->status == 'Konfirmasi Layanan')
-                                                <form action="/hapusLayanan/{{ $booking->id }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-danger ms-2">Batalkan</button>
-                                                </form>
-                                            @endif
+                                            <a href="/layanan-admin/{{ $booking->id }}" class="btn btn-primary">Detail</a>
                                         </div>
                                     </td>
                                 </tr>

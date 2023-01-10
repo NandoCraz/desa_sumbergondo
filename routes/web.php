@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingAdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DaftarAlamatController;
@@ -55,6 +56,11 @@ Route::get('/pesanan/dikirim', [PesananController::class, 'dikirim'])->middlewar
 Route::get('/pesanan/selesai', [PesananController::class, 'selesai'])->middleware('admin');
 Route::get('/pesanan/dibatalkan', [PesananController::class, 'dibatalkan'])->middleware('admin');
 Route::get('/pesanan/admin/{checkout:id}', [PesananController::class, 'detailPesananAdmin'])->middleware('admin');
+Route::get('/layanan-admin', [BookingAdminController::class, 'index'])->middleware('admin');
+Route::get('/layanan-admin/{booking:id}', [BookingAdminController::class, 'detailLayananAdmin'])->middleware('admin');
+Route::post('/hargaAkhir/{booking:id}', [BookingController::class, 'updateHarga'])->middleware('admin');
+Route::post('/keputusan/{booking:id}', [BookingAdminController::class, 'keputusanAdmin'])->middleware('admin');
+
 
 // Resource Route
 Route::resource('/master/data-kategori', DataKategoriController::class)->middleware('admin');
@@ -93,6 +99,8 @@ Route::post('/layananBarang/{barang_booking:id}', [BookingController::class, 'up
 Route::delete('/layananBarang/hapus/{barang_booking:id}', [BookingController::class, 'hapusBarangLayanan'])->middleware('auth');
 Route::delete('/pelayanan/hapus/{booking_pelayanan:id}', [BookingController::class, 'hapusPelayanan'])->middleware('auth');
 Route::post('/changeLayanan/{booking:id}', [BookingController::class, 'changeStatusBooking'])->middleware('auth');
+Route::delete('/hapusLayanan/{booking:id}', [BookingController::class, 'hapusLayanan'])->middleware('auth');
+Route::post('/penawaran/{booking:id}', [BookingController::class, 'penawaranBiaya'])->middleware('auth');
 // Resource Route
 Route::resource('/daftar-alamat', DaftarAlamatController::class)->middleware('auth');
 

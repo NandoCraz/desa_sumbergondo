@@ -56,8 +56,8 @@
             </div>
         </div>
     </li>
-    <li class="nav-item {{ Request::Is('layanan-booking') ? 'active' : '' }}">
-        <a class="nav-link" href="/users">
+    <li class="nav-item {{ Request::Is('layanan-admin') ? 'active' : '' }}">
+        <a class="nav-link" href="/layanan-admin">
             <i class="fa fa-calendar" aria-hidden="true"></i>
             <span>Layanan Booking</span>
         </a>

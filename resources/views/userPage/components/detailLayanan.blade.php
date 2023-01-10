@@ -45,6 +45,11 @@
                                                 <span
                                                     class="badge fs-6 mt-2 bg-info text-light p-2">{{ $booking->status }}</span>
                                             </p>
+                                        @elseif($booking->status == 'Persetujuan Layanan')
+                                            <p>
+                                                <span
+                                                    class="badge fs-6 mt-2 bg-primary text-light p-2">{{ $booking->status }}</span>
+                                            </p>
                                         @endif
                                     </h5>
                                     <h5>Nama Pemesan : <p>{{ $booking->nama_pemesan }}</p>
@@ -120,8 +125,10 @@
                                                         : {{ $booking->kendala == null ? '-' : $booking->kendala }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="4"><span class="fw-bold fs-6">Total Biaya Pelayanan
-                                                            (Sementara)</span> : Rp. {{ number_format($booking->total) }}
+                                                    <td colspan="4"><span class="fw-bold fs-6">Total Biaya
+                                                            Pelayanan
+                                                            ({{ $booking->upd_biaya == true ? 'Akhir' : 'Sementara' }})</span>
+                                                        : Rp. {{ number_format($booking->total) }}
                                                     </td>
                                                 </tr>
                                             </tfoot>
@@ -193,7 +200,7 @@
                                 </div>
                                 <div class="card-footer mt-3">
                                     <h4>
-                                        Total Biaya (Sementara) : Rp.
+                                        Total Biaya ({{ $booking->upd_biaya == true ? 'Akhir' : 'Sementara' }}) : Rp.
                                         {{ number_format($booking->total + $booking->total_harga_barang) }}
                                     </h4>
                                 </div>
@@ -206,22 +213,35 @@
                     <div class="row mt-5">
                         <div class="col-lg-6">
                             @if ($booking->status == 'Konfirmasi Layanan')
+                                <div class="d-flex">
+                                    <form action="/hapusLayanan/{{ $booking->id }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger">Batalkan</button>
+                                    </form>
+                                    <form action="/changeLayanan/{{ $booking->id }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="status" value="konfirmasi">
+                                        <button type="submit" class="btn btn-primary ms-3">Konfirmasi</button>
+                                    </form>
+                                </div>
+                            @elseif($booking->status == 'Persetujuan Layanan')
                                 <form action="/changeLayanan/{{ $booking->id }}" method="post">
                                     @csrf
-                                    <input type="hidden" name="status" value="konfirmasi">
-                                    <button type="submit" class="btn btn-primary">Konfirmasi</button>
+                                    <input type="hidden" name="status" value="deal">
+                                    <button type="submit" class="btn btn-success fw-bold fs-4 ms-3">Deal</button>
                                 </form>
                             @endif
                         </div>
-                        @if ($booking->status == 'persetujuan')
+                        @if ($booking->status == 'Persetujuan Layanan')
                             <div class="col-lg-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <form action="/penawaran/{{ $booking->id }}" method="post">
                                             @csrf
                                             <div class="mb-4">
-                                                <label for="penawaran" class="fw-bold">Ajukan Penawaran Total Biaya
-                                                    Layanan</label>
+                                                <label for="penawaran" class="fw-bold">Ajukan Penawaran (Untuk Biaya
+                                                    Pelayanan)</label>
                                                 <div class="input-group">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">
@@ -239,10 +259,16 @@
                                                 @enderror
                                             </div>
                                             <div class="d-flex">
-                                                <button type="submit" class="btn btn-dark">Ajukan</button>
-                                                <div class="text-danger ms-4 fw-bold fs-5">Ditolak</div>
-                                                <div class="text-success ms-4 fw-bold fs-5">Disetujui</div>
-                                                <div class="text-secondary ms-4 fw-bold fs-5">Diajukan</div>
+                                                @if ($booking->status_penawaran != 'Disetujui' || $booking->penawaran_3 != null)
+                                                    <button type="submit" class="btn btn-dark">Ajukan</button>
+                                                @endif
+                                                @if ($booking->status_penawaran == 'Ditolak')
+                                                    <div class="text-danger ms-4 fw-bold fs-5">Ditolak</div>
+                                                @elseif($booking->status_penawaran == 'Disetujui')
+                                                    <div class="text-success ms-4 fw-bold fs-5">Disetujui</div>
+                                                @elseif($booking->status_penawaran == 'Diajukan')
+                                                    <div class="text-secondary ms-4 fw-bold fs-5">Diajukan</div>
+                                                @endif
                                             </div>
                                         </form>
                                     </div>
