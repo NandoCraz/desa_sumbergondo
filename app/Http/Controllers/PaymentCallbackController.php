@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Checkout;
 use App\Services\Midtrans\CallbackService;
 use Illuminate\Http\Request;
@@ -17,23 +18,40 @@ class PaymentCallbackController extends Controller
             $order = $callback->getOrder();
 
             if ($callback->isSuccess()) {
-                Checkout::where('id', $order->id)->update([
-                    'payment_status' => 2,
-                    'status'=> 1,
-                ]);
-                
+                if ($checkout = Checkout::find($order->id)) {
+                    Checkout::where('id', $order->id)->update([
+                        'payment_status' => 2,
+                        'status' => 1,
+                    ]);
+                } elseif ($booking = Booking::find($order->id)) {
+                    Booking::where('id', $order->id)->update([
+                        'payment_status' => 2,
+                    ]);
+                }
             }
 
             if ($callback->isExpire()) {
-                Checkout::where('id', $order->id)->update([
-                    'payment_status' => 3,
-                ]);
+                if ($checkout = Checkout::find($order->id)) {
+                    Checkout::where('id', $order->id)->update([
+                        'payment_status' => 3,
+                    ]);
+                } elseif ($booking = Booking::find($order->id)) {
+                    Booking::where('id', $order->id)->update([
+                        'payment_status' => 3,
+                    ]);
+                }
             }
 
             if ($callback->isCancelled()) {
-                Checkout::where('id', $order->id)->update([
-                    'payment_status' => 4,
-                ]);
+                if ($checkout = Checkout::find($order->id)) {
+                    Checkout::where('id', $order->id)->update([
+                        'payment_status' => 4,
+                    ]);
+                } elseif ($booking = Booking::find($order->id)) {
+                    Booking::where('id', $order->id)->update([
+                        'payment_status' => 3,
+                    ]);
+                }
             }
 
             return response()

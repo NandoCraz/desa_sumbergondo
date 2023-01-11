@@ -134,7 +134,7 @@
                                                         <th class="product-total">Subtotal</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="text-center">
                                                     @foreach ($keranjangs as $keranjang)
                                                         <tr class="table-body-row">
                                                             <td class="product-image"><img

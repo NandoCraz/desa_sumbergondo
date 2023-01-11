@@ -54,6 +54,14 @@
                                         @elseif($booking->status == 'Persetujuan Layanan')
                                             <span
                                                 class="badge fs-6 mt-2 bg-primary text-light p-1">{{ $booking->status }}</span>
+                                        @elseif($booking->status == 'Pembayaran')
+                                            <span
+                                                class="badge fs-6 mt-2 bg-warning text-light p-1">{{ $booking->status }}</span>
+                                        @elseif($booking->status == 'Sedang Dikerjakan')
+                                            <span class="badge fs-6 mt-2 text-light p-1"
+                                                style="background-color: purple">{{ $booking->status }}</span>
+                                        @elseif($booking->status == 'Selesai')
+                                            <span class="badge fs-6 mt-2 bg-success text-light p-1">{{ $booking->status }}</span>
                                         @endif
                                     </td>
                                     <td>

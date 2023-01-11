@@ -29,15 +29,15 @@ class BookingAdminController extends Controller
             $booking = Booking::where('id', $booking->id)->first();
             if ($booking->penawaran_1 == null) {
                 $booking->update([
-                    'total' => $request->penawaran_2,
+                    'total' => $request->penawaran_1,
                     'status_penawaran' => 'Disetujui'
                 ]);
-            } elseif ($booking->penawaran_1 != null && $booking->penawaran_2 == null) {
+            } elseif ($booking->penawaran_1 != null && $booking->penawaran_2 != null && $booking->penawaran_3 == null) {
                 $booking->update([
                     'total' => $request->penawaran_2,
                     'status_penawaran' => 'Disetujui'
                 ]);
-            } elseif ($booking->penawaran_2 != null && $booking->penawaran_3 == null) {
+            } elseif ($booking->penawaran_2 != null && $booking->penawaran_3 != null) {
                 $booking->update([
                     'total' => $request->penawaran_3,
                     'status_penawaran' => 'Disetujui'

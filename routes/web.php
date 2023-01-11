@@ -101,6 +101,7 @@ Route::delete('/pelayanan/hapus/{booking_pelayanan:id}', [BookingController::cla
 Route::post('/changeLayanan/{booking:id}', [BookingController::class, 'changeStatusBooking'])->middleware('auth');
 Route::delete('/hapusLayanan/{booking:id}', [BookingController::class, 'hapusLayanan'])->middleware('auth');
 Route::post('/penawaran/{booking:id}', [BookingController::class, 'penawaranBiaya'])->middleware('auth');
+Route::post('/booking/charger', [BookingController::class, 'charger'])->name('booking.charger')->middleware('auth');
 // Resource Route
 Route::resource('/daftar-alamat', DaftarAlamatController::class)->middleware('auth');
 

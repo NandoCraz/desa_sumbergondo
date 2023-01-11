@@ -2,6 +2,7 @@
 
 namespace App\Services\Midtrans;
 
+use App\Models\Booking;
 use App\Models\Checkout;
 use App\Services\Midtrans\Midtrans;
 use Midtrans\Notification;
@@ -71,9 +72,12 @@ class CallbackService extends Midtrans
         $notification = new Notification();
 
         $orderNumber = $notification->order_id;
-        $checkout = Checkout::where('uuid', $orderNumber)->first();
 
+        if ($checkout = Checkout::where('uuid', $orderNumber)->first()) {
+            $this->order = $checkout;
+        } else if ($booking = Booking::where('uuid', $orderNumber)->first()) {
+            $this->order = $booking;
+        }
         $this->notification = $notification;
-        $this->order = $checkout;
     }
 }

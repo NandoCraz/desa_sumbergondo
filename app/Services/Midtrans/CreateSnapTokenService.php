@@ -28,6 +28,12 @@ class CreateSnapTokenService extends Midtrans
                 'name' => $pesanan->barang->nama_barang
             ]);
         }
+        array_push($barangs, [
+            'id' => $this->checkout->id,
+            'price' => $this->checkout->ongkir,
+            'quantity' => 1,
+            'name' => 'Ongkir'
+        ]);
         $params = [
             'transaction_details' => [
                 'order_id' => $this->checkout->uuid,

@@ -9,6 +9,7 @@ use App\Models\BookingPelayanan;
 use App\Models\Montir;
 use App\Models\Pelayanan;
 use Illuminate\Http\Request;
+use App\Services\Midtrans\CreateSnapTokenLayanan;
 
 class BookingController extends Controller
 {
@@ -205,6 +206,21 @@ class BookingController extends Controller
                 'status' => 'Persetujuan Layanan'
             ]);
             return back()->with('success', 'Layanan Berhasil Dikonfirmasi');
+        } elseif ($request->status == 'deal') {
+            Booking::where('id', $booking->id)->update([
+                'status' => 'Pembayaran'
+            ]);
+            return back()->with('success', 'Layanan Berhasil Dikonfirmasi');
+        } elseif ($request->status == 'dikerjakan') {
+            Booking::where('id', $booking->id)->update([
+                'status' => 'Sedang Dikerjakan'
+            ]);
+            return back()->with('success', 'Layanan Dikerjakan');
+        } elseif ($request->status == 'selesai') {
+            Booking::where('id', $booking->id)->update([
+                'status' => 'Selesai'
+            ]);
+            return back()->with('success', 'Layanan Telah Diselesaikan');
         }
     }
 
@@ -264,5 +280,20 @@ class BookingController extends Controller
 
         $booking->delete();
         return redirect('/layanans')->with('success', 'Layanan Dibatalkan');
+    }
+
+    public function charger(Request $request)
+    {
+        $booking = Booking::where('id', $request->id)->first();
+
+        $midtrans = new CreateSnapTokenLayanan($booking);
+        $snapToken = $midtrans->getSnapToken();
+
+        $booking->snap_token = $snapToken;
+        $booking->save();
+
+        return response()->json([
+            'snap_token' => $snapToken,
+        ]);
     }
 }

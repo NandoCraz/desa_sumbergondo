@@ -25,7 +25,7 @@ class MontirSeeder extends Seeder
             'nama' => 'Tukul Kurniawan',
             'alamat' => 'Jl. Bulak Rukem Barat/12A, Surabaya',
             'no_telp' => '081217176933',
-            'picture_montir' => 'montirPicture/wijoyo.jpg',
+            'picture_montir' => 'montirPicture/wijoyo.png',
         ]);
     }
 }

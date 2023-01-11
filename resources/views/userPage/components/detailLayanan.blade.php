@@ -50,6 +50,40 @@
                                                 <span
                                                     class="badge fs-6 mt-2 bg-primary text-light p-2">{{ $booking->status }}</span>
                                             </p>
+                                        @elseif($booking->status == 'Pembayaran' && $booking->payment_status == 1)
+                                            <p>
+                                                <span
+                                                    class="badge fs-6 mt-2 bg-warning text-light p-1">{{ $booking->status }}</span><span
+                                                    class="fw-bold"> | </span><span class="badge fs-6 mt-2 text-light p-1"
+                                                    style="background-color: orangered">Belum Dibayar</span>
+                                            </p>
+                                        @elseif($booking->status == 'Pembayaran' && $booking->payment_status == 2)
+                                            <p>
+                                                <span
+                                                    class="badge fs-6 mt-2 bg-warning text-light p-1">{{ $booking->status }}</span><span
+                                                    class="fw-bold"> | </span><span class="badge fs-6 mt-2 text-light p-1"
+                                                    style="background-color: rgb(102, 255, 0)">Sudah Dibayar</span>
+                                            </p>
+                                        @elseif($booking->status == 'Sedang Dikerjakan')
+                                            <p>
+                                                <span class="badge fs-6 mt-2 text-light p-1"
+                                                    style="background-color: purple">{{ $booking->status }}</span>
+                                                @if ($booking->payment_status == 1)
+                                                    <span class="fw-bold"> | </span><span
+                                                        class="badge fs-6 mt-2 text-light p-1"
+                                                        style="background-color: orangered">Belum Dibayar</span>
+                                                @elseif($booking->payment_status == 2)
+                                                    <span class="fw-bold"> | </span><span
+                                                        class="badge fs-6 mt-2 text-light p-1"
+                                                        style="background-color: rgb(102, 255, 0)">Sudah Dibayar</span>
+                                                @endif
+                                            </p>
+                                        @elseif($booking->status == 'Selesai')
+                                            <p>
+                                                <span
+                                                    class="badge fs-6 mt-2 bg-success text-light p-1">{{ $booking->status }}</span>
+
+                                            </p>
                                         @endif
                                     </h5>
                                     <h5>Nama Pemesan : <p>{{ $booking->nama_pemesan }}</p>
@@ -110,7 +144,7 @@
                                                                     @csrf
                                                                     @method('delete')
                                                                     <input type="hidden" name="id"
-                                                                        value="{{ $booking->id }}">
+                                                                        value="{{ $booking->id }}" min="0">
                                                                     <button class="btn btn-sm btn-danger"><i
                                                                             class="fas fa-solid fa-trash"></i></button>
                                                                 </form>
@@ -165,11 +199,12 @@
                                                                         value="{{ $booking->id }}">
                                                                     <input type="number" name="kuantitas" class="kuantitas"
                                                                         id="kuantitas" data-id="{{ $barang->pivot->id }}"
+                                                                        min="0"
                                                                         value="{{ $barang->pivot->kuantitas }}">
                                                                 </form>
                                                             </td>
                                                         @else
-                                                            <td>{{ $barang->kuantitas }}</td>
+                                                            <td>{{ $barang->pivot->kuantitas }}</td>
                                                         @endif
                                                         @if ($booking->status == 'Konfirmasi Layanan')
                                                             <td>
@@ -205,9 +240,6 @@
                                     </h4>
                                 </div>
                             </div>
-                            {{-- @if ($checkout->payment_status == '1')
-                                <button class="btn btn-lg btn-warning text-light mt-4" id="bayar">Bayar</button>
-                            @endif --}}
                         </div>
                     </div>
                     <div class="row mt-5">
@@ -231,6 +263,14 @@
                                     <input type="hidden" name="status" value="deal">
                                     <button type="submit" class="btn btn-success fw-bold fs-4 ms-3">Deal</button>
                                 </form>
+                            @elseif($booking->status == 'Sedang Dikerjakan')
+                                <form action="/changeLayanan/{{ $booking->id }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="status" value="selesai">
+                                    <button type="submit" class="btn btn-success ms-3">Selesai</button>
+                                </form>
+                            @elseif ($booking->tipe_bayar != 'cod' && $booking->status == 'Pembayaran' && $booking->payment_status == '1')
+                                <button class="btn btn-lg btn-warning text-light mt-4" id="bayar">Bayar</button>
                             @endif
                         </div>
                         @if ($booking->status == 'Persetujuan Layanan')
@@ -248,9 +288,31 @@
                                                             Rp.
                                                         </span>
                                                     </div>
-                                                    <input class="form-control @error('penawaran') is-invalid @enderror"
-                                                        id="penawaran" type="text" name="penawaran"
-                                                        value="{{ old('penawaran') }}" required autocomplete="off">
+                                                    @if ($booking->penawaran_1 != null && $booking->penawaran_2 == null)
+                                                        <input
+                                                            class="form-control @error('penawaran') is-invalid @enderror"
+                                                            id="penawaran" type="text" name="penawaran" readonly
+                                                            value="{{ old('penawaran', $booking->penawaran_1) }}"
+                                                            min="0" required autocomplete="off">
+                                                    @elseif($booking->penawaran_1 != null && $booking->penawaran_2 != null && $booking->penawaran_3 == null)
+                                                        <input
+                                                            class="form-control @error('penawaran') is-invalid @enderror"
+                                                            id="penawaran" type="text" name="penawaran" readonly
+                                                            value="{{ old('penawaran', $booking->penawaran_2) }}"
+                                                            min="0" required autocomplete="off">
+                                                    @elseif($booking->penawaran_1 != null && $booking->penawaran_2 != null && $booking->penawaran_3 != null)
+                                                        <input
+                                                            class="form-control @error('penawaran') is-invalid @enderror"
+                                                            id="penawaran" type="text" name="penawaran" readonly
+                                                            value="{{ old('penawaran', $booking->penawaran_2) }}"
+                                                            min="0" required autocomplete="off">
+                                                    @elseif($booking->penawaran_1 == null)
+                                                        <input
+                                                            class="form-control @error('penawaran') is-invalid @enderror"
+                                                            id="penawaran" type="text" name="penawaran"
+                                                            value="{{ old('penawaran') }}" min="0" required
+                                                            autocomplete="off">
+                                                    @endif
                                                 </div>
                                                 @error('penawaran')
                                                     <div class="invalid-feedback">
@@ -284,24 +346,49 @@
 @endsection
 
 @section('script')
-    {{-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
     </script>
-    
 
-    
-    @if ($checkout->payment_status == '1')
+
+
+    @if ($booking->snap_token != null && $booking->payment_status == '1')
         <script>
             $('#bayar').on('click', function(e) {
                 e.preventDefault();
-                snap.pay('{{ $checkout->snap_token }}', {
+                snap.pay('{{ $booking->snap_token }}', {
                     onSuccess: function(result) {
                         console.log(result);
-                        window.location.href = '/pesanan'
+                        window.location.href = '/layanans'
                     }
                 });
             })
         </script>
-    @endif --}}
+    @elseif($booking->snap_token == null && $booking->payment_status == '1')
+        <script>
+            $('#bayar').on('click', function(e) {
+                const pesan = $('.pesan');
+                e.preventDefault();
+                $.ajax({
+                    url: "{{ route('booking.charger') }}",
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    data: {
+                        id: "{{ $booking->id }}",
+                    },
+                    success: function(response) {
+                        snap.pay(response.snap_token, {
+                            onSuccess: function(result) {
+                                console.log(result);
+                                window.location.href = '/layanans'
+                            }
+                        })
+                    }
+                })
+            })
+        </script>
+    @endif
 
     <script>
         function debounce(func, timeout = 1000) {
