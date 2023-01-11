@@ -9,7 +9,7 @@
         Kembali</a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Detail Pesanan</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Detail Layanan</h6>
         </div>
         <div class="card-body">
             <div class="row mb-4">
@@ -20,7 +20,8 @@
                                 Status :
                                 @if ($booking->status == 'Konfirmasi Layanan')
                                     <p>
-                                        <span class="badge fs-6 mt-2 bg-secondary p-2">{{ $booking->status }}</span>
+                                        <span
+                                            class="badge fs-6 mt-2 text-light bg-secondary p-2">{{ $booking->status }}</span>
                                     </p>
                                 @elseif($booking->status == 'Menunggu Konfirmasi Admin')
                                     <p>
@@ -48,7 +49,7 @@
                                 @elseif($booking->status == 'Sedang Dikerjakan')
                                     <p>
                                         <span class="badge fs-6 mt-2 text-light p-1"
-                                            style="background-color: purple">{{ $booking->selesai }}</span>
+                                            style="background-color: purple">{{ $booking->status }}</span>
                                         @if ($booking->payment_status == 1)
                                             <span class="fw-bold"> | </span><span class="badge fs-6 mt-2 text-light p-1"
                                                 style="background-color: orangered">Belum Dibayar</span>
@@ -245,7 +246,7 @@
                                             @if ($booking->penawaran_1 != null && $booking->penawaran_2 == null)
                                                 <input class="form-control" id="penawaran" type="text"
                                                     value="{{ $booking->penawaran_1 }}" readonly autocomplete="off">
-                                            @elseif($booking->penawaran_1 != null && $booking->penawaran_2 != null)
+                                            @elseif($booking->penawaran_1 != null && $booking->penawaran_2 != null && $booking->penawaran_3 == null)
                                                 <input class="form-control" id="penawaran" type="text"
                                                     value="{{ $booking->penawaran_2 }}" readonly autocomplete="off">
                                             @elseif($booking->penawaran_2 != null && $booking->penawaran_3 != null)

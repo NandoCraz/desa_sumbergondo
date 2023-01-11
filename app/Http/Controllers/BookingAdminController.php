@@ -9,9 +9,20 @@ class BookingAdminController extends Controller
 {
     public function index()
     {
-        $bookings = Booking::latest()->get();
+        $menungguKonfirmasi = Booking::where('status', 'Konfirmasi Layanan')->latest()->get();
+        $konfirmasiAdmin = Booking::where('status', 'Menunggu Konfirmasi Admin')->latest()->get();
+        $persetujuanLayanan = Booking::where('status', 'Persetujuan Layanan')->latest()->get();
+        $pembayaran = Booking::where('status', 'Pembayaran')->latest()->get();
+        $sedangDikerjakan = Booking::where('status', 'Sedang Dikerjakan')->latest()->get();
+        $selesai = Booking::where('status', 'Selesai')->latest()->get();
+
         return view('adminPage.components.layananStatus.layananAdmin', [
-            'bookings' => $bookings
+            'menungguKonfirmasi' => $menungguKonfirmasi,
+            'konfirmasiAdmin' => $konfirmasiAdmin,
+            'persetujuanLayanan' => $persetujuanLayanan,
+            'pembayaran' => $pembayaran,
+            'sedangDikerjakan' => $sedangDikerjakan,
+            'selesai' => $selesai,
         ]);
     }
 

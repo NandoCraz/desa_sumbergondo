@@ -217,9 +217,11 @@ class BookingController extends Controller
             ]);
             return back()->with('success', 'Layanan Dikerjakan');
         } elseif ($request->status == 'selesai') {
-            Booking::where('id', $booking->id)->update([
+            $booking = Booking::where('id', $booking->id)->first();
+            $booking->update([
                 'status' => 'Selesai'
             ]);
+            
             return back()->with('success', 'Layanan Telah Diselesaikan');
         }
     }

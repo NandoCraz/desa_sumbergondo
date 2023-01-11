@@ -288,25 +288,44 @@
                                                             Rp.
                                                         </span>
                                                     </div>
-                                                    @if ($booking->penawaran_1 != null && $booking->penawaran_2 == null)
+                                                    @if ($booking->penawaran_1 != null && $booking->penawaran_2 == null && $booking->status_penawaran == 'Diajukan')
                                                         <input
                                                             class="form-control @error('penawaran') is-invalid @enderror"
                                                             id="penawaran" type="text" name="penawaran" readonly
                                                             value="{{ old('penawaran', $booking->penawaran_1) }}"
                                                             min="0" required autocomplete="off">
-                                                    @elseif($booking->penawaran_1 != null && $booking->penawaran_2 != null && $booking->penawaran_3 == null)
+                                                    @elseif($booking->penawaran_1 != null &&
+                                                        $booking->penawaran_2 != null &&
+                                                        $booking->penawaran_3 == null &&
+                                                        $booking->status_penawaran == 'Diajukan')
                                                         <input
                                                             class="form-control @error('penawaran') is-invalid @enderror"
                                                             id="penawaran" type="text" name="penawaran" readonly
                                                             value="{{ old('penawaran', $booking->penawaran_2) }}"
                                                             min="0" required autocomplete="off">
-                                                    @elseif($booking->penawaran_1 != null && $booking->penawaran_2 != null && $booking->penawaran_3 != null)
+                                                    @elseif($booking->penawaran_1 != null &&
+                                                        $booking->penawaran_2 != null &&
+                                                        $booking->penawaran_3 != null &&
+                                                        $booking->status_penawaran == 'Diajukan')
                                                         <input
                                                             class="form-control @error('penawaran') is-invalid @enderror"
                                                             id="penawaran" type="text" name="penawaran" readonly
-                                                            value="{{ old('penawaran', $booking->penawaran_2) }}"
+                                                            value="{{ old('penawaran', $booking->penawaran_3) }}"
                                                             min="0" required autocomplete="off">
-                                                    @elseif($booking->penawaran_1 == null)
+                                                    @elseif($booking->penawaran_1 != null &&
+                                                        $booking->penawaran_2 != null &&
+                                                        $booking->penawaran_3 != null &&
+                                                        ($booking->status_penawaran == 'Ditolak' || $booking->status_penawaran == 'Disetujui'))
+                                                        <input
+                                                            class="form-control @error('penawaran') is-invalid @enderror"
+                                                            id="penawaran" type="text" name="penawaran" readonly
+                                                            min="0" required autocomplete="off">
+                                                    @elseif($booking->status_penawaran == 'Disetujui')
+                                                        <input
+                                                            class="form-control @error('penawaran') is-invalid @enderror"
+                                                            id="penawaran" type="text" name="penawaran" readonly
+                                                            min="0" required autocomplete="off">
+                                                    @elseif($booking->penawaran_1 == null || $booking->penawaran_2 == null || $booking->penawaran_3 == null)
                                                         <input
                                                             class="form-control @error('penawaran') is-invalid @enderror"
                                                             id="penawaran" type="text" name="penawaran"
@@ -321,7 +340,7 @@
                                                 @enderror
                                             </div>
                                             <div class="d-flex">
-                                                @if ($booking->status_penawaran != 'Disetujui' || $booking->penawaran_3 != null)
+                                                @if ($booking->status_penawaran == 'Disetujui' || $booking->penawaran_3 == null)
                                                     <button type="submit" class="btn btn-dark">Ajukan</button>
                                                 @endif
                                                 @if ($booking->status_penawaran == 'Ditolak')
