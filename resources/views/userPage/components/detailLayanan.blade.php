@@ -118,7 +118,7 @@
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="table-responsive mb-5">
+                                    <div class="table-responsive mb-2">
                                         <table class="table">
                                             <h5>Pelayanan Dipesan</h5>
                                             <thead class="thead-light">
@@ -168,6 +168,38 @@
                                             </tfoot>
                                         </table>
                                     </div>
+                                    @if ($booking->lampiran_1 != null ||
+                                        $booking->lampiran_2 != null ||
+                                        $booking->lampiran_3 != null ||
+                                        $booking->lampiran_4 != null)
+                                        <h5>Lampiran Foto</h5>
+                                        <div class="row mb-5">
+                                            @if ($booking->lampiran_1 != null)
+                                                <div class="col-lg-4 mb-2">
+                                                    <img src="{{ asset('storage/' . $booking->lampiran_1) }}"
+                                                        alt="Lampiran 1" class="rounded" width="150">
+                                                </div>
+                                            @endif
+                                            @if ($booking->lampiran_2 != null)
+                                                <div class="col-lg-4 mb-2">
+                                                    <img src="{{ asset('storage/' . $booking->lampiran_2) }}"
+                                                        alt="Lampiran 2" class="rounded" width="150">
+                                                </div>
+                                            @endif
+                                            @if ($booking->lampiran_3 != null)
+                                                <div class="col-lg-4 mb-2">
+                                                    <img src="{{ asset('storage/' . $booking->lampiran_3) }}"
+                                                        alt="Lampiran 3" class="rounded" width="150">
+                                                </div>
+                                            @endif
+                                            @if ($booking->lampiran_4 != null)
+                                                <div class="col-lg-4 mb-2">
+                                                    <img src="{{ asset('storage/' . $booking->lampiran_4) }}"
+                                                        alt="Lampiran 4" class="rounded" width="150">
+                                                </div>
+                                            @endif
+                                        </div>
+                                    @endif
                                     <div class="table-responsive">
                                         <table class="table">
                                             <h5>Barang Dipesan</h5>
@@ -197,9 +229,9 @@
                                                                     @method('patch')
                                                                     <input type="hidden" name="id"
                                                                         value="{{ $booking->id }}">
-                                                                    <input type="number" name="kuantitas" class="kuantitas"
-                                                                        id="kuantitas" data-id="{{ $barang->pivot->id }}"
-                                                                        min="0"
+                                                                    <input type="number" name="kuantitas"
+                                                                        class="kuantitas" id="kuantitas"
+                                                                        data-id="{{ $barang->pivot->id }}" min="0"
                                                                         value="{{ $barang->pivot->kuantitas }}">
                                                                 </form>
                                                             </td>
@@ -225,7 +257,8 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="5"><span class="fw-bold fs-6">Total Harga Barang</span>
+                                                    <td colspan="5"><span class="fw-bold fs-6">Total Harga
+                                                            Barang</span>
                                                         : Rp. {{ number_format($booking->total_harga_barang) }}
                                                     </td>
                                                 </tr>
@@ -340,7 +373,9 @@
                                                 @enderror
                                             </div>
                                             <div class="d-flex">
-                                                @if ($booking->status_penawaran == 'Disetujui' || $booking->penawaran_3 == null)
+                                                @if ($booking->status_penawaran != 'Diajukan' &&
+                                                    $booking->status_penawaran != 'Disetujui' &&
+                                                    ($booking->penawaran_1 == null || $booking->penawaran_2 == null || $booking->penawaran_3 == null))
                                                     <button type="submit" class="btn btn-dark">Ajukan</button>
                                                 @endif
                                                 @if ($booking->status_penawaran == 'Ditolak')

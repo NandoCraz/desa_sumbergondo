@@ -68,16 +68,16 @@ class BookingController extends Controller
         $data['status'] = 'Konfirmasi Layanan';
 
         if (isset($request->lampiran_1)) {
-            $validateData['lampiran_1'] = $request->file('lampiran_1')->store('lampiranLayanan', 'public');
+            $data['lampiran_1'] = $request->file('lampiran_1')->store('lampiranLayanan', 'public');
         }
         if (isset($request->lampiran_2)) {
-            $validateData['lampiran_2'] = $request->file('lampiran_2')->store('lampiranLayanan', 'public');
+            $data['lampiran_2'] = $request->file('lampiran_2')->store('lampiranLayanan', 'public');
         }
         if (isset($request->lampiran_3)) {
-            $validateData['lampiran_3'] = $request->file('lampiran_3')->store('lampiranLayanan', 'public');
+            $data['lampiran_3'] = $request->file('lampiran_3')->store('lampiranLayanan', 'public');
         }
         if (isset($request->lampiran_4)) {
-            $validateData['lampiran_4'] = $request->file('lampiran_4')->store('lampiranLayanan', 'public');
+            $data['lampiran_4'] = $request->file('lampiran_4')->store('lampiranLayanan', 'public');
         }
 
         $createBooking = Booking::create($data);
@@ -221,7 +221,12 @@ class BookingController extends Controller
             $booking->update([
                 'status' => 'Selesai'
             ]);
-            
+
+            $montir = Montir::where('id', $booking->montir_id)->first();
+            $montir->update([
+                'is_tersedia' => true
+            ]);
+
             return back()->with('success', 'Layanan Telah Diselesaikan');
         }
     }

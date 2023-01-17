@@ -54,7 +54,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <a href="/layanan-admin/{{ $sls->id }}" class="btn btn-primary">Detail</a>
+                                            <a href="/layanan-admin/{{ $mngKonf->id }}" class="btn btn-primary">Detail</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -71,7 +71,7 @@
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Menunggu KOnfirmasi Admin</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Menunggu Konfirmasi Admin</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -214,6 +214,7 @@
                             <th scope="col">Tempat Perbaikan</th>
                             <th scope="col">Alamat</th>
                             <th scope="col">Total Harga</th>
+                            <th scope="col">Metode Bayar</th>
                             <th scope="col">Status</th>
                             <th scope="col">Aksi</th>
                         </tr>
@@ -227,6 +228,7 @@
                                     <td>{{ $pmbyr->tempat_perbaikan == 'dirumah' ? 'Di Rumah' : 'Di Bengkel' }}</td>
                                     <td>{{ $pmbyr->alamat == null ? '-' : $pmbyr->alamat }}</td>
                                     <td>Rp. {{ number_format($pmbyr->total + $pmbyr->total_harga_barang) }}</td>
+                                    <td class="fw-bold">{{ $pmbyr->tipe_bayar == 'website' ? 'Website' : 'COD' }}</td>
                                     <td>
                                         @if ($pmbyr->status == 'Konfirmasi Layanan')
                                             <span class="badge bg-secondary text-light p-1">{{ $pmbyr->status }}</span>

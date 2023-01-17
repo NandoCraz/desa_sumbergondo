@@ -16,7 +16,7 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5>
+                            <h5 class="font-weight-bold">
                                 Status :
                                 @if ($booking->status == 'Konfirmasi Layanan')
                                     <p>
@@ -65,27 +65,28 @@
                                     </p>
                                 @endif
                             </h5>
-                            <h5>Nama Pemesan : <p>{{ $booking->nama_pemesan }}</p>
+                            <h5 class="font-weight-bold">Nama Pemesan : <p>{{ $booking->nama_pemesan }}</p>
                             </h5>
-                            <h5>No. Telepon : <p>{{ $booking->no_telp }}</p>
+                            <h5 class="font-weight-bold">No. Telepon : <p>{{ $booking->no_telp }}</p>
                             </h5>
-                            <h5>Alamat : <p>{{ $booking->alamat == null ? '-' : $booking->alamat }}</p>
+                            <h5 class="font-weight-bold">Alamat : <p>
+                                    {{ $booking->alamat == null ? '-' : $booking->alamat }}</p>
                             </h5>
-                            <h5>Tipe Mobil : <p>{{ $booking->tipe_mobil }}</p>
+                            <h5 class="font-weight-bold">Tipe Mobil : <p>{{ $booking->tipe_mobil }}</p>
                             </h5>
-                            <h5>Tempat Perbaikan : <p>
+                            <h5 class="font-weight-bold">Tempat Perbaikan : <p>
                                     {{ $booking->tempat_perbaikan == 'dirumah' ? 'Di Rumah' : ' Di Bengkel' }}</p>
                             </h5>
                             @if ($booking->tempat_perbaikan == 'dibengkel')
-                                <h5>Alamat Bengkel : <p>Jl. Rangkah VII/124B, Surabaya</p>
+                                <h5 class="font-weight-bold">Alamat Bengkel : <p>Jl. Rangkah VII/124B, Surabaya</p>
                                 </h5>
                             @endif
-                            <h5>Waktu (Tanggal & Jam) : <p>{{ $booking->waktu }}</p>
+                            <h5 class="font-weight-bold">Waktu (Tanggal & Jam) : <p>{{ $booking->waktu }}</p>
                             </h5>
-                            <h5>Tipe Pembayaran : <p>
+                            <h5 class="font-weight-bold">Tipe Pembayaran : <p>
                                     {{ $booking->tipe_bayar == 'website' ? 'Melalui Website' : 'COD' }}</p>
                             </h5>
-                            <h5>
+                            <h5 class="font-weight-bold">
                                 Montir Pengerjaan :
                                 <p>{{ $booking->montir->nama }} | {{ $booking->montir->no_telp }}</p>
                                 <p><img src="{{ asset('storage/' . $booking->montir->picture_montir) }}"
@@ -99,7 +100,7 @@
                         <div class="card-body">
                             <div class="table-responsive mb-5">
                                 <table class="table">
-                                    <h5>Pelayanan Dipesan</h5>
+                                    <h5 class="font-weight-bold">Pelayanan Dipesan</h5>
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">#</th>
@@ -131,7 +132,7 @@
                             </div>
                             <div class="table-responsive">
                                 <table class="table">
-                                    <h5>Barang Dipesan</h5>
+                                    <h5 class="font-weight-bold">Barang Dipesan</h5>
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col"></th>

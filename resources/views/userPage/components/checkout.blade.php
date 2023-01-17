@@ -186,7 +186,7 @@
                             </tbody>
                             <tbody class="checkout-details" style="background-color: rgb(224, 224, 224)">
                                 <tr>
-                                    <td>Shipping</td>
+                                    <td>Ongkir</td>
                                     <td colspan="2" id="ongkir">0</td>
                                 </tr>
                                 <tr>
