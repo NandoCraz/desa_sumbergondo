@@ -1,10 +1,10 @@
 @extends('adminPage.layouts.main')
 @section('content')
-    @if (session('success'))
+    {{-- @if (session('success'))
         <div class="alert alert-success mb-3 col-lg-10" role="alert">
             {{ session('success') }}
         </div>
-    @endif
+    @endif --}}
     <a href="javascript:history.back()" class="btn btn-danger mb-4"><i class="fa fa-chevron-left" aria-hidden="true"></i>
         Kembali</a>
     <div class="card shadow mb-4">
@@ -227,9 +227,10 @@
                         </div>
                     </div>
                 @endif
-                @if ($booking->status == 'Persetujuan Layanan' &&
-                    $booking->status_penawaran == 'Diajukan' &&
-                    ($booking->penawaran_1 != null || $booking->penawaran_2 != null || $booking->penawaran_3 != null))
+                @if (
+                    $booking->status == 'Persetujuan Layanan' &&
+                        $booking->status_penawaran == 'Diajukan' &&
+                        ($booking->penawaran_1 != null || $booking->penawaran_2 != null || $booking->penawaran_3 != null))
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
@@ -245,21 +246,25 @@
                                                 </span>
                                             </div>
                                             @if ($booking->penawaran_1 != null && $booking->penawaran_2 == null)
-                                                <input class="form-control" id="penawaran" type="text"
-                                                    value="{{ $booking->penawaran_1 }}" readonly autocomplete="off">
+                                                <input class="form-control" name="penawaran" id="penawaran"
+                                                    type="text" value="{{ $booking->penawaran_1 }}" readonly
+                                                    autocomplete="off">
                                             @elseif($booking->penawaran_1 != null && $booking->penawaran_2 != null && $booking->penawaran_3 == null)
-                                                <input class="form-control" id="penawaran" type="text"
-                                                    value="{{ $booking->penawaran_2 }}" readonly autocomplete="off">
+                                                <input class="form-control" name="penawaran" id="penawaran"
+                                                    type="text" value="{{ $booking->penawaran_2 }}" readonly
+                                                    autocomplete="off">
                                             @elseif($booking->penawaran_2 != null && $booking->penawaran_3 != null)
-                                                <input class="form-control" id="penawaran" type="text"
-                                                    value="{{ $booking->penawaran_3 }}" readonly autocomplete="off">
+                                                <input class="form-control" name="penawaran" id="penawaran"
+                                                    type="text" value="{{ $booking->penawaran_3 }}" readonly
+                                                    autocomplete="off">
                                             @endif
                                         </div>
                                     </div>
                                     <div class="d-flex">
-                                        <input type="submit" name="keputusan" class="btn btn-danger" value="tolak">
-                                        <input type="submit" name="keputusan" class="btn btn-success ml-2"
-                                            value="setuju">
+                                        <button type="submit" name="keputusan" class="btn btn-danger"
+                                            value="tolak">Tolak</button>
+                                        <button type="submit" name="keputusan" class="btn btn-success ml-2"
+                                            value="setuju">Setuju</button>
                                     </div>
                                 </form>
                             </div>
@@ -269,4 +274,29 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    @if (session('success'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal
+                        .stopTimer)
+                    toast.addEventListener('mouseleave', Swal
+                        .resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            }).then((result) => {
+                location.reload();
+            })
+        </script>
+    @endif
 @endsection

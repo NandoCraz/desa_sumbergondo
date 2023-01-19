@@ -44,7 +44,7 @@ class DataKategoriController extends Controller
         ]);
 
         Kategori::create($validateData);
-        return redirect('/master/data-kategori')->with('berhasil', 'Kategori berhasil ditambahkan!');
+        return redirect('/master/data-kategori')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
     /**
@@ -86,7 +86,7 @@ class DataKategoriController extends Controller
         ]);
 
         Kategori::where('id', $id)->update($validateData);
-        return redirect('/master/data-kategori')->with('berhasil', 'Kategori berhasil diubah!');
+        return redirect('/master/data-kategori')->with('success', 'Kategori berhasil diubah!');
     }
 
     /**
@@ -98,7 +98,7 @@ class DataKategoriController extends Controller
     public function destroy($id)
     {
         Kategori::destroy($id);
-        return redirect('/master/data-kategori')->with('berhasil', 'Kategori berhasil dihapus!');
+        return redirect('/master/data-kategori')->with('success', 'Kategori berhasil dihapus!');
     }
 
     public function list(Kategori $kategori)

@@ -1,10 +1,10 @@
 @extends('adminPage.layouts.main')
 @section('content')
-    @if (session('berhasil'))
+    {{-- @if (session('berhasil'))
         <div class="alert alert-success mb-3 col-lg-10" role="alert">
             {{ session('berhasil') }}
         </div>
-    @endif
+    @endif --}}
     <a href="javascript:history.back()" class="btn btn-danger mb-4"><i class="fa fa-chevron-left" aria-hidden="true"></i>
         Kembali</a>
     <div class="card shadow mb-4">
@@ -99,4 +99,29 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    @if (session('success'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal
+                        .stopTimer)
+                    toast.addEventListener('mouseleave', Swal
+                        .resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            }).then((result) => {
+                location.reload();
+            })
+        </script>
+    @endif
 @endsection

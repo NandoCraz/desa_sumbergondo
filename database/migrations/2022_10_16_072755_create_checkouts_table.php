@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('layanan');
             $table->double('total');
             $table->double('ongkir');
-            $table->integer('estimasi');
+            $table->string('estimasi');
             $table->text('catatan')->nullable();
             $table->softDeletes();
             $table->timestamps();

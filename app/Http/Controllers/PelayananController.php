@@ -44,7 +44,7 @@ class PelayananController extends Controller
         ]);
 
         Pelayanan::create($validateData);
-        return redirect('/master/data-pelayanan')->with('berhasil', 'Pelayanan berhasil ditambahkan!');
+        return redirect('/master/data-pelayanan')->with('success', 'Pelayanan berhasil ditambahkan!');
     }
 
     /**
@@ -87,7 +87,7 @@ class PelayananController extends Controller
         ]);
 
         Pelayanan::where('id', $id)->update($validateData);
-        return redirect('/master/data-pelayanan')->with('berhasil', 'Pelayanan berhasil diubah!');
+        return redirect('/master/data-pelayanan')->with('success', 'Pelayanan berhasil diubah!');
     }
 
     /**
@@ -99,6 +99,6 @@ class PelayananController extends Controller
     public function destroy($id)
     {
         Pelayanan::destroy($id);
-        return redirect('/master/data-pelayanan')->with('berhasil', 'Pelayanan berhasil dihapus!');
+        return redirect('/master/data-pelayanan')->with('success', 'Pelayanan berhasil dihapus!');
     }
 }

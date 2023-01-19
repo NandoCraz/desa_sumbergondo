@@ -36,21 +36,22 @@ class BookingAdminController extends Controller
 
     public function keputusanAdmin(Request $request, Booking $booking)
     {
+        // return $request;
         if ($request->keputusan == 'setuju') {
-            $booking = Booking::where('id', $booking->id)->first();
-            if ($booking->penawaran_1 == null) {
+            // $booking = Booking::where('id', $booking->id)->first();
+            if ($booking->penawaran_1 != null) {
                 $booking->update([
-                    'total' => $request->penawaran_1,
+                    'total' => $request->penawaran,
                     'status_penawaran' => 'Disetujui'
                 ]);
             } elseif ($booking->penawaran_1 != null && $booking->penawaran_2 != null && $booking->penawaran_3 == null) {
                 $booking->update([
-                    'total' => $request->penawaran_2,
+                    'total' => $request->penawaran,
                     'status_penawaran' => 'Disetujui'
                 ]);
             } elseif ($booking->penawaran_2 != null && $booking->penawaran_3 != null) {
                 $booking->update([
-                    'total' => $request->penawaran_3,
+                    'total' => $request->penawaran,
                     'status_penawaran' => 'Disetujui'
                 ]);
             }

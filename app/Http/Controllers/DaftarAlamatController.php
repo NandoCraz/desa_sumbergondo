@@ -48,7 +48,7 @@ class DaftarAlamatController extends Controller
         $validator['kecamatan_id'] = 1;
 
         DaftarAlamat::create($validator);
-        return back()->with('berhasil', 'Alamat berhasil ditambahkan');
+        return back()->with('success', 'Alamat berhasil ditambahkan');
     }
 
     /**

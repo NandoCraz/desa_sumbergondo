@@ -15,7 +15,7 @@
     </div>
     <!-- end breadcrumb section -->
 
-    <div class="container my-4">
+    {{-- <div class="container my-4">
         @if (session('success'))
             <div class="alert alert-success mb-3 col-lg-10" role="alert">
                 {{ session('success') }}
@@ -26,7 +26,7 @@
                 {{ session('error') }}
             </div>
         @endif
-    </div>
+    </div> --}}
 
 
     <!-- single product -->
@@ -61,4 +61,52 @@
         </div>
     </div>
     <!-- end single product -->
+@endsection
+@section('script')
+    @if (session('success'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal
+                        .stopTimer)
+                    toast.addEventListener('mouseleave', Swal
+                        .resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            }).then((result) => {
+                location.reload();
+            })
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal
+                        .stopTimer)
+                    toast.addEventListener('mouseleave', Swal
+                        .resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'error',
+                title: '{{ session('error') }}'
+            }).then((result) => {
+                location.reload();
+            })
+        </script>
+    @endif
 @endsection

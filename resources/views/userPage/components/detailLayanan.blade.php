@@ -17,13 +17,13 @@
     <!-- end breadcrumb section -->
     <!-- products -->
     <div class="product-section mt-150 mb-150">
-        @if (session('success'))
+        {{-- @if (session('success'))
             <div class="container">
                 <div class="alert alert-success mb-3 col-lg-12" role="alert">
                     {{ session('success') }}
                 </div>
             </div>
-        @endif
+        @endif --}}
         <div class="container">
             <div class="card">
                 <div class="card-title">
@@ -168,10 +168,11 @@
                                             </tfoot>
                                         </table>
                                     </div>
-                                    @if ($booking->lampiran_1 != null ||
-                                        $booking->lampiran_2 != null ||
-                                        $booking->lampiran_3 != null ||
-                                        $booking->lampiran_4 != null)
+                                    @if (
+                                        $booking->lampiran_1 != null ||
+                                            $booking->lampiran_2 != null ||
+                                            $booking->lampiran_3 != null ||
+                                            $booking->lampiran_4 != null)
                                         <h5>Lampiran Foto</h5>
                                         <div class="row mb-5">
                                             @if ($booking->lampiran_1 != null)
@@ -327,28 +328,31 @@
                                                             id="penawaran" type="text" name="penawaran" readonly
                                                             value="{{ old('penawaran', $booking->penawaran_1) }}"
                                                             min="0" required autocomplete="off">
-                                                    @elseif($booking->penawaran_1 != null &&
-                                                        $booking->penawaran_2 != null &&
-                                                        $booking->penawaran_3 == null &&
-                                                        $booking->status_penawaran == 'Diajukan')
+                                                    @elseif(
+                                                        $booking->penawaran_1 != null &&
+                                                            $booking->penawaran_2 != null &&
+                                                            $booking->penawaran_3 == null &&
+                                                            $booking->status_penawaran == 'Diajukan')
                                                         <input
                                                             class="form-control @error('penawaran') is-invalid @enderror"
                                                             id="penawaran" type="text" name="penawaran" readonly
                                                             value="{{ old('penawaran', $booking->penawaran_2) }}"
                                                             min="0" required autocomplete="off">
-                                                    @elseif($booking->penawaran_1 != null &&
-                                                        $booking->penawaran_2 != null &&
-                                                        $booking->penawaran_3 != null &&
-                                                        $booking->status_penawaran == 'Diajukan')
+                                                    @elseif(
+                                                        $booking->penawaran_1 != null &&
+                                                            $booking->penawaran_2 != null &&
+                                                            $booking->penawaran_3 != null &&
+                                                            $booking->status_penawaran == 'Diajukan')
                                                         <input
                                                             class="form-control @error('penawaran') is-invalid @enderror"
                                                             id="penawaran" type="text" name="penawaran" readonly
                                                             value="{{ old('penawaran', $booking->penawaran_3) }}"
                                                             min="0" required autocomplete="off">
-                                                    @elseif($booking->penawaran_1 != null &&
-                                                        $booking->penawaran_2 != null &&
-                                                        $booking->penawaran_3 != null &&
-                                                        ($booking->status_penawaran == 'Ditolak' || $booking->status_penawaran == 'Disetujui'))
+                                                    @elseif(
+                                                        $booking->penawaran_1 != null &&
+                                                            $booking->penawaran_2 != null &&
+                                                            $booking->penawaran_3 != null &&
+                                                            ($booking->status_penawaran == 'Ditolak' || $booking->status_penawaran == 'Disetujui'))
                                                         <input
                                                             class="form-control @error('penawaran') is-invalid @enderror"
                                                             id="penawaran" type="text" name="penawaran" readonly
@@ -373,9 +377,10 @@
                                                 @enderror
                                             </div>
                                             <div class="d-flex">
-                                                @if ($booking->status_penawaran != 'Diajukan' &&
-                                                    $booking->status_penawaran != 'Disetujui' &&
-                                                    ($booking->penawaran_1 == null || $booking->penawaran_2 == null || $booking->penawaran_3 == null))
+                                                @if (
+                                                    $booking->status_penawaran != 'Diajukan' &&
+                                                        $booking->status_penawaran != 'Disetujui' &&
+                                                        ($booking->penawaran_1 == null || $booking->penawaran_2 == null || $booking->penawaran_3 == null))
                                                     <button type="submit" class="btn btn-dark">Ajukan</button>
                                                 @endif
                                                 @if ($booking->status_penawaran == 'Ditolak')
@@ -403,6 +408,52 @@
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
     </script>
 
+    @if (session('success'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal
+                        .stopTimer)
+                    toast.addEventListener('mouseleave', Swal
+                        .resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            }).then((result) => {
+                location.reload();
+            })
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal
+                        .stopTimer)
+                    toast.addEventListener('mouseleave', Swal
+                        .resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'error',
+                title: '{{ session('error') }}'
+            }).then((result) => {
+                location.reload();
+            })
+        </script>
+    @endif
 
 
     @if ($booking->snap_token != null && $booking->payment_status == '1')

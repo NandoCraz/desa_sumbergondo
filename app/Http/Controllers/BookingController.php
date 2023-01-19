@@ -89,28 +89,32 @@ class BookingController extends Controller
         $total = 0;
         $totalBarang = 0;
 
-        foreach ($request->pelayanan_id as $pelayanan_id) {
-            BookingPelayanan::create([
-                'booking_id' => $createBooking->id,
-                'pelayanan_id' => $pelayanan_id
-            ]);
+        if (isset($request->pelayanan_id)) {
+            foreach ($request->pelayanan_id as $pelayanan_id) {
+                BookingPelayanan::create([
+                    'booking_id' => $createBooking->id,
+                    'pelayanan_id' => $pelayanan_id
+                ]);
 
-            $pelayanan = Pelayanan::where('id', $pelayanan_id)->first();
-            $total += $pelayanan->harga;
+                $pelayanan = Pelayanan::where('id', $pelayanan_id)->first();
+                $total += $pelayanan->harga;
+            }
         }
 
-        foreach ($request->barang_id as $barang_id) {
-            $barang = Barang::where('id', $barang_id)->first();
-            BarangBooking::create([
-                'booking_id' => $createBooking->id,
-                'barang_id' => $barang_id
-            ]);
+        if (isset($request->barang_id)) {
+            foreach ($request->barang_id as $barang_id) {
+                $barang = Barang::where('id', $barang_id)->first();
+                BarangBooking::create([
+                    'booking_id' => $createBooking->id,
+                    'barang_id' => $barang_id
+                ]);
 
-            $barang->update([
-                'stok' => $barang->stok - 1
-            ]);
+                $barang->update([
+                    'stok' => $barang->stok - 1
+                ]);
 
-            $totalBarang += $barang->harga;
+                $totalBarang += $barang->harga;
+            }
         }
 
         Booking::where('id', $createBooking->id)->update([
@@ -281,9 +285,8 @@ class BookingController extends Controller
             $barangD->update([
                 'stok' => $barangD->stok + $barang->kuantitas
             ]);
+            $barang->delete();
         }
-        $barangBooking->delete();
-
 
         $booking->delete();
         return redirect('/layanans')->with('success', 'Layanan Dibatalkan');

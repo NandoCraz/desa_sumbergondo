@@ -58,7 +58,7 @@ class DataBarangController extends Controller
 
         Barang::create($validateData);
 
-        return redirect('/master/data-barang')->with('berhasil', 'Barang berhasil ditambahkan!');
+        return redirect('/master/data-barang')->with('success', 'Barang berhasil ditambahkan!');
     }
 
     /**
@@ -118,7 +118,7 @@ class DataBarangController extends Controller
 
         Barang::where('id', $id)->update($validateData);
 
-        return redirect('/master/data-barang')->with('berhasil', 'Barang berhasil diubah!');
+        return redirect('/master/data-barang')->with('success', 'Barang berhasil diubah!');
     }
 
     /**
@@ -134,6 +134,6 @@ class DataBarangController extends Controller
             unlink(storage_path('app/public/' . $barang->picture_barang));
         }
         Barang::destroy($id);
-        return redirect('/master/data-barang')->with('berhasil', 'Barang berhasil dihapus!');
+        return redirect('/master/data-barang')->with('success', 'Barang berhasil dihapus!');
     }
 }

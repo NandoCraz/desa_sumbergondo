@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'username' => 'adminarno',
             'email' => 'nsparkeladmin@admin.com',
             'no_hp' => '081234567890',
-            'picture_profile' => 'adminArno.jpg',
+            'picture_profile' => 'profilePicture/adminArno.jpg',
             'role' => 'admin',
             'password' => bcrypt('adminarno2022'),
         ]);
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'username' => 'shinarno',
             'email' => 'zacharyshin@gmail.com',
             'no_hp' => '081234567890',
-            'picture_profile' => 'adminArno.jpg',
+            'picture_profile' => 'profilePicture/adminArno.jpg',
             'role' => 'user',
             'password' => bcrypt('zacharyshin'),
         ]);

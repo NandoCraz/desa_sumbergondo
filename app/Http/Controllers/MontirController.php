@@ -50,7 +50,7 @@ class MontirController extends Controller
 
         Montir::create($validateData);
 
-        return redirect('/master/data-montir')->with('berhasil', 'Data Montir berhasil ditambahkan!');
+        return redirect('/master/data-montir')->with('success', 'Data Montir berhasil ditambahkan!');
     }
 
     /**
@@ -107,7 +107,7 @@ class MontirController extends Controller
 
         Montir::where('id', $id)->update($validateData);
 
-        return redirect('/master/data-montir')->with('berhasil', 'Data Montir berhasil diubah!');
+        return redirect('/master/data-montir')->with('success', 'Data Montir berhasil diubah!');
     }
 
     /**
@@ -123,6 +123,6 @@ class MontirController extends Controller
             unlink(storage_path('app/public/' . $montir->picture_montir));
         }
         Montir::destroy($id);
-        return redirect('/master/data-montir')->with('berhasil', 'Data Montir berhasil dihapus!');
+        return redirect('/master/data-montir')->with('success', 'Data Montir berhasil dihapus!');
     }
 }

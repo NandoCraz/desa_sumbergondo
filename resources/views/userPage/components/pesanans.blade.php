@@ -18,11 +18,11 @@
     <!-- products -->
     <div class="product-section mt-150 mb-150">
         <div class="container">
-            @if (session('success'))
+            {{-- @if (session('success'))
                 <div class="alert alert-success mb-3 col-lg-10" role="alert">
                     {{ session('success') }}
                 </div>
-            @endif
+            @endif --}}
             <div class="table-responsive">
                 <table class="table text-center">
                     <thead>
@@ -125,4 +125,52 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    @if (session('success'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal
+                        .stopTimer)
+                    toast.addEventListener('mouseleave', Swal
+                        .resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            }).then((result) => {
+                location.reload();
+            })
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal
+                        .stopTimer)
+                    toast.addEventListener('mouseleave', Swal
+                        .resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'error',
+                title: '{{ session('error') }}'
+            }).then((result) => {
+                location.reload();
+            })
+        </script>
+    @endif
 @endsection

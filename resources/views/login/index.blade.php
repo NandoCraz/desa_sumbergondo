@@ -26,7 +26,7 @@
             <div class="col-xl-10 col-lg-12 col-md-9">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
-                    @if (session()->has('berhasil'))
+                    {{-- @if (session()->has('berhasil'))
                         <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
                             <h5>{{ session('berhasil') }}</h5>
                         </div>
@@ -35,7 +35,7 @@
                         <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
                             <h5>{{ session('gagal') }}</h5>
                         </div>
-                    @endif
+                    @endif --}}
 
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
@@ -88,6 +88,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('assets_login/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-1.11.3.min.js') }}"></script>
     <script src="{{ asset('assets_login/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -102,6 +103,54 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets_login/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets_login/js/demo/chart-pie-demo.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session('success'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal
+                        .stopTimer)
+                    toast.addEventListener('mouseleave', Swal
+                        .resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            }).then((result) => {
+                location.reload();
+            })
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal
+                        .stopTimer)
+                    toast.addEventListener('mouseleave', Swal
+                        .resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'error',
+                title: '{{ session('error') }}'
+            }).then((result) => {
+                location.reload();
+            })
+        </script>
+    @endif
 </body>
 
 </html>

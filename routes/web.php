@@ -60,6 +60,9 @@ Route::get('/layanan-admin', [BookingAdminController::class, 'index'])->middlewa
 Route::get('/layanan-admin/{booking:id}', [BookingAdminController::class, 'detailLayananAdmin'])->middleware('admin');
 Route::post('/hargaAkhir/{booking:id}', [BookingController::class, 'updateHarga'])->middleware('admin');
 Route::post('/keputusan/{booking:id}', [BookingAdminController::class, 'keputusanAdmin'])->middleware('admin');
+Route::get('/seluruh-user', [DashboardAdminController::class, 'seluruhUser'])->middleware('admin');
+Route::delete('/hapusUser/{user:id}', [DashboardAdminController::class, 'hapusUser'])->middleware('admin');
+Route::get('/getUserDetail/{user:id}', [DashboardAdminController::class, 'getUserDetail'])->name('getUserDetail')->middleware('admin');
 
 
 // Resource Route
