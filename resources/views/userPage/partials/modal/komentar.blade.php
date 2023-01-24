@@ -8,10 +8,18 @@
             <div class="modal-body">
                 <form action="/komentar" method="post">
                     @csrf
-                    <textarea name="komentar" id="komentar" class="form-control w-100" rows="5" style="resize:none;"></textarea>
+                    @if (isset($komentarUser))
+                        <label>Komentar Anda :</label>
+                        <textarea name="komentar" id="komentar" class="form-control w-100" rows="5" style="resize:none;" disabled>{{ $komentarUser->komentar }}</textarea>
+                    @else
+                        <label>Komentar Anda :</label>
+                        <textarea name="komentar" id="komentar" class="form-control w-100" rows="5" style="resize:none;"></textarea>
+                    @endif
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Simpan Komentar</button>
+                @if (!isset($komentarUser))
+                    <button type="submit" class="btn btn-primary">Simpan Komentar</button>
+                @endif
                 </form>
             </div>
         </div>

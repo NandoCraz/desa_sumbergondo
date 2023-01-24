@@ -12,9 +12,15 @@ class DashboardUserController extends Controller
     public function index()
     {
         $barangs = Barang::paginate(3);
+        if (isset(auth()->user()->id)) {
+            $komentarUser = Komentar::where('user_id', auth()->user()->id)->first();
+        } else {
+            $komentarUser = null;
+        }
         $komentars = Komentar::with(['user'])->get();;
         return view('userPage.components.home', [
             'barangs' => $barangs,
+            'komentarUser' => $komentarUser,
             'komentars' => $komentars
         ]);
     }

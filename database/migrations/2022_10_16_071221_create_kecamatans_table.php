@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->uuid()->unique();
             $table->string('nama_kecamatan');
-            $table->foreignId('kota_id');
             $table->timestamps();
         });
     }
