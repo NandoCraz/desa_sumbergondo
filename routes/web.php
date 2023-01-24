@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\DataKategoriController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MontirController;
 use App\Http\Controllers\OngkirController;
@@ -61,7 +62,6 @@ Route::get('/layanan-admin/{booking:id}', [BookingAdminController::class, 'detai
 Route::post('/hargaAkhir/{booking:id}', [BookingController::class, 'updateHarga'])->middleware('admin');
 Route::post('/keputusan/{booking:id}', [BookingAdminController::class, 'keputusanAdmin'])->middleware('admin');
 Route::get('/seluruh-user', [DashboardAdminController::class, 'seluruhUser'])->middleware('admin');
-Route::delete('/hapusUser/{user:id}', [DashboardAdminController::class, 'hapusUser'])->middleware('admin');
 Route::get('/getUserDetail/{user:id}', [DashboardAdminController::class, 'getUserDetail'])->name('getUserDetail')->middleware('admin');
 
 
@@ -105,6 +105,8 @@ Route::post('/changeLayanan/{booking:id}', [BookingController::class, 'changeSta
 Route::delete('/hapusLayanan/{booking:id}', [BookingController::class, 'hapusLayanan'])->middleware('auth');
 Route::post('/penawaran/{booking:id}', [BookingController::class, 'penawaranBiaya'])->middleware('auth');
 Route::post('/booking/charger', [BookingController::class, 'charger'])->name('booking.charger')->middleware('auth');
+Route::post('/komentar', [KomentarController::class, 'simpanKomentar'])->middleware('auth');
+
 // Resource Route
 Route::resource('/daftar-alamat', DaftarAlamatController::class)->middleware('auth');
 

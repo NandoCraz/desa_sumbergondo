@@ -56,10 +56,6 @@
                                 <p class="product-price"><span>Stok : {{ $barang->stok }}</span> Rp.
                                     {{ number_format($barang->harga) }}
                                 </p>
-                                {{-- <a href="/keranjang/{{ $barang->id }}" class="cart-btn"><i
-                                        class="fas fa-shopping-cart"></i>
-                                    Add
-                                    to Cart</a> --}}
                                 <form action="/keranjang/{{ $barang->id }}" method="post">
                                     @csrf
                                     <input type="hidden" name="type" value="many">

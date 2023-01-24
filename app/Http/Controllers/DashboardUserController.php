@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Kategori;
+use App\Models\Komentar;
 use Illuminate\Http\Request;
 
 class DashboardUserController extends Controller
@@ -11,8 +12,10 @@ class DashboardUserController extends Controller
     public function index()
     {
         $barangs = Barang::paginate(3);
+        $komentars = Komentar::with(['user'])->get();;
         return view('userPage.components.home', [
-            'barangs' => $barangs
+            'barangs' => $barangs,
+            'komentars' => $komentars
         ]);
     }
 

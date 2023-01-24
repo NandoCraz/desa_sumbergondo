@@ -11,4 +11,9 @@ class Komentar extends Model
     use HasFactory, Uuid;
 
     protected $guarded = ["uuid"];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

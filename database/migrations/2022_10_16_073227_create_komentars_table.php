@@ -18,6 +18,7 @@ return new class extends Migration
             $table->uuid()->unique();
             $table->foreignId('user_id');
             $table->text('komentar');
+            $table->text('balasan')->nullable();
             $table->timestamps();
         });
     }

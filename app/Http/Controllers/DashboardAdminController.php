@@ -20,12 +20,6 @@ class DashboardAdminController extends Controller
         ]);
     }
 
-    public function hapusUser(User $user)
-    {
-        $user->delete();
-        return back()->with('success', 'Berhasil Menghapus User');
-    }
-
     public function getUserDetail(User $user)
     {
         $user = User::findOrFail($user->id);

@@ -12,9 +12,12 @@
                             <p class="subtitle">Perbaiki & Modifikasi</p>
                             <h1>Spare Part dan Pelayanan Bengkel Online</h1>
                             <div class="hero-btns">
-                                <a href="/produk" class="boxed-btn">Lihat Produk</a>
+                                <a href="/produk" class="bordered-btn">Lihat Produk</a>
                                 <a href="/kontak" class="bordered-btn">Kontak Kami</a>
+                                <a href="#" class="bordered-btn" data-bs-toggle="modal"
+                                    data-bs-target="#komentar">Beri Komentar</a>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -22,11 +25,10 @@
         </div>
     </div>
     <!-- end hero area -->
-
+    @include('userPage.partials.modal.komentar')
     <!-- features list section -->
     <div class="list-section pt-80 pb-80">
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                     <div class="list-box d-flex align-items-center">
@@ -34,7 +36,7 @@
                             <i class="fas fa-shipping-fast"></i>
                         </div>
                         <div class="content">
-                            <h3>Gratis Ongkos Kirim</h3>
+                            <h3>Ongkos Kirim Murah</h3>
                             <p>Saat Berbelanja dan Menggunakan Pelayanan Kami!</p>
                         </div>
                     </div>
@@ -56,8 +58,8 @@
                             <i class="fas fa-sync"></i>
                         </div>
                         <div class="content">
-                            <h3>Pengembalian</h3>
-                            <p>Dapatkan pengembalian dana dalam 3 hari!</p>
+                            <h3>Barang Berkualitas</h3>
+                            <p>Barang Di Toko Kami Berkualitas Impor!</p>
                         </div>
                     </div>
                 </div>
@@ -89,7 +91,7 @@
                                         src="{{ asset('storage/' . $barang->picture_barang) }}"
                                         alt="{{ $barang->nama }}"></a>
                             </div>
-                            <h3>{{ $barang->nama }}</h3>
+                            <h3>{{ $barang->nama_barang }}</h3>
                             <p class="product-price"><span>Stok : {{ $barang->stok }}</span> Rp.
                                 {{ number_format($barang->harga) }} </p>
                         </div>
@@ -105,54 +107,32 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1 text-center">
-                    <div class="testimonial-sliders">
-                        <div class="single-testimonial-slider">
-                            <div class="client-avater">
-                                <img src="assets/img/avaters/avatar1.png" alt="">
-                            </div>
-                            <div class="client-meta">
-                                <h3>Saira Hakim <span>Local shop owner</span></h3>
-                                <p class="testimonial-body">
-                                    " Sed ut perspiciatis unde omnis iste natus error veritatis et quasi architecto
-                                    beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis
-                                    iste natus error sit voluptatem accusantium "
-                                </p>
-                                <div class="last-icon">
-                                    <i class="fas fa-quote-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-testimonial-slider">
-                            <div class="client-avater">
-                                <img src="assets/img/avaters/avatar2.png" alt="">
-                            </div>
-                            <div class="client-meta">
-                                <h3>David Niph <span>Local shop owner</span></h3>
-                                <p class="testimonial-body">
-                                    " Sed ut perspiciatis unde omnis iste natus error veritatis et quasi architecto
-                                    beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis
-                                    iste natus error sit voluptatem accusantium "
-                                </p>
-                                <div class="last-icon">
-                                    <i class="fas fa-quote-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-testimonial-slider">
-                            <div class="client-avater">
-                                <img src="assets/img/avaters/avatar3.png" alt="">
-                            </div>
-                            <div class="client-meta">
-                                <h3>Jacob Sikim <span>Local shop owner</span></h3>
-                                <p class="testimonial-body">
-                                    " Sed ut perspiciatis unde omnis iste natus error veritatis et quasi architecto
-                                    beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis
-                                    iste natus error sit voluptatem accusantium "
-                                </p>
-                                <div class="last-icon">
-                                    <i class="fas fa-quote-right"></i>
-                                </div>
-                            </div>
+                    <div class="splide">
+                        <div class="splide__track">
+                            <ul class="splide__list">
+                                @foreach ($komentars as $kmntr)
+                                    <li class="splide__slide">
+                                        <a href="#">
+                                            <div class="single-testimonial-slider">
+                                                <div class="client-avater">
+                                                    <img src="{{ asset('storage/' . $kmntr->user->picture_profile) }}"
+                                                        alt="">
+                                                </div>
+                                                <div class="client-meta">
+                                                    <h3>{{ $kmntr->user->name }} <span>{{ $kmntr->user->username }}</span>
+                                                    </h3>
+                                                    <p class="testimonial-body">
+                                                        " {{ $kmntr->komentar }} "
+                                                    </p>
+                                                    <div class="last-icon">
+                                                        <i class="fas fa-quote-right"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -213,4 +193,7 @@
             })
         </script>
     @endif
+    <script>
+        new Splide('.splide').mount();
+    </script>
 @endsection

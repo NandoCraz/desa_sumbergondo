@@ -5,7 +5,7 @@
         
         // testimonial sliders
         $(".testimonial-sliders").owlCarousel({
-            items: 1,
+            // items: 1,
             loop: true,
             autoplay: true,
             responsive:{
