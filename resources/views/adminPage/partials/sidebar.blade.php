@@ -62,14 +62,14 @@
             <span>Layanan Booking</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::Is('users') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::Is('seluruh-user') ? 'active' : '' }}">
         <a class="nav-link" href="/seluruh-user">
             <i class="fas fa-solid fa-users"></i>
             <span>Seluruh User</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::Is('komen-user') ? 'active' : '' }}">
-        <a class="nav-link" href="/users">
+    <li class="nav-item {{ Request::Is('seluruh-komentar') ? 'active' : '' }}">
+        <a class="nav-link" href="/seluruh-komentar">
             <i class="fas fa-solid fa-comment"></i>
             <span>Komentar User</span>
         </a>

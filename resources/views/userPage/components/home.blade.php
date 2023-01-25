@@ -105,14 +105,15 @@
     <!-- testimonail-section -->
     <div class="testimonail-section mt-150 mb-150">
         <div class="container">
+            @include('userPage.partials.modal.balasan')
             <div class="row">
                 <div class="col-lg-10 offset-lg-1 text-center">
                     <div class="splide">
-                        <div class="splide__track">
+                        <div class="splide__track list-komentar">
                             <ul class="splide__list">
                                 @foreach ($komentars as $kmntr)
                                     <li class="splide__slide">
-                                        <a href="#">
+                                        <button class="btn viewdetails" data-id='{{ $kmntr->id }}'>
                                             <div class="single-testimonial-slider">
                                                 <div class="client-avater">
                                                     <img src="{{ asset('storage/' . $kmntr->user->picture_profile) }}"
@@ -129,7 +130,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </button>
                                     </li>
                                 @endforeach
                             </ul>
@@ -194,6 +195,37 @@
         </script>
     @endif
     <script>
-        new Splide('.splide').mount();
+        $(document).ready(function() {
+            new Splide('.splide').mount();
+
+            $('.list-komentar').on('click', '.viewdetails', function() {
+                var komentarid = $(this).attr('data-id');
+                console.log(komentarid);
+                console.log('test');
+
+                if (komentarid > 0) {
+
+                    // AJAX request
+                    var url = "{{ route('balasanKomentar', [':komentarid']) }}";
+                    url = url.replace(':komentarid', komentarid);
+
+                    // Empty modal data
+                    $('#detailKomentar').empty();
+
+                    $.ajax({
+                        url: url,
+                        dataType: 'json',
+                        success: function(response) {
+
+                            // Add employee details
+                            $('#detailKomentar').html(response.html);
+
+                            // Display Modal
+                            $('#komentarModal').modal('show');
+                        }
+                    });
+                }
+            });
+        });
     </script>
 @endsection
