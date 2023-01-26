@@ -1,11 +1,11 @@
 {{-- @dd($checkoutsDel) --}}
 @extends('adminPage.layouts.main')
 @section('content')
-    @if (session('success'))
+    {{-- @if (session('success'))
         <div class="alert alert-success mb-3 col-lg-10" role="alert">
             {{ session('success') }}
         </div>
-    @endif
+    @endif --}}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Seluruh User</h6>

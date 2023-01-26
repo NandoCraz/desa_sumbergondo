@@ -30,6 +30,7 @@
             display: none;
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 
 </head>
 
@@ -115,6 +116,13 @@
     <script src="{{ asset('assets_admin/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets_admin/js/demo/chart-pie-demo.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+            $('.dataTable').DataTable();
+        });
+    </script>
     @yield('script')
 
 </body>

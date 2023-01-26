@@ -116,8 +116,11 @@
                                         <button class="btn viewdetails" data-id='{{ $kmntr->id }}'>
                                             <div class="single-testimonial-slider">
                                                 <div class="client-avater">
-                                                    <img src="{{ asset('storage/' . $kmntr->user->picture_profile) }}"
-                                                        alt="">
+                                                    @if ($kmntr->user->picture_profile != null)
+                                                        <img src="{{ asset('storage/' . $kmntr->user->picture_profile) }}">
+                                                    @else
+                                                        <img src="{{ asset('storage/profilePicture/userDef.png') }}">
+                                                    @endif
                                                 </div>
                                                 <div class="client-meta">
                                                     <h3>{{ $kmntr->user->name }} <span>{{ $kmntr->user->username }}</span>

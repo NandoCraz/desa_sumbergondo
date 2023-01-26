@@ -64,6 +64,8 @@ Route::post('/keputusan/{booking:id}', [BookingAdminController::class, 'keputusa
 Route::get('/seluruh-user', [DashboardAdminController::class, 'seluruhUser'])->middleware('admin');
 Route::get('/getUserDetail/{user:id}', [DashboardAdminController::class, 'getUserDetail'])->name('getUserDetail')->middleware('admin');
 Route::get('/seluruh-komentar', [KomentarController::class, 'index'])->middleware('admin');
+Route::get('/getKomentarUser/{komentar:id}', [KomentarController::class, 'getKomentarUser'])->name('getKomentarUser')->middleware('admin');
+Route::post('/balasanKomentarAdmin/{komentar:id}', [KomentarController::class, 'balasanAdmin'])->middleware('admin');
 
 
 // Resource Route
