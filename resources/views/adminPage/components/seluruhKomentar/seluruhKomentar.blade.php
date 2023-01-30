@@ -31,7 +31,7 @@
                                 <td>{{ Str::of($komentar->komentar)->limit(50) }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button class='btn btn-info btn-sm mr-2 viewdetails' data-id='{{ $komentar->id }}'>
-                                        <i class="fa fa-comments" aria-hidden="true"></i></button>
+                                        <i class="fa fa-comments" aria-hiddenpa="true"></i></button>
                                 </td>
                             </tr>
                         @endforeach

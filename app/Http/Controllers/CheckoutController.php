@@ -95,8 +95,6 @@ class CheckoutController extends Controller
 
         $checkout = Checkout::create($input);
 
-
-
         foreach ($keranjangs as $keranjang) {
             Pesanan::create([
                 'barang_id' => $keranjang->barang_id,

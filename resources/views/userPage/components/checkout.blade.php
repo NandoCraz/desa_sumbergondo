@@ -85,9 +85,9 @@
                                     <div class="card-body">
                                         <div class="billing-address-form">
                                             <div class="mb-3">
-                                                <label for="">Ekspedia</label>
-                                                <select class="form-select"" name="courier" id="courier">
-                                                    <option selected>-- Pilih Ekspedia --</option>
+                                                <label for="">Ekspedisi</label>
+                                                <select class="form-select" name="courier" id="courier">
+                                                    <option selected>-- Pilih Ekspedisi --</option>
                                                     <option value="jne">JNE</option>
                                                     <option value="tiki">TIKI</option>
                                                     <option value="pos">POS</option>

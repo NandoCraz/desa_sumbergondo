@@ -17,6 +17,7 @@ use App\Http\Controllers\PaymentCallbackController;
 use App\Http\Controllers\PelayananController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -110,6 +111,8 @@ Route::post('/penawaran/{booking:id}', [BookingController::class, 'penawaranBiay
 Route::post('/booking/charger', [BookingController::class, 'charger'])->name('booking.charger')->middleware('auth');
 Route::post('/komentar', [KomentarController::class, 'simpanKomentar'])->middleware('auth');
 Route::get('/balasanKomentar/{komentar:id}', [KomentarController::class, 'balasanKomentar'])->name('balasanKomentar');
+Route::post('/changeDataUser/{user:id}', [UserController::class, 'changeDataUser'])->middleware('auth');
+Route::get('/profile-saya', [DashboardUserController::class, 'profilUser'])->middleware('auth');
 
 // Resource Route
 Route::resource('/daftar-alamat', DaftarAlamatController::class)->middleware('auth');

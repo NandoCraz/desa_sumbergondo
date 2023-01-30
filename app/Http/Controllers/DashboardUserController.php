@@ -25,6 +25,10 @@ class DashboardUserController extends Controller
         ]);
     }
 
+    public function profilUser() {
+        return view('userPage.components.profileUser');
+    }
+
     public function getProduk()
     {
         $kategoris = Kategori::all();
