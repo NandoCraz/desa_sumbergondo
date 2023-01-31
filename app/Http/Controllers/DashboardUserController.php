@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\DaftarAlamat;
 use App\Models\Kategori;
 use App\Models\Komentar;
 use Illuminate\Http\Request;
@@ -25,8 +26,17 @@ class DashboardUserController extends Controller
         ]);
     }
 
-    public function profilUser() {
+    public function profilUser()
+    {
         return view('userPage.components.profileUser');
+    }
+
+    public function pengaturanUser()
+    {
+        $alamats = DaftarAlamat::where('user_id', auth()->user()->id)->with(['provinsi', 'kota'])->get();
+        return view('userPage.components.settingUser', [
+            'alamats' => $alamats
+        ]);
     }
 
     public function getProduk()

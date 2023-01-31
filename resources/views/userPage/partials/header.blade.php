@@ -25,7 +25,7 @@
                                 <li><a href="#">Profil</a>
                                     <ul class="sub-menu">
                                         <li><a href="/profile-saya">Profil Saya</a></li>
-                                        <li><a href="">Pengaturan</a></li>
+                                        <li><a href="/pengaturan">Pengaturan</a></li>
                                         <li><a href="/pesanan">Pesanan Saya</a></li>
                                         <li><a href="/layanans">Layanan Saya</a></li>
                                         <li>

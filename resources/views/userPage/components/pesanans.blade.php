@@ -24,7 +24,7 @@
                 </div>
             @endif --}}
             <div class="table-responsive">
-                <table class="table text-center">
+                <table class="table text-center stripe" id="dataTable">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

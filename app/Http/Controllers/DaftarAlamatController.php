@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DaftarAlamat;
+use App\Models\Provinsi;
 use Illuminate\Http\Request;
 
 class DaftarAlamatController extends Controller
@@ -93,6 +94,5 @@ class DaftarAlamatController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }

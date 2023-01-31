@@ -113,6 +113,9 @@ Route::post('/komentar', [KomentarController::class, 'simpanKomentar'])->middlew
 Route::get('/balasanKomentar/{komentar:id}', [KomentarController::class, 'balasanKomentar'])->name('balasanKomentar');
 Route::post('/changeDataUser/{user:id}', [UserController::class, 'changeDataUser'])->middleware('auth');
 Route::get('/profile-saya', [DashboardUserController::class, 'profilUser'])->middleware('auth');
+Route::get('/pengaturan', [DashboardUserController::class, 'pengaturanUser'])->middleware('auth');
+Route::post('/changePassword/{user:id}', [UserController::class, 'changePassword'])->middleware('auth');
+Route::get('/getAlamatUser/{daftar_alamat:id}', [DaftarAlamatController::class, 'getAlamatUser'])->name('getAlamatUser')->middleware('auth'); 
 
 // Resource Route
 Route::resource('/daftar-alamat', DaftarAlamatController::class)->middleware('auth');

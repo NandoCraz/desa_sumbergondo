@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -30,5 +31,30 @@ class UserController extends Controller
         $user->update($data);
 
         return back()->with('success', 'Data berhasil diubah');
+    }
+
+    public function changePassword(Request $request, User $user)
+    {
+        // return $request;
+        $request->validate([
+            'old_pass' => 'required',
+            'new_pass' => 'required',
+            'konf_pass' => 'required'
+        ]);
+
+        $pass = User::findorFail($user->id);
+
+        if (Hash::check($request->old_pass, $pass->password)) {
+            if ($request->new_pass == $request->konf_pass) {
+                User::find($user->id)->update([
+                    'password' => Hash::make($request->new_pass)
+                ]);
+                return back()->with('berhasil', 'Password Berhasil di ubah');
+            } else {
+                return back()->with('error', 'Konfirmasi Password tidak sama');
+            }
+        } else {
+            return back()->with('error', 'Password Lama salah');
+        }
     }
 }
