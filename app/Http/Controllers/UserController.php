@@ -49,12 +49,12 @@ class UserController extends Controller
                 User::find($user->id)->update([
                     'password' => Hash::make($request->new_pass)
                 ]);
-                return back()->with('berhasil', 'Password Berhasil di ubah');
+                return redirect('/dashboard-admin')->with('success', 'Password Berhasil di ubah');
             } else {
-                return back()->with('error', 'Konfirmasi Password tidak sama');
+                return redirect('/dashboard-admin')->with('error', 'Konfirmasi Password tidak sama');
             }
         } else {
-            return back()->with('error', 'Password Lama salah');
+            return redirect('/dashboard-admin')->with('error', 'Password Lama salah');
         }
     }
 }

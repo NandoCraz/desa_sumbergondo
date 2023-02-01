@@ -57,7 +57,6 @@
                 <div class="container-fluid">
                     @yield('content')
                 </div>
-                @include('adminPage.partials.modals.profile')
                 @include('adminPage.partials.modals.setting')
                 <!-- /.container-fluid -->
 

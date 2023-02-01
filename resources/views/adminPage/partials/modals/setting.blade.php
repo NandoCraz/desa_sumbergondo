@@ -13,13 +13,12 @@
                             <div class="card mb-4">
                                 <div class="card-header">User Password</div>
                                 <div class="card-body">
-                                    <form method="POST" action="/users/password/{{ auth()->user()->id }}">
+                                    <form method="POST" action="/changePassword/{{ auth()->user()->id }}">
                                         @csrf
                                         <div class="mb-3">
                                             <label class="small mb-1" for="old_pass">Password Lama</label>
                                             <input class="form-control @error('old_pass') is-invalid @enderror"
-                                                id="old_pass" name="old_pass" type="password"
-                                                placeholder="Masukkan Password Lama" />
+                                                id="old_pass" name="old_pass" type="password">
                                             @error('old_pass')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -29,8 +28,7 @@
                                         <div class="mb-3">
                                             <label class="small mb-1" for="new_pass">Password Baru</label>
                                             <input class="form-control @error('new_pass') is-invalid @enderror"
-                                                id="new_pass" name="new_pass" type="password"
-                                                placeholder="Masukkan Password Baru" />
+                                                id="new_pass" name="new_pass" type="password" />
                                             @error('new_pass')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -40,8 +38,7 @@
                                         <div class="mb-3">
                                             <label class="small mb-1" for="konf_pass">Konfirmasi Password Baru</label>
                                             <input class="form-control @error('konf_pass') is-invalid @enderror"
-                                                id="konf_pass" name="konf_pass" type="password"
-                                                placeholder="Konfirmasi Password" />
+                                                id="konf_pass" name="konf_pass" type="password" />
                                             @error('konf_pass')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

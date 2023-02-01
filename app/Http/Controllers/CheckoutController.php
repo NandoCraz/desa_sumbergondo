@@ -63,6 +63,7 @@ class CheckoutController extends Controller
     public function charger(Request $request)
     {
         // $barangs = Barang::all();
+        // return $request;
 
         $data = $request->validate([
             'daftar_alamat_id' => 'required',

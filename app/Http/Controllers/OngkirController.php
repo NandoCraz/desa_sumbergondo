@@ -30,7 +30,9 @@ class OngkirController extends Controller
 
     public function cost(Request $request)
     {
+        // return $request;
         $alamat = DaftarAlamat::find($request->daftar_alamat_id);
+        // dd($alamat);
         $keranjang = Keranjang::where('user_id', auth()->user()->id)->with(['barang'])->get();
         $weight = 0;
         foreach ($keranjang as $item) {
@@ -46,5 +48,4 @@ class OngkirController extends Controller
 
         return response()->json($response->json()['rajaongkir'], $response->status());
     }
-
 }
