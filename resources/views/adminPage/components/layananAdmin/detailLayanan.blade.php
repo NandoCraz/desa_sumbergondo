@@ -69,8 +69,14 @@
                             </h5>
                             <h5 class="font-weight-bold">No. Telepon : <p>{{ $booking->no_telp }}</p>
                             </h5>
-                            <h5 class="font-weight-bold">Alamat : <p>
-                                    {{ $booking->alamat == null ? '-' : $booking->alamat }}</p>
+                            <h5 class="font-weight-bold">Alamat :<h5>Alamat :
+                                    @if ($booking->alamat == null)
+                                        <p>-</p>
+                                    @else
+                                        <p>{{ $booking->alamat }}, {{ $booking->kecamatan->nama_kecamatan }},
+                                            {{ $booking->kode_pos }}, Surabaya</p>
+                                    @endif
+                                </h5>
                             </h5>
                             <h5 class="font-weight-bold">Tipe Mobil : <p>{{ $booking->tipe_mobil }}</p>
                             </h5>

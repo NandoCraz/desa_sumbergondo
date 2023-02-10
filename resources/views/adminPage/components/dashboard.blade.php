@@ -351,10 +351,8 @@
         </div>
     </div>
     <div class="container mt-5">
-        <h2 class="mb-4 text-center" style="font-weight: bold">Total Penjualan Sparepart</h2>
+        <h2 class="mb-4 text-center" style="font-weight: bold">Total Penjualan Sparepart & Layanan Service</h2>
         <canvas id="myChart" class="mb-5" height="100px"></canvas>
-        <h2 class="my-4 text-center" style="font-weight: bold">Total Booking Layanan</h2>
-        <canvas id="myChartBkn" height="100px"></canvas>
     </div>
 @endsection
 @section('script')
@@ -411,45 +409,38 @@
         var dataPesanan = {{ Js::from($dataPesanan) }};
         var dataBooking = {{ Js::from($dataBooking) }};
 
-        const dataPsn = {
+        const data = {
             labels: labelPesanan,
             datasets: [{
-                label: 'Total Penjualan Sparepart',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: dataPesanan,
-            }]
+                    label: 'Total Penjualan Sparepart',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: dataPesanan,
+                },
+                {
+                    label: 'Total Layanan Service',
+                    backgroundColor: 'rgb(52, 52, 255)',
+                    borderColor: 'rgb(52, 52, 255)',
+                    data: dataBooking,
+                }
+            ]
         };
 
-        const dataBkn = {
-            labels: labelBooking,
-            datasets: [{
-                label: 'Total Booking Layanan',
-                backgroundColor: 'rgb(52, 52, 255)',
-                borderColor: 'rgb(52, 52, 255)',
-                data: dataBooking,
-            }]
-        };
-
-        const configPesanan = {
+        const config = {
             type: 'line',
-            data: dataPsn,
-            options: {}
-        };
-
-        const configBooking = {
-            type: 'line',
-            data: dataBkn,
-            options: {}
+            data: data,
+            options: {
+                scale: {
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
         };
 
         const myChart = new Chart(
             document.getElementById('myChart'),
-            configPesanan,
-        );
-        const myChartBkn = new Chart(
-            document.getElementById('myChartBkn'),
-            configBooking,
+            config,
         );
     </script>
 @endsection

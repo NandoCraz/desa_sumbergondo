@@ -61,6 +61,8 @@ class DashboardAdminController extends Controller
          ->groupBy(DB::raw("Month(created_at)"))
          ->pluck('count', 'month_name');
 
+      // $charts = 
+
       $labelPesanan = $pesanans->keys();
       $dataPesanan = $pesanans->values();
       $labelBooking = $bookings->keys();

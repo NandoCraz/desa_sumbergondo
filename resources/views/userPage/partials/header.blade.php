@@ -41,7 +41,13 @@
                             @endauth
                             <li>
                                 <div class="header-icons">
-                                    <a class="shopping-cart" href="/keranjang"><i class="fas fa-shopping-cart"></i></a>
+                                    <a class="shopping-cart" href="/keranjang"><i class="fas fa-shopping-cart"></i>
+                                        @if (isset(auth()->user()->id))
+                                            <span class="top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                {{ App\Models\Keranjang::where('user_id', auth()->user()->id)->count() }}
+                                            </span>
+                                        @endif
+                                    </a>
                                     <a class="mobile-hide search-bar-icon" href="#"><i
                                             class="fas fa-search"></i></a>
                                 </div>

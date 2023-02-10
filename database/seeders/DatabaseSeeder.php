@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             BarangSeeder::class,
             MontirSeeder::class,
             PelayananSeeder::class,
+            KecamatanSeeder::class,
         ]);
     }
 }

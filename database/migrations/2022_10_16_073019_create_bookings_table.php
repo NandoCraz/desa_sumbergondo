@@ -21,6 +21,8 @@ return new class extends Migration
             $table->foreignId('montir_id');
             $table->string('nama_pemesan');
             $table->string('alamat')->nullable();
+            $table->string('kode_pos')->nullable();
+            $table->foreignId('kecamatan_id')->nullable();
             $table->string('no_telp')->nullable();
             $table->string('tipe_mobil');
             $table->text('kendala')->nullable();

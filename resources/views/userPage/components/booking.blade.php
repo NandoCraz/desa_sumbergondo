@@ -33,7 +33,7 @@
                                 <p class="text-muted">- Selain dari pelayanan, harga akan ditentukan dari pihak admin.</p>
                             </div>
                             <div>
-                                <p class="text-muted">- Service Pelayanan hanya untuk sekitar Kota Surabaya.</p>
+                                <p class="text-muted">- Pelayanan Service hanya untuk sekitar Kota Surabaya.</p>
                             </div>
                         </div>
                     </div>
@@ -118,26 +118,52 @@
                                     </div>
                                     <h4 class="fw-bold my-3">Alamat Bengkel : Jl. Rangkah VII/124, Surabaya</h4>
                                 </div>
-                                <div class="mb-4" id="rumah">
-                                    <label for="alamat">Alamat <span class="fw-bold text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <input class="form-control w-75 @error('alamat') is-invalid @enderror"
-                                            id="alamat" type="text" name="alamat" value="{{ old('alamat') }}"
-                                            autocomplete="off">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                Surabaya
-                                            </span>
+                                <div id="rumah">
+                                    <div class="mb-4">
+                                        <label for="alamat">Alamat <span class="fw-bold text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <input class="form-control w-75 @error('alamat') is-invalid @enderror"
+                                                id="alamat" type="text" name="alamat" value="{{ old('alamat') }}"
+                                                autocomplete="off">
                                         </div>
+                                        @error('alamat')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                    @error('alamat')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
+                                    <div class="mb-4">
+                                        <label for="kecamatan_id">Kecamatan <span
+                                                class="fw-bold text-danger">*</span></label>
+                                        <select class="form-control" name="kecamatan_id" required>
+                                            <option value="">-- Pilih Kecamatan --</option>
+                                            @foreach ($kecamatans as $kecamatan)
+                                                <option value="{{ $kecamatan->id }}">{{ $kecamatan->nama_kecamatan }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('kecamatan_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="kode_pos">Kode Pos <span class="fw-bold text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <input class="form-control w-75 @error('kode_pos') is-invalid @enderror"
+                                                id="kode_pos" type="text" name="kode_pos" value="{{ old('kode_pos') }}"
+                                                autocomplete="off">
                                         </div>
-                                    @enderror
+                                        @error('kode_pos')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="no_telp">No. Telepon</label>
+                                    <label for="no_telp">No. Telepon <span class="fw-bold text-danger">*</span></label>
                                     <input class="form-control @error('no_telp') is-invalid @enderror" id="no_telp"
                                         type="text" name="no_telp" value="{{ old('no_telp') }}" required
                                         autocomplete="off">
@@ -149,8 +175,7 @@
                                 </div>
                                 <div class="mb-4">
                                     <label for="tipe_mobil">Tipe Mobil <span class="fw-bold text-danger">*</span></label>
-                                    <select class="form-control" aria-label="Default select example" name="tipe_mobil"
-                                        required>
+                                    <select class="form-control" name="tipe_mobil" required>
                                         <option value="">-- Pilih Tipe Mobil --</option>
                                         <option value="Mobil SUV">Mobil SUV</option>
                                         <option value="Mobil MPV">Mobil MPV</option>
@@ -206,8 +231,7 @@
                                 <div class="mb-4">
                                     <label for="montir_id">Montir Pengerjaan <span
                                             class="fw-bold text-danger">*</span></label>
-                                    <select class="form-control" aria-label="Default select example" name="montir_id"
-                                        required>
+                                    <select class="form-control" name="montir_id" required>
                                         <option value="">-- Pilih Montir --</option>
                                         @if ($montirs->count() > 0)
                                             @foreach ($montirs as $montir)

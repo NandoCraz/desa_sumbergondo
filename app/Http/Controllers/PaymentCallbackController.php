@@ -18,37 +18,37 @@ class PaymentCallbackController extends Controller
             $order = $callback->getOrder();
 
             if ($callback->isSuccess()) {
-                if ($checkout = Checkout::find($order->id)) {
-                    Checkout::where('id', $order->id)->update([
+                if ($checkout = Checkout::where('uuid', $order->uuid)->first()) {
+                    Checkout::where('uuid', $order->uuid)->update([
                         'payment_status' => 2,
                         'status' => 1,
                     ]);
-                } elseif ($booking = Booking::find($order->id)) {
-                    Booking::where('id', $order->id)->update([
+                } elseif ($booking = Booking::where('uuid', $order->uuid)->first()) {
+                    Booking::where('uuid', $order->uuid)->update([
                         'payment_status' => 2,
                     ]);
                 }
             }
 
             if ($callback->isExpire()) {
-                if ($checkout = Checkout::find($order->id)) {
-                    Checkout::where('id', $order->id)->update([
+                if ($checkout = Checkout::where('uuid', $order->uuid)->first()) {
+                    Checkout::where('uuid', $order->uuid)->update([
                         'payment_status' => 3,
                     ]);
-                } elseif ($booking = Booking::find($order->id)) {
-                    Booking::where('id', $order->id)->update([
+                } elseif ($booking = Booking::where('uuid', $order->uuid)->first()) {
+                    Booking::where('uuid', $order->uuid)->update([
                         'payment_status' => 3,
                     ]);
                 }
             }
 
             if ($callback->isCancelled()) {
-                if ($checkout = Checkout::find($order->id)) {
-                    Checkout::where('id', $order->id)->update([
+                if ($checkout = Checkout::where('uuid', $order->uuid)->first()) {
+                    Checkout::where('uuid', $order->uuid)->update([
                         'payment_status' => 4,
                     ]);
-                } elseif ($booking = Booking::find($order->id)) {
-                    Booking::where('id', $order->id)->update([
+                } elseif ($booking = Booking::where('uuid', $order->uuid)->first()) {
+                    Booking::where('uuid', $order->uuid)->update([
                         'payment_status' => 3,
                     ]);
                 }

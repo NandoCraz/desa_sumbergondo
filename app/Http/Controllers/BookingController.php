@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\BarangBooking;
 use App\Models\Booking;
 use App\Models\BookingPelayanan;
+use App\Models\Kecamatan;
 use App\Models\Montir;
 use App\Models\Pelayanan;
 use Illuminate\Http\Request;
@@ -18,10 +19,12 @@ class BookingController extends Controller
         $pelayanans = Pelayanan::all();
         $montirs = Montir::all();
         $barangs = Barang::all();
+        $kecamatans = Kecamatan::all();
         return view('userPage.components.booking', [
             'pelayanans' => $pelayanans,
             'montirs' => $montirs,
-            'barangs' => $barangs
+            'barangs' => $barangs,
+            'kecamatans' => $kecamatans,
         ]);
     }
 
@@ -49,6 +52,8 @@ class BookingController extends Controller
             'montir_id' => 'required',
             'tempat_perbaikan' => 'required',
             'alamat' => 'required_if:tempat_perbaikan,==,dirumah|nullable|max:255',
+            'kecamatan_id' => 'required_if:tempat_perbaikan,==,dirumah|nullable',
+            'kode_pos' => 'required_if:tempat_perbaikan,==,dirumah|nullable|numeric',
             'tipe_mobil' => 'required',
             'no_telp' => 'required|numeric',
             'kendala' => 'nullable',

@@ -27,4 +27,9 @@ class Booking extends Model
     {
         return $this->belongsTo(Montir::class);
     }
+
+    public function kecamatan()
+    {
+        return $this->belongsTo(Kecamatan::class);
+    }
 }

@@ -90,7 +90,13 @@
                                     </h5>
                                     <h5>No. Telepon : <p>{{ $booking->no_telp }}</p>
                                     </h5>
-                                    <h5>Alamat : <p>{{ $booking->alamat == null ? '-' : $booking->alamat }}</p>
+                                    <h5>Alamat :
+                                        @if ($booking->alamat == null)
+                                            <p>-</p>
+                                        @else
+                                            <p>{{ $booking->alamat }}, {{ $booking->kecamatan->nama_kecamatan }},
+                                                {{ $booking->kode_pos }}, Surabaya</p>
+                                        @endif
                                     </h5>
                                     <h5>Tipe Mobil : <p>{{ $booking->tipe_mobil }}</p>
                                     </h5>
@@ -303,7 +309,7 @@
                                     <input type="hidden" name="status" value="selesai">
                                     <button type="submit" class="btn btn-success ms-3">Selesai</button>
                                 </form>
-                            @elseif ($booking->tipe_bayar != 'cod' && $booking->status == 'Pembayaran' && $booking->payment_status == '1')
+                            @elseif ($booking->tipe_bayar != 'cod' && $booking->payment_status == '1')
                                 <button class="btn btn-lg btn-warning text-light mt-4" id="bayar">Bayar</button>
                             @endif
                         </div>
