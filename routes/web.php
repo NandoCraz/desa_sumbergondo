@@ -67,6 +67,7 @@ Route::get('/getUserDetail/{user:id}', [DashboardAdminController::class, 'getUse
 Route::get('/seluruh-komentar', [KomentarController::class, 'index'])->middleware('admin');
 Route::get('/getKomentarUser/{komentar:id}', [KomentarController::class, 'getKomentarUser'])->name('getKomentarUser')->middleware('admin');
 Route::post('/balasanKomentarAdmin/{komentar:id}', [KomentarController::class, 'balasanAdmin'])->middleware('admin');
+Route::get('/laporan-penjualan', [DashboardAdminController::class, 'laporanPdf'])->middleware('admin');
 
 
 // Resource Route
@@ -115,7 +116,7 @@ Route::post('/changeDataUser/{user:id}', [UserController::class, 'changeDataUser
 Route::get('/profile-saya', [DashboardUserController::class, 'profilUser'])->middleware('auth');
 Route::get('/pengaturan', [DashboardUserController::class, 'pengaturanUser'])->middleware('auth');
 Route::post('/changePassword/{user:id}', [UserController::class, 'changePassword'])->middleware('auth');
-Route::get('/getAlamatUser/{daftar_alamat:id}', [DaftarAlamatController::class, 'getAlamatUser'])->name('getAlamatUser')->middleware('auth'); 
+Route::get('/getAlamatUser/{daftar_alamat:id}', [DaftarAlamatController::class, 'getAlamatUser'])->name('getAlamatUser')->middleware('auth');
 
 // Resource Route
 Route::resource('/daftar-alamat', DaftarAlamatController::class)->middleware('auth');

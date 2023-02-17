@@ -10,8 +10,10 @@ use App\Models\Komentar;
 use App\Models\Montir;
 use App\Models\Pelayanan;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class DashboardAdminController extends Controller
 {
@@ -60,8 +62,6 @@ class DashboardAdminController extends Controller
          ->whereYear('created_at', date('Y'))
          ->groupBy(DB::raw("Month(created_at)"))
          ->pluck('count', 'month_name');
-
-      // $charts = 
 
       $labelPesanan = $pesanans->keys();
       $dataPesanan = $pesanans->values();
@@ -136,5 +136,24 @@ class DashboardAdminController extends Controller
       $response['html'] = $html;
 
       return response()->json($response);
+   }
+
+   public function laporanPdf(Request $request)
+   {
+      $awal = Carbon::parse($request->tglAwal)->format('Y-m-d');
+      $akhir = Carbon::parse($request->tglAkhir)->format('Y-m-d');
+      $checkouts = Checkout::with(['daftarAlamat', 'pesanans'])->whereBetween('created_at', [$awal, $akhir])->get();
+
+      $total = 0;
+      foreach ($checkouts as $checkout) {
+         $total += $checkout->total;
+      }
+
+      $pdf = PDF::loadView('adminPage.partials.laporan.Lpenjualan', [
+         'checkouts' => $checkouts,
+         'total' => $total,
+      ]);
+
+      return $pdf->download('laporanPenjualan_' . $awal . '-' . $akhir . '.pdf');
    }
 }

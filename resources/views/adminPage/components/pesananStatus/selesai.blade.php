@@ -1,15 +1,29 @@
 @extends('adminPage.layouts.main')
 @section('content')
-    {{-- @if (session('berhasil'))
-        <div class="alert alert-success mb-3 col-lg-10" role="alert">
-            {{ session('berhasil') }}
-        </div>
-    @endif --}}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Pesanan Selesai</h6>
         </div>
         <div class="card-body">
+            <div class="row mb-5">
+                <form action="/laporan-penjualan" method="get" class="col-lg-6">
+                    @csrf
+                    <label for="timestamp" class="mb-4">Pilih Tanggal Untuk Cetak PDF</label>
+                    <div class="d-flex">
+                        <div class="mr-3">
+                            <label for="tglAwal">Tanggal Awal</label>
+                            <input class="form-control selector" type="text" id="tglAwal" name="tglAwal"
+                                autocomplete="off" required>
+                        </div>
+                        <div class="mr-3">
+                            <label for="tglAwal">Tanggal Awal</label>
+                            <input class="form-control selector" type="text" id="tglAkhir" name="tglAkhir"
+                                autocomplete="off" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-sm mt-3">Cetak</button>
+                </form>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="text-center">
@@ -71,4 +85,11 @@
             })
         </script>
     @endif
+    <script>
+        $(document).ready(function() {
+            $(".selector").flatpickr({
+                dateFormat: "Y-m-d",
+            });
+        });
+    </script>
 @endsection
