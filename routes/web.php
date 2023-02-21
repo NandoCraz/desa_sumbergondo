@@ -68,6 +68,7 @@ Route::get('/seluruh-komentar', [KomentarController::class, 'index'])->middlewar
 Route::get('/getKomentarUser/{komentar:id}', [KomentarController::class, 'getKomentarUser'])->name('getKomentarUser')->middleware('admin');
 Route::post('/balasanKomentarAdmin/{komentar:id}', [KomentarController::class, 'balasanAdmin'])->middleware('admin');
 Route::get('/laporan-penjualan', [DashboardAdminController::class, 'laporanPdf'])->middleware('admin');
+Route::get('/laporan-layanan', [DashboardAdminController::class, 'laporanPdfLayanan'])->middleware('admin');
 
 
 // Resource Route

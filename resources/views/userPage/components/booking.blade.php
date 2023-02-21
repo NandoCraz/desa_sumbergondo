@@ -348,11 +348,24 @@
         $(document).ready(function() {
             $('.js-example-basic-multiple').select2();
 
+            var maxYear = new Date().getFullYear();
+            var maxMonth = new Date().getMonth() + 1;
+            var maxDate = new Date().getDate() + 1;
             $(".selector").flatpickr({
                 enableTime: true,
                 dateFormat: "Y-m-d H:i",
+                minDate: "today",
+                maxDate: maxYear + "." + maxMonth + "." + maxDate,
                 minTime: "09:00",
                 maxTime: "16:00",
+                disable: [
+                    function(date) {
+                        return (date.getDay() === 0 || date.getDay() === 6);
+                    }
+                ],
+                locale: {
+                    "firstDayOfWeek": 1
+                }
             });
 
         });

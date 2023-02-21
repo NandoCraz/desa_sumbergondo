@@ -42,6 +42,7 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $checkout->daftarAlamat->nama_penerima }}</td>
                                     <td>{{ $checkout->daftarAlamat->alamat }},
+                                        {{ $checkout->daftarAlamat->kode_pos }},
                                         {{ $checkout->daftarAlamat->provinsi->nama_provinsi }},
                                         {{ $checkout->daftarAlamat->kota->nama_kab_kota }}</td>
                                     <td>Rp. {{ number_format($checkout->total) }}</td>

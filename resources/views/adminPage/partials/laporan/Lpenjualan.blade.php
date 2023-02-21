@@ -35,6 +35,7 @@
     tr,
     td {
         border: 1px solid black;
+        text-align: center;
     }
 
     th,
@@ -49,7 +50,7 @@
         <h1>NSPARKEL</h1>
         <h5>Jl. Rangkah VII/124C, Surabaya | 081233911558</h5>
     </div>
-    <span>Laporan Penjualan Tanggal : 2023-09-07 / 2023-09-07</span>
+    <span>Laporan Penjualan Tanggal : {{ $awal }} / {{ $akhir }}</span>
     <table width="100%" cellspacing="0">
         <thead>
             <tr>
@@ -72,6 +73,7 @@
                         {{ $checkout->daftarAlamat->provinsi->nama_provinsi }},
                         {{ $checkout->daftarAlamat->kota->nama_kab_kota }}</td>
                     <td>Rp. {{ number_format($checkout->total) }}</td>
+                    <td>{{ $checkout->pesanans->count() }}</td>
                 </tr>
             @endforeach
         </tbody>

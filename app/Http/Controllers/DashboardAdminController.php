@@ -53,12 +53,12 @@ class DashboardAdminController extends Controller
       $users = User::where('role', 'user')->get();
       $komentars = Komentar::all();
 
-      $pesanans = Checkout::where('status', 4)->select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
+      $pesanans = Checkout::withTrashed()->where('status', 4)->select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
          ->whereYear('created_at', date('Y'))
          ->groupBy(DB::raw("Month(created_at)"))
          ->pluck('count', 'month_name');
 
-      $bookings = Booking::where('status', 'Selesai')->select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
+      $bookings = Booking::withTrashed()->where('status', 'Selesai')->select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
          ->whereYear('created_at', date('Y'))
          ->groupBy(DB::raw("Month(created_at)"))
          ->pluck('count', 'month_name');
@@ -140,9 +140,18 @@ class DashboardAdminController extends Controller
 
    public function laporanPdf(Request $request)
    {
-      $awal = Carbon::parse($request->tglAwal)->format('Y-m-d');
-      $akhir = Carbon::parse($request->tglAkhir)->format('Y-m-d');
-      $checkouts = Checkout::with(['daftarAlamat', 'pesanans'])->whereBetween('created_at', [$awal, $akhir])->get();
+      // dd($request->all());
+      if (strpos($request->timestamp, ' to ')) {
+         $tanggal = explode(' to ', $request->timestamp);
+         $awal = Carbon::parse($tanggal[0])->format('Y-m-d');
+         $akhir = Carbon::parse($tanggal[1])->format('Y-m-d');
+         $checkouts = Checkout::with(['daftarAlamat', 'pesanans'])->whereBetween('created_at', [$awal, $akhir])->get();
+      } else {
+         $awal = Carbon::parse($request->timestamp)->format('Y-m-d');
+         $akhir = $awal;
+         $checkouts = Checkout::with(['daftarAlamat', 'pesanans'])->where('created_at', 'LIKE', '%' . $awal . '%')->get();
+      }
+
 
       $total = 0;
       foreach ($checkouts as $checkout) {
@@ -152,8 +161,40 @@ class DashboardAdminController extends Controller
       $pdf = PDF::loadView('adminPage.partials.laporan.Lpenjualan', [
          'checkouts' => $checkouts,
          'total' => $total,
-      ]);
+         'awal' => $awal,
+         'akhir' => $akhir,
+      ])->setPaper('a4', 'landscape');
 
       return $pdf->download('laporanPenjualan_' . $awal . '-' . $akhir . '.pdf');
+   }
+
+   public function laporanPdfLayanan(Request $request)
+   {
+      if (strpos($request->timestamp, ' to ')) {
+         $tanggal = explode(' to ', $request->timestamp);
+         $awal = Carbon::parse($tanggal[0])->format('Y-m-d');
+         $akhir = Carbon::parse($tanggal[1])->format('Y-m-d');
+         $bookings = Booking::with(['montir', 'pelayanan', 'barang', 'kecamatan'])->whereBetween('created_at', [$awal, $akhir])->get();
+      } else {
+         $awal = Carbon::parse($request->timestamp)->format('Y-m-d');
+         $akhir = $awal;
+         $bookings = Booking::with(['montir', 'pelayanan', 'barang', 'kecamatan'])->where('created_at', 'LIKE', '%' . $awal . '%')->get();
+      }
+
+
+      $total = 0;
+      foreach ($bookings as $booking) {
+         $total += $booking->total;
+         $total += $booking->total_harga_barang;
+      }
+
+      $pdf = PDF::loadView('adminPage.partials.laporan.Llayanan', [
+         'bookings' => $bookings,
+         'total' => $total,
+         'awal' => $awal,
+         'akhir' => $akhir,
+      ])->setPaper('a4', 'landscape');
+
+      return $pdf->download('laporanLayanan_' . $awal . '-' . $akhir . '.pdf');
    }
 }

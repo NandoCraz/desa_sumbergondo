@@ -336,7 +336,21 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Selesai</h6>
         </div>
+
         <div class="card-body">
+            <div class="row mb-5">
+                <form action="/laporan-layanan" method="get" class="col-lg-6">
+                    @csrf
+                    <label for="timestamp" class="mb-4">Pilih Tanggal Untuk Cetak PDF</label>
+                    <div class="d-flex">
+                        <div class="mr-3">
+                            <input class="form-control selector" type="text" id="timestamp" name="timestamp"
+                                autocomplete="off" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-sm mt-3">Cetak</button>
+                </form>
+            </div>
             <div class="table-responsive">
                 <table class="table text-center dataTable">
                     <thead>
@@ -422,4 +436,12 @@
             })
         </script>
     @endif
+    <script>
+        $(document).ready(function() {
+            $(".selector").flatpickr({
+                dateFormat: "Y-m-d",
+                mode: "range",
+            });
+        });
+    </script>
 @endsection

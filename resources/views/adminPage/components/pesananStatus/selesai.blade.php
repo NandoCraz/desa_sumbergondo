@@ -11,17 +11,11 @@
                     <label for="timestamp" class="mb-4">Pilih Tanggal Untuk Cetak PDF</label>
                     <div class="d-flex">
                         <div class="mr-3">
-                            <label for="tglAwal">Tanggal Awal</label>
-                            <input class="form-control selector" type="text" id="tglAwal" name="tglAwal"
+                            <input class="form-control selector" type="text" id="timestamp" name="timestamp"
                                 autocomplete="off" required>
                         </div>
-                        <div class="mr-3">
-                            <label for="tglAwal">Tanggal Awal</label>
-                            <input class="form-control selector" type="text" id="tglAkhir" name="tglAkhir"
-                                autocomplete="off" required>
-                        </div>
+                        <button type="submit" class="btn btn-success btn-sm">Cetak</button>
                     </div>
-                    <button type="submit" class="btn btn-success btn-sm mt-3">Cetak</button>
                 </form>
             </div>
             <div class="table-responsive">
@@ -42,6 +36,7 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $checkout->daftarAlamat->nama_penerima }}</td>
                                 <td>{{ $checkout->daftarAlamat->alamat }},
+                                    {{ $checkout->daftarAlamat->kode_pos }},
                                     {{ $checkout->daftarAlamat->provinsi->nama_provinsi }},
                                     {{ $checkout->daftarAlamat->kota->nama_kab_kota }}</td>
                                 <td>Rp. {{ number_format($checkout->total) }}</td>
@@ -88,6 +83,7 @@
     <script>
         $(document).ready(function() {
             $(".selector").flatpickr({
+                mode: "range",
                 dateFormat: "Y-m-d",
             });
         });
