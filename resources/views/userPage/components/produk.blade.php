@@ -39,13 +39,17 @@
                                         class="text-dark">{{ $kategori->nama_kategori }}</a></li>
                             @endforeach
                         </ul>
+                        <div class="row justify-content-center mt-5">
+                            <input type="text" id="cari" class="form-control col-lg-8 p-3" placeholder="Cari Barang"
+                                autocomplete="off">
+                        </div>
                     </div>
                 </div>
             </div>
             @if ($barangs->count())
-                <div class="row product-lists mb-5">
+                <div class="row mb-5" id="loopProduct">
                     @foreach ($barangs as $barang)
-                        <div class="col-lg-4 col-md-6 text-center strawberry">
+                        <div class="col-lg-4 col-md-6 text-center">
                             <div class="single-product-item">
                                 <div class="product-image">
                                     <a href="/single-produk/{{ $barang->uuid }}"><img
@@ -120,4 +124,58 @@
             })
         </script>
     @endif
+    <script>
+        function debounce(func, timeout = 800) {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    func.apply(this, args);
+                }, timeout);
+            };
+        }
+        const cari = document.querySelector('#cari');
+        const products = document.querySelector('#loopProduct');
+        // const halos = ['tes',
+        //     'halo', 'tod'
+        // ];
+        cari.addEventListener('keyup', debounce(function() {
+            const cariBr = cari.value;
+            const url = `/cari`;
+            $.ajax({
+                url: url,
+                method: 'post',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ @csrf_token() }}'
+                },
+                data: {
+                    cari: cariBr,
+                },
+                success: function(response) {
+                    // console.log(response);
+                    products.innerHTML = response.map(barang =>
+                        `<div class="col-lg-4 col-md-4 text-center strawberry">
+                            <div class="single-product-item">
+                                <div class="product-image">
+                                    <a href="/single-produk/${barang.uuid}"><img
+                                            src="storage/${barang.picture_barang}"
+                                            alt="${barang.nama_barang}"></a>
+                                </div>
+                                <h3>${barang.nama_barang }</h3>
+                                <p class="product-price"><span>Stok : ${barang.stok}</span> Rp.
+                                    ${Intl.NumberFormat().format(barang.harga)}
+                                </p>
+                                <form action="/keranjang/${barang.id}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="type" value="many">
+                                    <button type="submit" class="btn btn-lg btn-warning text-light"><i
+                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
+                                </form>
+                            </div>
+                        </div>`
+                    ).join('');
+                }
+            });
+        }, 800));
+    </script>
 @endsection

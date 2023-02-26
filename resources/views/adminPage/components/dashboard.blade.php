@@ -15,7 +15,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($kategoris) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-list fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($barangs) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-shopping-basket fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($barangSiap) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-shopping-basket fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($montirs) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-user-circle fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($pelayanans) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-wrench fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($belumDibayar) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-credit-card-alt fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($menungguKonfirmasi) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-exclamation-circle fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($diproses) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-refresh fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -160,7 +160,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($dikirim) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-truck fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($penjualanSelesai) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-check-square-o fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -195,7 +195,7 @@
                                     {{ number_format($hasilPenjualan) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-usd fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -217,7 +217,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($menungguAdmin) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-exclamation-circle fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($penawaran) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-handshake-o fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -251,7 +251,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($pembayaran) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-money fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -268,7 +268,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($dikerjakan) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-spinner fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -285,7 +285,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($selesai) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-check-square-o fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -297,13 +297,13 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: tomato">
-                                    Hasil Layanan
+                                    Hasil Pelayanan Service
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{ number_format($hasilBooking) }}
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-usd fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -325,7 +325,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($users) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-users fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -342,7 +342,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($komentars) }}</div>
                             </div>
                             <div class="col-auto" style="color: rgb(52, 52, 255)">
-                                <i class="fas fa-solid fa-pen-nib fa-2x text-gray-300"></i>
+                                <i class="fa fa-comments fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>

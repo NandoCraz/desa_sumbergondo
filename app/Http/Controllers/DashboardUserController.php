@@ -66,4 +66,14 @@ class DashboardUserController extends Controller
             'barang' => $barang
         ]);
     }
+
+    public function cari(Request $request)
+    {
+        if ($request->cari == null || $request->cari == '') {
+            $barangs = Barang::with(['kategori'])->get();
+        } else {
+            $barangs = Barang::where('nama_barang', 'like', '%' . $request->cari . '%')->with(['kategori'])->get();
+        }
+        return response()->json($barangs);
+    }
 }

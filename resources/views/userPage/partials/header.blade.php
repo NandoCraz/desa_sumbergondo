@@ -6,7 +6,7 @@
                     <!-- logo -->
                     <div class="site-logo">
                         <a href="/">
-                            <img src="{{ asset('assets/img/logo_ukk.png') }}" width="60" alt="">
+                            <img src="{{ asset('assets/img/nsparkel_logo.png') }}">
                         </a>
                     </div>
                     <!-- logo -->
@@ -17,7 +17,6 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="/produk">Produk</a></li>
                             <li><a href="/booking">Booking</a></li>
-                            <li><a href="/kontak">Kontak</a></li>
                             @guest
                                 <li><a href="/login">Login</a></li>
                             @endguest
@@ -48,13 +47,10 @@
                                             </span>
                                         @endif
                                     </a>
-                                    <a class="mobile-hide search-bar-icon" href="#"><i
-                                            class="fas fa-search"></i></a>
                                 </div>
                             </li>
                         </ul>
                     </nav>
-                    <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
                     <div class="mobile-menu"></div>
                     <!-- menu end -->
                 </div>

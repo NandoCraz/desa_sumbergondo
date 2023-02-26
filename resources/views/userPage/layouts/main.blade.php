@@ -56,10 +56,6 @@
     @include('userPage.partials.header')
     <!-- end header -->
 
-    <!-- search area -->
-    @include('userPage.partials.search')
-    <!-- end search area -->
-
     @yield('container')
 
     <!-- footer -->

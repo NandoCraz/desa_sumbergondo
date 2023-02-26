@@ -118,6 +118,7 @@ Route::get('/profile-saya', [DashboardUserController::class, 'profilUser'])->mid
 Route::get('/pengaturan', [DashboardUserController::class, 'pengaturanUser'])->middleware('auth');
 Route::post('/changePassword/{user:id}', [UserController::class, 'changePassword'])->middleware('auth');
 Route::get('/getAlamatUser/{daftar_alamat:id}', [DaftarAlamatController::class, 'getAlamatUser'])->name('getAlamatUser')->middleware('auth');
+Route::post('/cari', [DashboardUserController::class, 'cari']);
 
 // Resource Route
 Route::resource('/daftar-alamat', DaftarAlamatController::class)->middleware('auth');

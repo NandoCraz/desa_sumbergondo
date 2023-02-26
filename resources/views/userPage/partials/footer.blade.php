@@ -5,13 +5,13 @@
                 <div class="footer-box get-in-touch">
                     <h2 class="widget-title">Kunjungi Toko Kami</h2>
                     <ul>
-                        <li>Jl. Pandaan Tengah/XII-A, Surabaya</li>
+                        <li>Jl. Rangkah VII/106B, Surabaya</li>
                         <li>nandocraz18@gmail.com</li>
-                        <li>+62812-1717-6933</li>
+                        <li>+62812-3391-1558</li>
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
+            {{-- <div class="col-lg-4 col-md-6">
                 <div class="footer-box pages">
                     <h2 class="widget-title">Halaman</h2>
                     <ul>
@@ -21,7 +21,7 @@
                         <li><a href="">Contact</a></li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
