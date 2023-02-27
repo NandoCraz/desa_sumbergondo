@@ -195,7 +195,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-warning btn-lg text-light mt-3">Bayar</button>
+                        <button type="submit" class="btn btn-warning btn-lg text-light mt-3">Lanjut Pembayaran</button>
                     </div>
                 </div>
             </div>

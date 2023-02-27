@@ -21,30 +21,70 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card">
+                        <div class="col-lg-12">
+                            <div class="card p-4">
                                 <div class="card-title">
-                                    <h3 class="text-center">Alamat Pengiriman</h3>
+                                    <h3 class="text-center">NSParkel</h3>
                                 </div>
                                 <div class="card-body">
-                                    <h5>Nama Penerima : <p>{{ $checkout->daftarAlamat->nama_penerima }}</p>
-                                    </h5>
-                                    <h5>No. Handphone : <p>{{ $checkout->daftarAlamat->no_hp }}</p>
-                                    </h5>
-                                    <h5>Alamat : <p>{{ $checkout->daftarAlamat->alamat }},
-                                            {{ $checkout->daftarAlamat->kode_pos }},
-                                            {{ $checkout->daftarAlamat->provinsi->nama_provinsi }},
-                                            {{ $checkout->daftarAlamat->kota->nama_kab_kota }}.
-                                        </p>
-                                    </h5>
+                                    <div>Hai, {{ $checkout->daftarAlamat->nama_penerima }}</div>
+                                    <div>Terima kasih telah berbelanja Sparepart di NSParkel</div>
+                                    <div class="mt-4">Tanggal Pemesanan :
+                                        {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $checkout->created_at)->format('Y-m-d') }}
+                                    </div>
+                                    <div>Nama Penerima : {{ $checkout->daftarAlamat->nama_penerima }}</div>
+                                    <div>No. Handphone : {{ $checkout->daftarAlamat->no_hp }}</div>
+                                    <div>Tujuan Pengiriman : {{ $checkout->daftarAlamat->alamat }},
+                                        {{ $checkout->daftarAlamat->kode_pos }},
+                                        {{ $checkout->daftarAlamat->provinsi->nama_provinsi }},
+                                        {{ $checkout->daftarAlamat->kota->nama_kab_kota }}</div>
+                                    <hr>
+                                    <div>Jumlah Barang Dipesan : {{ $checkout->pesanans->count() }}</div>
+                                    <div>Jasa Pengiriman : {{ $checkout->courier }}</div>
+                                    <div>Layanan Pengiriman : {{ $checkout->layanan }}</div>
+                                    <div>Estimasi Sampai (Hari) : {{ $checkout->estimasi }}</div>
+                                    <div>Catatan : {{ $checkout->catatan }}</div>
+                                    <hr>
+                                    <div>Status : @if ($checkout->payment_status == '1' && $checkout->status == '5')
+                                            <td>
+                                                <h5><span class="badge bg-danger">Dibatalkan</span></h5>
+                                            </td>
+                                        @elseif ($checkout->payment_status == '1')
+                                            <td>
+                                                <h5><span class="badge bg-warning">Belum Dibayar</span></h5>
+                                            </td>
+                                        @elseif($checkout->payment_status == '2')
+                                            @if ($checkout->status == '1')
+                                                <td>
+                                                    <h5><span class="badge bg-dark">Menunggu Konfirmasi</span></h5>
+                                                </td>
+                                            @elseif($checkout->status == '2')
+                                                <td>
+                                                    <h5><span class="badge bg-secondary">Diproses</span></h5>
+                                                </td>
+                                            @elseif($checkout->status == '3')
+                                                <td>
+                                                    <h5><span class="badge bg-info text-light">Dikirim</span></h5>
+                                                </td>
+                                            @elseif($checkout->status == '4')
+                                                <td>
+                                                    <h5><span class="badge bg-success">Selesai</span></h5>
+                                                </td>
+                                            @endif
+                                        @else
+                                            <td>
+                                                <h5><span class="badge bg-danger">Kadaluarsa</span></h5>
+                                            </td>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-12 mt-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-details">
-                                        <table class="cart-table">
+                                        <table class="cart-table text-center">
                                             <thead class="cart-table-head">
                                                 <tr class="table-head-row">
                                                     <th class="product-name">Nama Barang</th>

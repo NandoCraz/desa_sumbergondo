@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard-admin">
         <div class="sidebar-brand-icon">
             <img src="{{ asset('assets/img/nsparkel_logo.png') }}" alt="NSParkel" width="90" class="rounded-circle">
         </div>
@@ -74,13 +74,6 @@
             <span>Komentar User</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::Is('komen-user') ? 'active' : '' }}">
-        <a class="nav-link" href="/users">
-            <i class="fa fa-cogs" aria-hidden="true"></i>
-            <span>Setting</span>
-        </a>
-    </li>
-
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

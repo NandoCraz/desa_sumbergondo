@@ -13,30 +13,37 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
+                <div class="col-lg-12">
+                    <div class="card p-4">
                         <div class="card-title">
                             <h3 class="text-center">Alamat Pengiriman</h3>
                         </div>
                         <div class="card-body">
-                            <h5>Nama Penerima : <p>{{ $checkout->daftarAlamat->nama_penerima }}</p>
-                            </h5>
-                            <h5>No. Handphone : <p>{{ $checkout->daftarAlamat->no_hp }}</p>
-                            </h5>
-                            <h5>Alamat : <p>{{ $checkout->daftarAlamat->alamat }},
-                                    {{ $checkout->daftarAlamat->kode_pos }},
-                                    {{ $checkout->daftarAlamat->provinsi->nama_provinsi }},
-                                    {{ $checkout->daftarAlamat->kota->nama_kab_kota }}.
-                                </p>
-                            </h5>
+                            <div>Hai, {{ $checkout->daftarAlamat->nama_penerima }}</div>
+                            <div>Terima kasih telah berbelanja Sparepart di NSParkel</div>
+                            <div class="mt-4">Tanggal Pemesanan :
+                                {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $checkout->created_at)->format('Y-m-d') }}
+                            </div>
+                            <div>Nama Penerima : {{ $checkout->daftarAlamat->nama_penerima }}</div>
+                            <div>No. Handphone : {{ $checkout->daftarAlamat->no_hp }}</div>
+                            <div>Tujuan Pengiriman : {{ $checkout->daftarAlamat->alamat }},
+                                {{ $checkout->daftarAlamat->kode_pos }},
+                                {{ $checkout->daftarAlamat->provinsi->nama_provinsi }},
+                                {{ $checkout->daftarAlamat->kota->nama_kab_kota }}</div>
+                            <hr>
+                            <div>Jumlah Barang Dipesan : {{ $checkout->pesanans->count() }}</div>
+                            <div>Jasa Pengiriman : {{ $checkout->courier }}</div>
+                            <div>Layanan Pengiriman : {{ $checkout->layanan }}</div>
+                            <div>Estimasi Sampai (Hari) : {{ $checkout->estimasi }}</div>
+                            <div>Catatan : {{ $checkout->catatan }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-12 mt-4">
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-details">
-                                <table class="cart-table">
+                            <div class="table-responsive">
+                                <table class="table text-center">
                                     <thead class="cart-table-head">
                                         <tr class="table-head-row">
                                             <th class="product-name">Nama Barang</th>
@@ -82,9 +89,19 @@
                     @endif
                     @if ($checkout->status == '1')
                         <h5 class="mt-4">Status : <span class="badge bg-dark text-light">Menunggu Konfirmasi</span></h5>
+                        <form action="/changeStatus/{{ $checkout->uuid }}" method="post" class="ms-2">
+                            @csrf
+                            <input type="hidden" name="action" value="konfirmasi">
+                            <button type="submit" class="btn btn-success btn-sm">Konfirmasi</button>
+                        </form>
                     @endif
                     @if ($checkout->status == '2')
                         <h5 class="mt-4">Status : <span class="badge bg-secondary text-light">Sedang Diproses</span></h5>
+                        <form action="/changeStatus/{{ $checkout->uuid }}" method="post" class="ms-2">
+                            @csrf
+                            <input type="hidden" name="action" value="kirim">
+                            <button type="submit" class="btn btn-success btn-sm">Kirim</button>
+                        </form>
                     @endif
                     @if ($checkout->status == '3')
                         <h5 class="mt-4">Status : <span class="badge bg-info text-light">Dikirim</span></h5>

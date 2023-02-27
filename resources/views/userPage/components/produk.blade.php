@@ -154,7 +154,7 @@
                 success: function(response) {
                     // console.log(response);
                     products.innerHTML = response.map(barang =>
-                        `<div class="col-lg-4 col-md-4 text-center strawberry">
+                        `<div class="col-lg-4 col-md-6 text-center">
                             <div class="single-product-item">
                                 <div class="product-image">
                                     <a href="/single-produk/${barang.uuid}"><img

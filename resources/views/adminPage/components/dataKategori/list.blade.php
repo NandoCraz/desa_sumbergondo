@@ -1,6 +1,6 @@
 @extends('adminPage.layouts.main')
 @section('content')
-    <a href="javascript:history.back()" class=" btn btn-secondary text-decoration-none my-4">Kembali</a>
+    <a href="/master/data-kategori" class=" btn btn-secondary text-decoration-none my-4">Kembali</a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Data Kategori</h6>

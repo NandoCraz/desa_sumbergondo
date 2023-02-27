@@ -5,7 +5,7 @@
             {{ session('success') }}
         </div>
     @endif --}}
-    <a href="javascript:history.back()" class="btn btn-danger mb-4"><i class="fa fa-chevron-left" aria-hidden="true"></i>
+    <a href="/layanan-admin" class="btn btn-danger mb-4"><i class="fa fa-chevron-left" aria-hidden="true"></i>
         Kembali</a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">

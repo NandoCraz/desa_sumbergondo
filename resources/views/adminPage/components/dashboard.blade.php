@@ -33,7 +33,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($barangs) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-shopping-basket fa-2x text-gray-300"></i>
+                                <i class="fa fa-cubes fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($barangSiap) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-shopping-basket fa-2x text-gray-300"></i>
+                                <i class="fa fa-cube fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($belumDibayar) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-credit-card-alt fa-2x text-gray-300"></i>
+                                <i class="fa fa-credit-card fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($diproses) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-refresh fa-2x text-gray-300"></i>
+                                <i class="fa fa-spinner fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($penjualanSelesai) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-check-square-o fa-2x text-gray-300"></i>
+                                <i class="fa fa-check-square fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -195,7 +195,7 @@
                                     {{ number_format($hasilPenjualan) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-usd fa-2x text-gray-300"></i>
+                                <i class="fa fa-usd fa-2x text-gray-300" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($penawaran) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-handshake-o fa-2x text-gray-300"></i>
+                                <i class="fa fa-question-circle fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -251,7 +251,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($pembayaran) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-money fa-2x text-gray-300"></i>
+                                <i class="fa fa-credit-card fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -285,7 +285,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($selesai) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-check-square-o fa-2x text-gray-300"></i>
+                                <i class="fa fa-check-square fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -303,7 +303,7 @@
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-usd fa-2x text-gray-300"></i>
+                                <i class="fa fa-jpy fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
