@@ -117,6 +117,7 @@
             const imgPreview = document.querySelector('.imgPreview');
 
             const oFReader = new FileReader();
+            
             oFReader.readAsDataURL(image.files[0]);
 
             oFReader.onload = function(oFREvent) {

@@ -30,17 +30,14 @@
                                         @csrf
                                         <!-- Profile picture image-->
                                         @if (auth()->user()->picture_profile)
-                                            @if (auth()->user()->picture_profile)
-                                                <img class="imgPreview img-profile mb-2"
-                                                    src="{{ asset('storage/' . auth()->user()->picture_profile) }}"
-                                                    width="170">
-                                            @else
-                                                <img class="imgPreview img-profile mb-2"
-                                                    src="{{ asset('storage/profileImages/default.jpg') }}" width="170">
-                                            @endif
+                                            <img class="imgPreview img-profile mb-2"
+                                                src="{{ asset('storage/' . auth()->user()->picture_profile) }}"
+                                                width="170">
                                         @else
-                                            <img class="imgPreview img-fluid col-sm-5 d-block mb-3" width="170">
+                                            <img class="imgPreview img-profile mb-2"
+                                                src="{{ asset('storage/profilePicture/userDef.png') }}" width="170">
                                         @endif
+
 
                                         <div class="input-group mb-3">
                                             <input class="form-control mt-4 @error('picture_profile') is-invalid @enderror"

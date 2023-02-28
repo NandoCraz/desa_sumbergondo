@@ -19,22 +19,18 @@
                                         @csrf
                                         <!-- Profile picture image-->
                                         @if (auth()->user()->picture_profile)
-                                            @if (auth()->user()->picture_profile)
-                                                <img class="imgPreview img-profile mb-2"
-                                                    src="{{ asset('storage/' . auth()->user()->picture_profile) }}"
-                                                    width="170">
-                                            @else
-                                                <img class="imgPreview img-profile mb-2"
-                                                    src="{{ asset('storage/profileImages/default.jpg') }}"
-                                                    width="170">
-                                            @endif
+                                            <img class="imgPreviewProfile img-profile mb-2"
+                                                src="{{ asset('storage/' . auth()->user()->picture_profile) }}"
+                                                width="170">
                                         @else
-                                            <img class="imgPreview img-fluid col-sm-5 d-block mb-3" width="170">
+                                            <img class="imgPreviewProfile img-profile mb-2"
+                                                src="{{ asset('storage/profilePicture/userDef.png') }}" width="170">
                                         @endif
 
                                         <div class="input-group mb-3">
                                             <input class="form-control @error('picture_profile') is-invalid @enderror"
-                                                name="picture_profile" type="file" id="imageFile" onchange="tampilImage()">
+                                                name="picture_profile" type="file" id="imageFileProfile"
+                                                onchange="tampilImageProfile()">
                                             @error('picture_profile')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -101,9 +97,9 @@
     </div>
 </div>
 <script>
-    function tampilImage() {
-        const image = document.querySelector('#imageFile');
-        const imgPreview = document.querySelector('.imgPreview');
+    function tampilImageProfile() {
+        const image = document.querySelector('#imageFileProfile');
+        const imgPreview = document.querySelector('.imgPreviewProfile');
 
         const oFReader = new FileReader();
         oFReader.readAsDataURL(image.files[0]);
