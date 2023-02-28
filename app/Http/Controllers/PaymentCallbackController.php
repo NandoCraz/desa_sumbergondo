@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\Booking;
 use App\Models\Checkout;
 use App\Services\Midtrans\CallbackService;
@@ -32,9 +33,19 @@ class PaymentCallbackController extends Controller
 
             if ($callback->isExpire()) {
                 if ($checkout = Checkout::where('uuid', $order->uuid)->first()) {
-                    Checkout::where('uuid', $order->uuid)->update([
+
+                    $checkout = Checkout::where('uuid', $order->uuid)->first();
+                    $checkout->update([
                         'payment_status' => 3,
                     ]);
+
+                    foreach ($checkout->pesanans as $pesanan) {
+                        $barang = Barang::where('id', $pesanan->barang_id)->first();
+                        $barang->update([
+                            'stok' => $barang->stok + $pesanan->kuantitas,
+                        ]);
+                    }
+                    
                 } elseif ($booking = Booking::where('uuid', $order->uuid)->first()) {
                     Booking::where('uuid', $order->uuid)->update([
                         'payment_status' => 3,

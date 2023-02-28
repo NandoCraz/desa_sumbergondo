@@ -10,20 +10,20 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nama_penerima" class="form-label">Nama Penerima</label>
-                        <input type="text" class="form-control" id="nama_penerima" name="nama_penerima">
+                        <input type="text" class="form-control" id="nama_penerima" name="nama_penerima" required>
                     </div>
                     <div class="mb-3">
                         <label for="no_hp" class="form-label">No. HP</label>
-                        <input type="text" class="form-control" id="no_hp" name="no_hp">
+                        <input type="text" class="form-control" id="no_hp" name="no_hp" required>
                     </div>
                     <div class="mb-3">
                         <label for="alamat" class="form-label">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat">
+                        <input type="text" class="form-control" id="alamat" name="alamat" required>
                     </div>
                     <div class="mb-3">
                         <label for="">Provinsi</label>
-                        <select class="form-select" id="provinsi_id" name="provinsi_id">
-                            <option selected>-- Pilih Provinsi --</option>
+                        <select class="form-select" id="provinsi_id" name="provinsi_id" required>
+                            <option value="">-- Pilih Provinsi --</option>
                             @foreach ($provinsis as $provinsi)
                                 <option value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
                             @endforeach
@@ -31,14 +31,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="">Kota</label>
-                        <select class="form-select" name="kota_id" id="kota_id">
-                            <option selected>-- Pilih Kota --</option>
+                        <select class="form-select" name="kota_id" id="kota_id" required>
+                            <option value="">-- Pilih Kota --</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <div class="mb-3">
                             <label for="kode_pos" class="form-label">Kode Pos</label>
-                            <input type="text" class="form-control" id="kode_pos" name="kode_pos" min="0">
+                            <input type="text" class="form-control" id="kode_pos" name="kode_pos" min="0" required>
                         </div>
                     </div>
                 </div>

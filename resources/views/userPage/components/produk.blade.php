@@ -158,7 +158,7 @@
                             <div class="single-product-item">
                                 <div class="product-image">
                                     <a href="/single-produk/${barang.uuid}"><img
-                                            src="storage/${barang.picture_barang}"
+                                            src="/storage/${barang.picture_barang}"
                                             alt="${barang.nama_barang}"></a>
                                 </div>
                                 <h3>${barang.nama_barang }</h3>

@@ -51,8 +51,8 @@
                                         @if ($daftar_alamats->count() > 0)
                                             <div class="mt-5">
                                                 <label for="">Alamat Tujuan</label>
-                                                <select class="form-select" name="daftar_alamat_id">
-                                                    <option>-- Pilih Alamat Tujuan --</option>
+                                                <select class="form-select" required name="daftar_alamat_id">
+                                                    <option value="">-- Pilih Alamat Tujuan --</option>
                                                     @foreach ($daftar_alamats as $daftar_alamat)
                                                         <option value="{{ $daftar_alamat->id }}">
                                                             {{ $daftar_alamat->nama_penerima }} |
@@ -86,8 +86,8 @@
                                         <div class="billing-address-form">
                                             <div class="mb-3">
                                                 <label for="">Ekspedisi</label>
-                                                <select class="form-select" name="courier" id="courier">
-                                                    <option selected>-- Pilih Ekspedisi --</option>
+                                                <select class="form-select" required name="courier" id="courier">
+                                                    <option value="">-- Pilih Ekspedisi --</option>
                                                     <option value="jne">JNE</option>
                                                     <option value="tiki">TIKI</option>
                                                     <option value="pos">POS</option>
@@ -95,8 +95,8 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="">Layanan</label>
-                                                <select class="form-select" name="layanan" id="layanan">
-                                                    <option selected>-- Pilih Layanan --</option>
+                                                <select class="form-select" name="layanan" required id="layanan">
+                                                    <option value="">-- Pilih Layanan --</option>
                                                 </select>
 
                                             </div>

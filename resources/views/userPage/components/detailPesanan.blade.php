@@ -149,6 +149,9 @@
                     onSuccess: function(result) {
                         console.log(result);
                         window.location.href = '/pesanan'
+                    },
+                    onPending: function(result) {
+                        return
                     }
                 });
             })
