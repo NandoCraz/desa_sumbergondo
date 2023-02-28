@@ -104,13 +104,13 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end mt-3">
-                            <button class="btn btn-lg btn-warning text-light mt-4" id="bayar">Checkout</button>
+                            <button class="btn btn-lg btn-warning text-light mt-4 bayar" id="bayar">Checkout</button>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12 mt-5 text-center">
-                        <h3 class="pesan"></h3>
+                    <div class="col-lg-12 mt-5 text-center mb-3">
+                        <h5 class="mb-3" id="pesan"></h5>
                     </div>
                 </div>
             </div>
@@ -124,8 +124,9 @@
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
     </script>
     <script>
+        const bayar = document.querySelector('.bayar');
         $('#bayar').on('click', function(e) {
-            const pesan = $('.pesan');
+            const pesan = document.getElementById('pesan');
             e.preventDefault();
             $.ajax({
                 url: "{{ route('checkout.charger') }}",
@@ -150,6 +151,9 @@
                     })
                 }
             })
+            bayar.classList.add('d-none');
+            console.log(pesan);
+            pesan.innerHTML = "Silahkan Kunjungi Halaman Pesanan Saya..";
         })
     </script>
 @endsection

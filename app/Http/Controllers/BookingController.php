@@ -221,7 +221,12 @@ class BookingController extends Controller
             ]);
             return back()->with('success', 'Layanan Berhasil Dikonfirmasi');
         } elseif ($request->status == 'dikerjakan') {
-            Booking::where('id', $booking->id)->update([
+
+            $booking = Booking::where('id', $booking->id)->first();
+            if ($booking->payment_status == '1') {
+                return back()->with('error', 'Layanan Gagal Dikerjakan, Pembayaran Belum Dilakukan');
+            }
+            $booking->update([
                 'status' => 'Sedang Dikerjakan'
             ]);
             return back()->with('success', 'Layanan Dikerjakan');

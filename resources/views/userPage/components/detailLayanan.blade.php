@@ -309,7 +309,7 @@
                                     <input type="hidden" name="status" value="selesai">
                                     <button type="submit" class="btn btn-success ms-3">Selesai</button>
                                 </form>
-                            @elseif ($booking->tipe_bayar != 'cod' && $booking->payment_status == '1')
+                            @elseif ($booking->tipe_bayar != 'cod' && $booking->payment_status == '1' && $booking->status == 'Pembayaran')
                                 <button class="btn btn-lg btn-warning text-light mt-4" id="bayar">Bayar</button>
                             @endif
                         </div>
