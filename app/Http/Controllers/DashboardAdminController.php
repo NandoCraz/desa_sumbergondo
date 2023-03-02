@@ -174,11 +174,11 @@ class DashboardAdminController extends Controller
          $tanggal = explode(' to ', $request->timestamp);
          $awal = Carbon::parse($tanggal[0])->format('Y-m-d');
          $akhir = Carbon::parse($tanggal[1])->format('Y-m-d');
-         $bookings = Booking::with(['montir', 'pelayanan', 'barang', 'kecamatan'])->whereBetween('created_at', [$awal, $akhir])->get();
+         $bookings = Booking::with(['kategori'])->whereBetween('created_at', [$awal, $akhir])->get();
       } else {
          $awal = Carbon::parse($request->timestamp)->format('Y-m-d');
          $akhir = $awal;
-         $bookings = Booking::with(['montir', 'pelayanan', 'barang', 'kecamatan'])->where('created_at', 'LIKE', '%' . $awal . '%')->get();
+         $bookings = Booking::with(['kategori'])->where('created_at', 'LIKE', '%' . $awal . '%')->get();
       }
 
 
@@ -197,4 +197,5 @@ class DashboardAdminController extends Controller
 
       return $pdf->download('laporanLayanan_' . $awal . '-' . $akhir . '.pdf');
    }
+
 }

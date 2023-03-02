@@ -69,9 +69,10 @@ class PesananController extends Controller
         ]);
     }
 
-    public function detailPesananAdmin(Checkout $checkout)
+    public function detailPesananAdmin($id)
     {
-        $checkout = Checkout::where('id', $checkout->id)->with(['daftarAlamat', 'user', 'pesanans'])->first();
+        // return 'tes';
+        $checkout = Checkout::where('id', $id)->with(['daftarAlamat', 'user', 'pesanans'])->first();
 
         return view('adminPage.components.pesananAdmin.detailPesanan', [
             'checkout' => $checkout,
@@ -90,7 +91,8 @@ class PesananController extends Controller
             foreach ($checkout->pesanans as $pesanan) {
                 $barang = Barang::where('id', $pesanan->barang_id)->first();
                 $barang->update([
-                    'stok' => $barang->stok + $pesanan->kuantitas
+                    'stok' => $barang->stok + $pesanan->kuantitas,
+                    'dibeli' => $barang->dibeli - $pesanan->kuantitas
                 ]);
             }
 

@@ -70,17 +70,27 @@
                             @enderror
                         </div>
                         <div class="mb-4">
-                            <label for="kategori_id">Kategori</label>
-                            <select class="form-control" aria-label="Default select example" name="kategori_id">
+                            <label class="form-control-label">Kategori <p class="text-muted fs-6">(Masukkan setidaknya 1
+                                    kategori)
+                                </p></label>
+                            <div class="row">
                                 @foreach ($kategoris as $kategori)
-                                    <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
+                                    <div class="col-lg-2">
+                                        <div class="form-check">
+                                            @if (old('kategori') == $kategori->id)
+                                                <input class="form-check-input" type="checkbox" value="{{ $kategori->id }}"
+                                                    id="kategori" name="kategori[]" checked>
+                                            @else
+                                                <input class="form-check-input" type="checkbox" value="{{ $kategori->id }}"
+                                                    id="kategori" name="kategori[]">
+                                            @endif
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{ $kategori->nama_kategori }}
+                                            </label>
+                                        </div>
+                                    </div>
                                 @endforeach
-                            </select>
-                            @error('kategori_id')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            </div>
                         </div>
                         <div class="mb-4">
                             <label for="imageFile" class="form-label">Barang Picture</label>
@@ -117,7 +127,7 @@
             const imgPreview = document.querySelector('.imgPreview');
 
             const oFReader = new FileReader();
-            
+
             oFReader.readAsDataURL(image.files[0]);
 
             oFReader.onload = function(oFREvent) {

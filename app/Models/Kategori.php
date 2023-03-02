@@ -12,8 +12,13 @@ class Kategori extends Model
 
     protected $guarded = ["uuid"];
 
+    // public function barang()
+    // {
+    //     return $this->hasMany(Barang::class);
+    // }
+
     public function barang()
     {
-        return $this->hasMany(Barang::class);
+        return $this->belongsToMany(Barang::class, 'barang_kategoris');
     }
 }

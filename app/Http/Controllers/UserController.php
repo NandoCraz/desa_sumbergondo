@@ -57,4 +57,18 @@ class UserController extends Controller
             return redirect('/dashboard-admin')->with('error', 'Password Lama salah');
         }
     }
+
+    public function deleteUser(User $user)
+    {
+        $user = User::findOrFail($user->id);
+        $user->delete($user->id);
+        return back()->with('success', 'Barang berhasil dihapus!');
+    }
+
+    public function editUser(User $user)
+    {
+        return view('adminPage.components.editUser', [
+            'user' => $user
+        ]);
+    }
 }

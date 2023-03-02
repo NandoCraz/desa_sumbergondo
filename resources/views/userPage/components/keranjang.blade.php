@@ -62,7 +62,7 @@
                                                     @csrf
                                                     @method('patch')
                                                     <input type="number" name="kuantitas" class="kuantitas" id="kuantitas"
-                                                        min="0" data-id="{{ $keranjang->id }}"
+                                                        min="0" max="{{ $keranjang->barang->stok }}" data-id="{{ $keranjang->id }}"
                                                         value="{{ $keranjang->kuantitas }}">
                                                 </form>
                                             </td>

@@ -53,7 +53,13 @@
                                 {{-- <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a> --}}
                                 <button type="submit" class="btn btn-warning text-light">Add to Cart</button>
                             </form>
-                            <p class="mt-5"><strong>Kategori : </strong>{{ $barang->kategori->nama_kategori }}</p>
+                            <p class="mt-5"><strong>Kategori : </strong>
+                                @foreach ($barang->kategori as $kategori)
+                                    <ul class="list-group">
+                                        <li class="list-group-item">{{ $kategori->nama_kategori }}</li>
+                                    </ul>
+                                @endforeach
+                            </p>
                         </div>
                     </div>
                 </div>

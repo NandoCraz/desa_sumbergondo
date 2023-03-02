@@ -35,6 +35,10 @@
                                 <td class="d-flex justify-content-center">
                                     <button class='btn btn-info btn-sm mr-2 viewdetails' data-id='{{ $user->id }}'>
                                         <i class="fa fa-user-circle" aria-hidden="true"></i></button>
+                                    <button class="btn btn-sm btn-danger hapus mr-2" data-id="{{ $user->id }}"><i
+                                            class="fas fa-solid fa-trash"></i></button>
+                                    <a href="/editUser/{{ $user->id }}" class="btn btn-success btn-sm"><i
+                                            class="fas fa-solid fa-pen"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -77,5 +81,46 @@
             });
 
         });
+
+        $('#dataTable').on('click', '.hapus', function() {
+            Swal.fire({
+                title: 'Yakin Menghapus User?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!',
+                preConfirm: () => {
+                    return $.ajax({
+                        url: '/deleteUser/' + $(this).data('id'),
+                        method: 'POST',
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                        },
+                        success: function(data) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal
+                                        .stopTimer)
+                                    toast.addEventListener('mouseleave', Swal
+                                        .resumeTimer)
+                                }
+                            })
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'User Terhapus'
+                            }).then((result) => {
+                                location.reload();
+                            })
+                        }
+                    })
+                }
+            })
+        })
     </script>
 @endsection

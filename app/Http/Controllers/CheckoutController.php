@@ -16,6 +16,7 @@ class CheckoutController extends Controller
     public function index()
     {
         $is_tersedia = true;
+        // $ada = false;
         $keranjangs = Keranjang::where('user_id', auth()->user()->id)->with(['barang', 'user'])->get();
 
         foreach ($keranjangs as $keranjang) {

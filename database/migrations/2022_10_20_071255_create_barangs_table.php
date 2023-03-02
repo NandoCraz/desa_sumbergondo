@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nama_barang');
             $table->integer('harga');
             $table->integer('stok');
+            $table->integer('dibeli')->default(0);
             $table->foreignId('kategori_id');
             $table->string('deskripsi');
             $table->double('berat');

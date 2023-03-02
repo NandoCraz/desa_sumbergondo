@@ -1,3 +1,4 @@
+{{-- @dd($user) --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Halaman Login</title>
+    <title>Halaman Reset Password</title>
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets_login/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -14,6 +15,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/img/logo_ukk.png') }}">
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets_login/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
@@ -46,37 +48,27 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Selamat Datang Kembali!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Ubah Password</h1>
                                     </div>
-                                    <form action="/login" method="POST" class="user">
+                                    <form action="/ubahPass" method="POST" class="user">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email"
-                                                class="form-control form-control-user @error('email') is-invalid @enderror"
-                                                id="email" aria-describedby="emailHelp"
-                                                placeholder="Masukkan Alamat Email..." name="email" required
-                                                value="{{ old('email') }}">
-                                            @error(' ')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                            <input type="hidden" name="id" value="{{ $user->id }}">
+                                            <input type="password" class="form-control form-control-user"
+                                                placeholder="Masukkan Password Baru" name="new_pass" required>
+
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="password"
-                                                placeholder="Password" name="password" required>
+                                            <input type="hidden" name="id" value="{{ $user->id }}">
+                                            <input type="password" class="form-control form-control-user"
+                                                placeholder="Masukkan Password Baru" name="konf_pass" required>
+
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">Ubah
+                                            Password</button>
                                     </form>
                                     <hr>
-                                    <div class="text-center small">
-                                        Belum mempunyai akun?
-                                        <a class="" href="/register">Register!</a>
-                                    </div>
-                                    <div class="text-center small">
-                                        Lupa Password?
-                                        <a class="" href="/resetPassword">Reset!</a>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -108,6 +100,7 @@
     <script src="{{ asset('assets_login/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets_login/js/demo/chart-pie-demo.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     @if (session('success'))
         <script>
@@ -155,6 +148,13 @@
             })
         </script>
     @endif
+    <script>
+        $(document).ready(function() {
+            $(".selector").flatpickr({
+                dateFormat: "Y-m-d",
+            });
+        });
+    </script>
 </body>
 
 </html>

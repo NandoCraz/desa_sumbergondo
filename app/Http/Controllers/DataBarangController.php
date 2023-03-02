@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\BarangKategori;
 use App\Models\Kategori;
+use App\Models\Pesanan;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use PDF;
 
 class DataBarangController extends Controller
 {
@@ -47,7 +51,7 @@ class DataBarangController extends Controller
         $validateData = $request->validate([
             'nama_barang' => 'required|max:255',
             'berat' => 'required',
-            'kategori_id' => 'required',
+            // 'kategori_id' => 'required',
             'harga' => 'required|numeric|min:1',
             'stok' => 'required',
             'deskripsi' => 'required',
@@ -56,7 +60,14 @@ class DataBarangController extends Controller
 
         $validateData['picture_barang'] = $request->file('picture_barang')->store('barangPicture', 'public');
 
-        Barang::create($validateData);
+        $Cbarang = Barang::create($validateData);
+
+        foreach ($request->kategori as $kategori) {
+            BarangKategori::create([
+                'barang_id' => $Cbarang->id,
+                'kategori_id' => $kategori
+            ]);
+        }
 
         return redirect('/master/data-barang')->with('success', 'Barang berhasil ditambahkan!');
     }
@@ -100,7 +111,7 @@ class DataBarangController extends Controller
         $barang = Barang::findOrFail($id);
         $validateData = $request->validate([
             'nama_barang' => 'required|max:255',
-            'kategori_id' => 'required',
+            // 'kategori_id' => 'required',
             'harga' => 'required|numeric',
             'stok' => 'required',
             'deskripsi' => 'required',
@@ -118,6 +129,14 @@ class DataBarangController extends Controller
 
         Barang::where('id', $id)->update($validateData);
 
+        BarangKategori::where('barang_id', $id)->delete();
+        foreach ($request->kategori as $kategori) {
+            BarangKategori::create([
+                'barang_id' => $id,
+                'kategori_id' => $kategori
+            ]);
+        }
+
         return redirect('/master/data-barang')->with('success', 'Barang berhasil diubah!');
     }
 
@@ -133,7 +152,42 @@ class DataBarangController extends Controller
         if (file_exists(storage_path('app/public/' . $barang->picture_barang))) {
             unlink(storage_path('app/public/' . $barang->picture_barang));
         }
+        BarangKategori::where('barang_id', $id)->delete();
         Barang::destroy($id);
         return redirect('/master/data-barang')->with('success', 'Barang berhasil dihapus!');
+    }
+
+    public function laporanBarang(Request $request)
+    {
+        $barangs = Barang::all();
+
+        if (strpos($request->timestamp, ' to ')) {
+            $tanggal = explode(' to ', $request->timestamp);
+            $awal = Carbon::parse($tanggal[0])->format('Y-m-d');
+            $akhir = Carbon::parse($tanggal[1])->format('Y-m-d');
+            $barangs->map(function ($barang) use ($awal, $akhir) {
+                // buat laporan barang yang sudah dibeli
+                $barang->dibeli = Pesanan::where('barang_id', $barang->id)->whereHas('checkout', function ($q) use ($awal, $akhir) {
+                    $q->whereBetween('created_at', [$awal, $akhir]);
+                })->count();
+            });
+        } else {
+            $awal = Carbon::parse($request->timestamp)->format('Y-m-d');
+            $akhir = $awal;
+            $barangs->map(function ($barang) use ($awal) {
+                // buat laporan barang yang sudah dibeli
+                $barang->dibeli = Pesanan::whereHas('checkout', function ($q) use ($awal) {
+                    $q->where('created_at', 'LIKE', '%' . $awal . '%');
+                })->count();
+            });
+        }
+
+
+
+        $pdf = PDF::loadView('adminPage.partials.laporan.Lstok', [
+            'barangs' => $barangs,
+        ])->setPaper('a4', 'landscape');
+
+        return $pdf->download('laporan_barang' . '.pdf');
     }
 }

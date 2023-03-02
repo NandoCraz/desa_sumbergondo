@@ -43,6 +43,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'register'])->middleware('guest');
+Route::get('/resetPassword', [LoginController::class, 'resetPassword'])->middleware('guest');
+Route::post('/reset', [LoginController::class, 'reset'])->middleware('guest');
+Route::post('/ubahPass', [LoginController::class, 'ubahPass'])->middleware('guest');
 // ==== End Login and Register Routes ====
 
 
@@ -57,7 +60,7 @@ Route::get('/pesanan/diproses', [PesananController::class, 'diproses'])->middlew
 Route::get('/pesanan/dikirim', [PesananController::class, 'dikirim'])->middleware('admin');
 Route::get('/pesanan/selesai', [PesananController::class, 'selesai'])->middleware('admin');
 Route::get('/pesanan/dibatalkan', [PesananController::class, 'dibatalkan'])->middleware('admin');
-Route::get('/pesanan/admin/{checkout:id}', [PesananController::class, 'detailPesananAdmin'])->middleware('admin');
+Route::get('/pesanan/admin/{id}', [PesananController::class, 'detailPesananAdmin'])->middleware('admin');
 Route::get('/layanan-admin', [BookingAdminController::class, 'index'])->middleware('admin');
 Route::get('/layanan-admin/{booking:id}', [BookingAdminController::class, 'detailLayananAdmin'])->middleware('admin');
 Route::post('/hargaAkhir/{booking:id}', [BookingController::class, 'updateHarga'])->middleware('admin');
@@ -69,7 +72,10 @@ Route::get('/getKomentarUser/{komentar:id}', [KomentarController::class, 'getKom
 Route::post('/balasanKomentarAdmin/{komentar:id}', [KomentarController::class, 'balasanAdmin'])->middleware('admin');
 Route::get('/laporan-penjualan', [DashboardAdminController::class, 'laporanPdf'])->middleware('admin');
 Route::get('/laporan-layanan', [DashboardAdminController::class, 'laporanPdfLayanan'])->middleware('admin');
+Route::post('/deleteUser/{user:id}', [UserController::class, 'deleteUser'])->middleware('admin');
+Route::get('/editUser/{user:id}', [UserController::class, 'editUser'])->middleware('admin');
 
+Route::get('/barang/laporan', [DataBarangController::class, 'laporanBarang'])->middleware('admin');
 
 // Resource Route
 Route::resource('/master/data-kategori', DataKategoriController::class)->middleware('admin');

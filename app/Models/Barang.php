@@ -12,13 +12,18 @@ class Barang extends Model
 
     protected $guarded = ["uuid"];
 
-    public function kategori()
-    {
-        return $this->belongsTo(Kategori::class);
-    }
+    // public function kategori()
+    // {
+    //     return $this->belongsTo(Kategori::class);
+    // }
 
     public function booking()
     {
         return $this->belongsToMany(Booking::class, 'barang_bookings')->withPivot('id');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsToMany(Kategori::class, 'barang_kategoris');
     }
 }
