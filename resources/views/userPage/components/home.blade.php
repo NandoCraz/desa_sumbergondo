@@ -111,31 +111,33 @@
                     <div class="splide">
                         <div class="splide__track list-komentar">
                             <ul class="splide__list">
-                                @foreach ($komentars as $kmntr)
-                                    <li class="splide__slide">
-                                        <button class="btn viewdetails" data-id='{{ $kmntr->id }}'>
-                                            <div class="single-testimonial-slider">
-                                                <div class="client-avater">
-                                                    @if ($kmntr->user->picture_profile != null)
-                                                        <img src="{{ asset('storage/' . $kmntr->user->picture_profile) }}">
-                                                    @else
-                                                        <img src="{{ asset('storage/profilePicture/userDef.png') }}">
-                                                    @endif
-                                                </div>
-                                                <div class="client-meta">
-                                                    <h3>{{ $kmntr->user->name }} <span>{{ $kmntr->user->username }}</span>
-                                                    </h3>
-                                                    <p class="testimonial-body">
-                                                        " {{ $kmntr->komentar }} "
-                                                    </p>
-                                                    <div class="last-icon">
-                                                        <i class="fas fa-quote-right"></i>
+                                @if (isset(auth()->user))   
+                                    @foreach ($komentars as $kmntr)
+                                        <li class="splide__slide">
+                                            <button class="btn viewdetails" data-id='{{ $kmntr->id }}'>
+                                                <div class="single-testimonial-slider">
+                                                    <div class="client-avater">
+                                                        @if ($kmntr->user->picture_profile != null)
+                                                            <img src="{{ asset('storage/' . $kmntr->user->picture_profile) }}">
+                                                        @else
+                                                            <img src="{{ asset('storage/profilePicture/userDef.png') }}">
+                                                        @endif
+                                                    </div>
+                                                    <div class="client-meta">
+                                                        <h3>{{ $kmntr->user->name }} <span>{{ $kmntr->user->username }}</span>
+                                                        </h3>
+                                                        <p class="testimonial-body">
+                                                            " {{ $kmntr->komentar }} "
+                                                        </p>
+                                                        <div class="last-icon">
+                                                            <i class="fas fa-quote-right"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </button>
-                                    </li>
-                                @endforeach
+                                            </button>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>
