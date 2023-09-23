@@ -41,9 +41,11 @@ class DataRwController extends Controller
 
     public function listDataRt(Warga $warga)
     {
-        $data_rt = Tetangga::where('rw_id', $warga->id)->with(['pengolahan'])->get();
+        $data_rt = Tetangga::where('rw_id', $warga->id)->get();
+        $id_rw = $warga->id;
         return view('adminPage.components.dataRt.index', [
             'data_rt' => $data_rt,
+            'id_rw' => $id_rw,
         ]);
     }
 }

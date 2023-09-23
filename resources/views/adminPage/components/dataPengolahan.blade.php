@@ -34,7 +34,7 @@
                                 <td class="text-center">{{ $tagihan->tetangga->nomor_rt }}</td>
                                 <td class="text-center">{{ $tagihan->tagihan_insenator }}</td>
                                 <td class="text-center">
-                                    <a href="/tambah-tagihan" class="btn btn-success btn-sm"><i
+                                    <a href="/tambah-upd-tagihan/{{ $tagihan->id }}" class="btn btn-success btn-sm"><i
                                             class="fas fa-solid fa-plus"></i></a>
                                     <button class="btn btn-sm btn-danger hapus" data-id="{{ $tagihan->id }}"><i
                                             class="fas fa-solid fa-trash"></i></button>
@@ -74,7 +74,7 @@
     <script>
         $('#dataTable').on('click', '.hapus', function() {
             Swal.fire({
-                title: 'Yakin Menghapus Data RT?',
+                title: 'Yakin Menghapus Data Tagihan?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -82,7 +82,7 @@
                 confirmButtonText: 'Ya, Hapus!',
                 preConfirm: () => {
                     return $.ajax({
-                        url: '/master/hapus-data-rt/' + $(this).data('id'),
+                        url: '/hapus-tagihan/' + $(this).data('id'),
                         method: 'POST',
                         data: {
                             _token: "{{ csrf_token() }}",
@@ -104,7 +104,7 @@
                             })
                             Toast.fire({
                                 icon: 'success',
-                                title: 'Data RW Terhapus'
+                                title: 'Data Tagihan Terhapus'
                             }).then((result) => {
                                 location.reload();
                             })

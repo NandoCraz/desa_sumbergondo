@@ -1,6 +1,6 @@
 @extends('adminPage.layouts.main')
 @section('content')
-    <a href="/master/data-pelayanan" class=" btn btn-secondary text-decoration-none my-4">Kembali</a>
+    <a href="/master/data-rw" class=" btn btn-secondary text-decoration-none my-4">Kembali</a>
     <div class="row">
         <div class="col-lg-10">
             <div class="card">

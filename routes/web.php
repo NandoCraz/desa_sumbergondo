@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\DataKategoriController;
+use App\Http\Controllers\DataRtController;
 use App\Http\Controllers\DataRwController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\LoginController;
@@ -85,7 +86,9 @@ Route::post('/get_rt', [DashboardAdminController::class, 'get_rt']);
 Route::post('/simpan-jadwal', [DashboardAdminController::class, 'simpan_jadwal'])->middleware('admin');
 Route::get('/data-pengolahan', [PengolahanController::class, 'index'])->middleware('admin');
 Route::get('/tambah-tagihan', [PengolahanController::class, 'tambahTagihan'])->middleware('admin');
+Route::get('/tambah-upd-tagihan/{pengolahan:id}', [PengolahanController::class, 'updateTagihan'])->middleware('admin');
 Route::post('/simpan-tagihan', [PengolahanController::class, 'simpanTagihan'])->middleware('admin');
+Route::post('/simpan-update-tagihan', [PengolahanController::class, 'simpanUpdateTagihan'])->middleware('admin');
 
 // Resource Route
 Route::resource('/master/data-kategori', DataKategoriController::class)->middleware('admin');
@@ -96,8 +99,11 @@ Route::get('/master/data-rw', [DataRwController::class, 'dataRw'])->middleware('
 Route::get('/master/tambah-data-rw', [DataRwController::class, 'tambahDataRw'])->middleware('admin');
 Route::get('/master/list-data-rt/{warga:id}', [DataRwController::class, 'listDataRt'])->middleware('admin');
 Route::post('/master/simpan-data-rw', [DataRwController::class, 'simpanDataRw'])->middleware('admin');
+Route::post('/simpan-data-rt', [DataRtController::class, 'simpanDataRt'])->middleware('admin');
 Route::delete('/master/hapus-data-rw/{warga:id}', [DataRwController::class, 'hapusDataRw'])->middleware('admin');
-Route::get('/tambah-data-rt', [DataRwController::class, 'tambahDataRw'])->middleware('admin');
+Route::delete('/master/hapus-data-rt/{tetangga:id}', [DataRtController::class, 'hapusDataRt'])->middleware('admin');
+Route::delete('/hapus-tagihan/{pengolahan:id}', [PengolahanController::class, 'hapusTagihan'])->middleware('admin');
+Route::get('/tambah-data-rt', [DataRtController::class, 'tambahDataRt'])->middleware('admin');
 
 // ==== End Admin Routes ====
 

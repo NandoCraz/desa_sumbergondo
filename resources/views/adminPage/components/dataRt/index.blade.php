@@ -7,7 +7,7 @@
         </div>
     @endif --}}
     <div class="col">
-        <a href="/master/tambah-data-rt" class="btn btn-info mb-4"><i class=" fas fa-solid fa-plus"></i> Tambah
+        <a href="/tambah-data-rt?no_rw={{ $id_rw }}" class="btn btn-info mb-4"><i class=" fas fa-solid fa-plus"></i> Tambah
             RT</a>
         <a href="/tambah-data-rt" class="btn btn-danger btm-sm">Kembali</a>
     </div>
