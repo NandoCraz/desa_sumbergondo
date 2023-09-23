@@ -9,12 +9,12 @@
                 <div class="col-lg-9 offset-lg-2 text-center">
                     <div class="hero-text">
                         <div class="hero-text-tablecell">
-                            <h3 style="color: bisque">Pengolahan Sampah</h3>
-                            <h2 style="color: bisque">Desa Sumber Gondo</h2>
+                            <h1 style="color: rgb(255, 255, 255)">DESA SUMBERGONDO</h1>
+                            <h2 style="color: rgb(255, 255, 255)">PENGELOLAAN SAMPAH MANDIRI</h2>
                             {{-- <p class="subtitle">Bank Sampah, Komposter, dan Incenerator</p> --}}
                             <div class="hero-btns">
                                 <a href="" class="bordered-btn"
-                                    style="cursor: not-allowed; pointer-events: none;">Lihat Produk</a>
+                                    style="cursor: not-allowed; pointer-events: none;">Desa Sumbergondo telah melakukan pengelolaan sampah mandiri sejak 2018 dan menjadi satu-satunya desa yang tidak membuang sampah ke TPA sejak 2019. Pengolahan sampah di Desa Sumbergondo melibatkan insenerator, komposter, dan bank sampah. Sehingga meningkatkan pendapatan desa.</a>
                             </div>
 
                         </div>
@@ -72,49 +72,25 @@
     <div class="product-section mb-4" style="margin-top: 75px">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="col-6 text-center">
                     <div class="section-title">
                         <h3>Step <span class="orange-text">by</span> Step</h3>
-                        <p>Langkah-Langkah Pemilahan Sampah</p>
+                        <img src="{{ asset('assets/img/Plan evaluation.png') }}" alt="">
+                    </div>
+                </div>
+                <div class="col-6 text-center">
+                    <div class="section-title">
+                        <h3>Video <span class="orange-text">Edukasi</span></h3>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe width="420" height="315" src="https://www.youtube.com/embed/dy0FNMOmrAk"></iframe>
+                        </div>
+                        <p class="fw-bold mt-3">Berikut ini adalah video edukasi pengolahan sampah </p>
                     </div>
                 </div>
             </div>
-            <h3>Pemilahan Sampah</h3>
         </div>
     </div>
-    <!-- end product section -->
-
-    <!-- testimonail-section -->
-
-    <!-- end testimonail-section -->
-
-    <!-- logo carousel -->
-    {{-- <div class="logo-carousel-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="logo-carousel-inner">
-                        <div class="single-logo-item">
-                            <img src="assets/img/company-logos/1.png" alt="">
-                        </div>
-                        <div class="single-logo-item">
-                            <img src="assets/img/company-logos/2.png" alt="">
-                        </div>
-                        <div class="single-logo-item">
-                            <img src="assets/img/company-logos/3.png" alt="">
-                        </div>
-                        <div class="single-logo-item">
-                            <img src="assets/img/company-logos/4.png" alt="">
-                        </div>
-                        <div class="single-logo-item">
-                            <img src="assets/img/company-logos/5.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- end logo carousel -->
+  
 @endsection
 @section('script')
     @if (session('success'))

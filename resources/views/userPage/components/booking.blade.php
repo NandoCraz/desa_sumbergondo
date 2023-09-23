@@ -7,8 +7,8 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
-                        <h5 style="color: bisque">Ingin Tahu Cara Pengolahan Sampah? Yuk Belajar Di</h5>
-                        <h3 style="color: bisque">Wisata Edukasi SumberGondo</h3>
+                        <h5 style="color: rgb(255, 255, 255)">Ingin Tahu Cara Pengolahan Sampah? Yuk Belajar Di</h5>
+                        <h3 style="color: rgb(255, 255, 255)">Wisata Edukasi Sumbergondo</h3>
                         <p>#LikeSumberGondo</p>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                             </form>
                         </div>
                     </div>
-                    <h6 class="mt-2">NOTES : Booking Untuk Wisata Edukasi hanya bisa dipesan minimal 1 Pack (15 Orang). Untuk info lebih
+                    <h6 class="mt-2">CATATAN : Booking Untuk Wisata Edukasi hanya bisa dipesan minimal 1 Pack (15 Orang). Untuk info lebih
                         lanjut atau ingin bertanya silahkan <a href="https://wa.me/6281233911558">Hubungi Admin</a></h6>
                 </div>
             </div>

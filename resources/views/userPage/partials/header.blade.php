@@ -6,7 +6,7 @@
                     <!-- logo -->
                     <div class="site-logo">
                         <a href="/">
-                            <img src="{{ asset('assets/img/logo-kim-wm.png') }}">
+                            <img src="{{ asset('assets/img/Logo_Rejeki_Barokah.png') }}">
                         </a>
                     </div>
                     <!-- logo -->
@@ -16,7 +16,7 @@
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="/produk">Produk</a></li>
-                            <li><a href="/booking">Booking</a></li>
+                            <li><a href="/booking">Wisata Edukasi</a></li>
                             <li><a href="/kelas-pelatihan">Pelatihan</a></li>
                             @guest
                                 <li><a href="/login">Login</a></li>

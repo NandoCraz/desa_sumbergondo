@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('tipe_bayar')->nullable();
             $table->double('total')->nullable();
             $table->string('status')->nullable();
-            $table->enum('payment_status', ['1', '2', '3', '4'])->default('1')->comment('1=Menunggu Pembayaran, 2=Sudah Dibayar, 3=Kadaluarsa, 4=Batal');
+            $table->enum('payment_status', ['1', '2', '3', '4'])->default('1')->comment('1=Menunggu Pembayaran, 2=Sudah Dibayar, 3=Kadaluarsa, 4=Batal')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
