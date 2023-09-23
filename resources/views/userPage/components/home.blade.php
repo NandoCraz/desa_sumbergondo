@@ -9,12 +9,12 @@
                 <div class="col-lg-9 offset-lg-2 text-center">
                     <div class="hero-text">
                         <div class="hero-text-tablecell">
-                            <h2 style="color: rgb(255, 255, 255)">Pengolahan Sampah</h2>
-                            <h1 style="color: rgb(255, 255, 255)">Desa Sumbergondo</h1>
+                            <h1 style="color: rgb(255, 255, 255)">DESA SUMBERGONDO</h1>
+                            <h2 style="color: rgb(255, 255, 255)">PENGELOLAAN SAMPAH MANDIRI</h2>
                             {{-- <p class="subtitle">Bank Sampah, Komposter, dan Incenerator</p> --}}
                             <div class="hero-btns">
                                 <a href="" class="bordered-btn"
-                                    style="cursor: not-allowed; pointer-events: none;">Desa Sumbergondo telah melakukan pengolahan sampah mandiri sejak 2018 dan menjadi satu-satunya desa yang tidak membuang sampah ke TPA sejak 2019. Pengolahan sampah di Desa SumberGondo melibatkan insenerator, komposter, bank sampah, dan meningkatkan pendapatan desa.</a>
+                                    style="cursor: not-allowed; pointer-events: none;">Desa Sumbergondo telah melakukan pengelolaan sampah mandiri sejak 2018 dan menjadi satu-satunya desa yang tidak membuang sampah ke TPA sejak 2019. Pengolahan sampah di Desa Sumbergondo melibatkan insenerator, komposter, dan bank sampah. Sehingga meningkatkan pendapatan desa.</a>
                             </div>
 
                         </div>
