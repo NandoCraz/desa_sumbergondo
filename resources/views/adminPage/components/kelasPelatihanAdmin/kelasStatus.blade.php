@@ -7,7 +7,7 @@
     @endif --}}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Menunggu Konfirmasi Admin</h6>
+            <h6 class="m-0 font-weight-bold text-dark">Menunggu Konfirmasi Admin</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -35,7 +35,7 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <a href="/pelatihan-admin/{{ $konfAdm->id }}"
-                                                class="btn btn-primary">Detail</a>
+                                                class="btn btn-info">Detail</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -52,7 +52,7 @@
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Belum Dibayar</h6>
+            <h6 class="m-0 font-weight-bold text-dark">Belum Dibayar</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -81,7 +81,7 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <a href="/pelatihan-admin/{{ $konf->id }}"
-                                                class="btn btn-primary">Detail</a>
+                                                class="btn btn-info">Detail</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -99,7 +99,7 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <a href="/pelatihan-admin/{{ $blmByr->id }}"
-                                                class="btn btn-primary">Detail</a>
+                                                class="btn btn-info">Detail</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -116,7 +116,7 @@
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Sudah Dibayar</h6>
+            <h6 class="m-0 font-weight-bold text-dark">Sudah Dibayar</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">

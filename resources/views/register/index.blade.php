@@ -31,7 +31,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row align-items-center">
                             <div class="col-lg-6 d-none d-lg-block">
-                                <img src="{{ asset('assets_login/img/logoRegister.png') }}" width="480"
+                                <img src="{{ asset('assets_login/img/Logo_Login.png') }}" width="450" style="padding-left: 50px" 
                                     alt="Login">
                             </div>
                             <div class="col-lg-6">

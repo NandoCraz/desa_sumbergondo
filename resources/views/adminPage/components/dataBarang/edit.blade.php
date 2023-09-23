@@ -1,6 +1,5 @@
 @extends('adminPage.layouts.main')
 @section('content')
-    <a href="/master/data-barang" class=" btn btn-secondary text-decoration-none my-4">Kembali</a>
     <div class="row">
         <div class="col-lg-10">
             <div class="card">
@@ -14,44 +13,46 @@
                     <form method="POST" action="/master/data-barang/{{ $barang->id }}" enctype="multipart/form-data">
                         @method('put')
                         @csrf
-                        <div class="mb-4">
-                            <label for="nama_barang">Nama</label>
-                            <input class="form-control @error('nama_barang') is-invalid @enderror" id="nama_barang"
-                                type="text" name="nama_barang" value="{{ old('nama_barang', $barang->nama_barang) }}"
-                                required autocomplete="off">
-                            @error('nama_barang')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-4">
-                            <label for="harga">Harga</label>
-                            <div class="input-group">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        Rp.
-                                    </span>
-                                </div>
-                                <input class="form-control @error('harga') is-invalid @enderror" id="harga"
-                                    type="text" name="harga" value="{{ old('harga', $barang->harga) }}" required
-                                    autocomplete="off">
+                        <div class="row">
+                            <div class="col-6 mb-4">
+                                <label for="nama_barang">Nama</label>
+                                <input class="form-control @error('nama_barang') is-invalid @enderror" id="nama_barang"
+                                    type="text" name="nama_barang" value="{{ old('nama_barang', $barang->nama_barang) }}"
+                                    required autocomplete="off">
+                                @error('nama_barang')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                            @error('harga')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
+                            <div class="col-4 mb-4">
+                                <label for="harga">Harga</label>
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            Rp.
+                                        </span>
+                                    </div>
+                                    <input class="form-control @error('harga') is-invalid @enderror" id="harga"
+                                        type="text" name="harga" value="{{ old('harga', $barang->harga) }}" required
+                                        autocomplete="off">
                                 </div>
-                            @enderror
-                        </div>
-                        <div class="mb-4">
-                            <label for="stok">Stok</label>
-                            <input class="form-control @error('stok') is-invalid @enderror" id="stok" type="number"
-                                name="stok" value="{{ old('stok', $barang->stok) }}" required autocomplete="off">
-                            @error('stok')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                                @error('harga')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="col-2 mb-4">
+                                <label for="stok">Stok</label>
+                                <input class="form-control @error('stok') is-invalid @enderror" id="stok" type="number"
+                                    name="stok" value="{{ old('stok', $barang->stok) }}" required autocomplete="off">
+                                @error('stok')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="mb-4">
                             <label class="form-control-label">Kategori <p class="text-muted fs-6">(Masukkan setidaknya 1
@@ -100,12 +101,13 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="mb-4 mt-5">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        <div class="text-right mb-2 mt-2">
+                            <button type="submit" class="btn btn-success">Simpan</button>
                         </div>
                     </form>
                 </div>
             </div>
+    <a href="/master/data-barang" class=" btn btn-secondary text-decoration-none my-2">Kembali</a>
         </div>
     </div>
 

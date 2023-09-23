@@ -4,7 +4,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard-admin">
         <div class="sidebar-brand-icon">
-            <img src="{{ asset('assets/img/Logo_Rejeki_Barokah.png') }}" alt="NSParkel" width="185" class="">
+            <img src="{{ asset('assets/img/Logo_Rejeki_Barokah.png') }}" alt="NSParkel" width="100%" class="">
         </div>
         {{-- <div class="sidebar-brand-text mx-3">NS<sub>parkel</sub></div> --}}
     </a>
@@ -35,7 +35,6 @@
                 <a class="collapse-item" href="/master/data-kategori">Data Kategori</a>
                 <a class="collapse-item" href="/master/data-barang">Data Barang</a>
                 <a class="collapse-item" href="/master/data-rw">Data RW</a>
-                <a class="collapse-item" href="/master/data-pamflet">Pamflet</a>
             </div>
         </div>
     </li>
@@ -82,8 +81,8 @@
         </a>
         <div id="bankUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/bank-sampah/data-bank">Data Bank</a>
-                <a class="collapse-item" href="/bank-sampah/komposter">Tagihan Komposter</a>
+                <a class="collapse-item" href="/bank-sampah/data-bank"><i class="fa fa-table text-primary mr-2" aria-hidden="true"></i>Data Bank</a>
+                <a class="collapse-item" href="/bank-sampah/komposter"><i class="fa fa-credit-card text-danger mr-2" aria-hidden="true"></i>Tagihan Komposter</a>
             </div>
         </div>
     </li>

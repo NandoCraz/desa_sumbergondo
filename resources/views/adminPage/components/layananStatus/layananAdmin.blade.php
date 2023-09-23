@@ -6,8 +6,8 @@
         </div>
     @endif --}}
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Menunggu Konfirmasi Admin</h6>
+        <div class="card-header py-3 text-center">
+            <h6 class="m-0 font-weight-bold text-info">Menunggu Konfirmasi Admin</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -34,7 +34,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <a href="/layanan-admin/{{ $konfAdm->id }}" class="btn btn-primary">Detail</a>
+                                            <a href="/layanan-admin/{{ $konfAdm->id }}" class="btn btn-outline-info btn-light">Detail</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -50,8 +50,8 @@
         </div>
     </div>
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Belum Dibayar</h6>
+        <div class="card-header py-3 text-center">
+            <h6 class="m-0 font-weight-bold text-warning">Belum Dibayar</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -79,7 +79,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <a href="/layanan-admin/{{ $konf->id }}" class="btn btn-primary">Detail</a>
+                                            <a href="/layanan-admin/{{ $konf->id }}" class="btn btn-in-outlinefo">D btn-lightetail</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -96,7 +96,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <a href="/layanan-admin/{{ $blmByr->id }}" class="btn btn-primary">Detail</a>
+                                            <a href="/layanan-admin/{{ $blmByr->id }}" class="btn btn--outlineinfo" btn-light>Detail</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -112,8 +112,8 @@
         </div>
     </div>
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Sudah Dibayar</h6>
+        <div class="card-header py-3 text-center">
+            <h6 class="m-0 font-weight-bold text-success">Sudah Dibayar</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -139,7 +139,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <a href="/layanan-admin/{{ $pmbyr->id }}" class="btn btn-primary">Detail</a>
+                                            <a href="/layanan-admin/{{ $pmbyr->id }}" class="btn btn-i-outlinenfo"> btn-lightDetail</a>
                                         </div>
                                     </td>
                                 </tr>

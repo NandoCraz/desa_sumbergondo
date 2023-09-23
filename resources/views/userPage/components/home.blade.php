@@ -4,27 +4,50 @@
 @section('container')
     <!-- hero area -->
     <div class="hero-area hero-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 offset-lg-2 text-center">
-                    <div class="hero-text">
-                        <div class="hero-text-tablecell">
-                            <h1 style="color: rgb(255, 255, 255)">DESA SUMBERGONDO</h1>
-                            <h2 style="color: rgb(255, 255, 255)">PENGELOLAAN SAMPAH MANDIRI</h2>
-                            {{-- <p class="subtitle">Bank Sampah, Komposter, dan Incenerator</p> --}}
-                            <div class="hero-btns">
-                                <a href="" class="bordered-btn"
-                                    style="cursor: not-allowed; pointer-events: none;">Desa Sumbergondo telah melakukan
-                                    pengelolaan sampah mandiri sejak 2018 dan menjadi satu-satunya desa yang tidak membuang
-                                    sampah ke TPA sejak 2019. Pengolahan sampah di Desa Sumbergondo melibatkan insenerator,
-                                    komposter, dan bank sampah. Sehingga meningkatkan pendapatan desa.</a>
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{{ asset('assets/img/komposer.jpg') }}" style="filter: brightness(30%);height: 100%;width: 100%" alt="">
+              </div>
+              <div class="carousel-item">
+                <img src="{{ asset('assets/img/ppkomposter.jpg') }}" style="filter: brightness(30%);height: 100%;width: 100%" alt="">
+              </div>
+              <div class="carousel-item">
+                <img src="{{ asset('assets/img/bank sampah.jpg') }}" style="filter: brightness(30%);height: 100%;width: 100%" alt="">
+              </div>
+              <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 offset-lg-2 text-center">
+                        <div class="hero-text">
+                            <div class="hero-text-tablecell">
+                                <h1 style="color: rgb(255, 255, 255)">DESA SUMBERGONDO</h1>
+                                <h2 style="color: rgb(255, 255, 255)">PENGELOLAAN SAMPAH MANDIRI</h2>
+                                <p class="sub-head" style="color: rgb(255, 255, 255)">Satu-satunya desa di Indonesia yang tidak membuang sampah ke TPA sejak 2019</p>
+                                {{-- <p class="subtitle">Bank Sampah, Komposter, dan Incenerator</p> --}}
+                                <div class="hero-btns">
+                                    <a href="" class="bordered-btn"
+                                        style="cursor: not-allowed; pointer-events: none;">Bank Sampah</a>
+                                    <a href="" class="bordered-btn"
+                                        style="cursor: not-allowed; pointer-events: none;">Komposter</a>
+                                    <a href="" class="bordered-btn"
+                                        style="cursor: not-allowed; pointer-events: none;">Incenerator</a>
+                                </div>
+    
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
     </div>
     <!-- end hero area -->
     {{-- @include('userPage.partials.modal.komentar') --}}
@@ -88,7 +111,9 @@
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe width="420" height="315" src="https://www.youtube.com/embed/dy0FNMOmrAk"></iframe>
                         </div>
-                        <p class="fw-bold mt-3">Berikut ini adalah video edukasi pengolahan sampah </p>
+                        <p class="fw-bold mt-3 mb-4">Berikut ini adalah foto edukasi wisata</p>
+                        <img class="rounded float-start me-3" src="{{ asset('assets/img/foto1.jpg') }}" style="width: 260px;height: 175px;" alt="">
+                        <img class="rounded float-start" src="{{ asset('assets/img/foto3.jpg') }}" style="width: 260px; height: 175px;"  alt="">
                     </div>
                 </div>
             </div>

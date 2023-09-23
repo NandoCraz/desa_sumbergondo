@@ -1,7 +1,7 @@
 @extends('adminPage.layouts.main')
 
 @section('content')
-    <div class="container mb-4">
+    <div class="container mb-4 text-center">
         <h2 class="fw-bolder" style="font-weight: bold">Master Data</h2>
         <div class="row mt-3">
             <div class="col-xl-3 col-md-6 mb-4">

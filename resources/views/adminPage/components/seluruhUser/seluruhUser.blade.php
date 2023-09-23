@@ -6,10 +6,13 @@
             {{ session('success') }}
         </div>
     @endif --}}
+    <div class="my-3" style="justify-content: end">
+        <a href="/tambah-akun" class="btn btn-outline-dark btn-warning" style="font-weight: 700">Tambah Akun Keluarga</a>
+    </div>
+
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Seluruh User</h6>
-            <a href="/tambah-akun" class="btn btn-sm btn-primary mt-3">Tambah Akun Keluarga</a>
+        <div class="card-header py-3 text-center">
+            <h6 class="m-0 font-weight-bold text-success">Seluruh User</h6>
         </div>
         @include('adminPage.partials.modals.userDetail')
         <div class="card-body">

@@ -1,6 +1,5 @@
 @extends('adminPage.layouts.main')
 @section('content')
-    <a href="/master/data-kategori" class=" btn btn-secondary text-decoration-none my-4">Kembali</a>
     <div class="row">
         <div class="col-lg-10">
             <div class="card">
@@ -25,12 +24,13 @@
                             @enderror
                         </div>
                         
-                        <div class="mb-4 mt-5">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        <div class="text-right mb-2 mt-2">
+                            <button type="submit" class="btn btn-success">Simpan</button>
                         </div>
                     </form>
-                </div>
+                </div>                
             </div>
+            <a href="/master/data-kategori" class=" btn btn-secondary text-decoration-none my-2">Kembali</a>
         </div>
     </div>
 @endsection

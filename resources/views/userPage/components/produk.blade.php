@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
+                        <h1>Pupuk Hasil Komposer</h1>
                         <p>#LikeSumberGondo</p>
-                        <h1>Produk</h1>
                     </div>
                 </div>
             </div>
