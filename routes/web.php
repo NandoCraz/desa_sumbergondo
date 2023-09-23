@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\BookingAdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CheckoutController;
@@ -86,9 +87,17 @@ Route::post('/get_rt', [DashboardAdminController::class, 'get_rt']);
 Route::post('/simpan-jadwal', [DashboardAdminController::class, 'simpan_jadwal'])->middleware('admin');
 Route::get('/data-pengolahan', [PengolahanController::class, 'index'])->middleware('admin');
 Route::get('/tambah-tagihan', [PengolahanController::class, 'tambahTagihan'])->middleware('admin');
+Route::get('/tambah-tagihan-komposter/{user:id}', [BankController::class, 'tambahTagihanKomposter'])->middleware('admin');
 Route::get('/tambah-upd-tagihan/{pengolahan:id}', [PengolahanController::class, 'updateTagihan'])->middleware('admin');
 Route::post('/simpan-tagihan', [PengolahanController::class, 'simpanTagihan'])->middleware('admin');
 Route::post('/simpan-update-tagihan', [PengolahanController::class, 'simpanUpdateTagihan'])->middleware('admin');
+Route::get('/bank-sampah/data-bank', [BankController::class, 'dataBank'])->middleware('admin');
+Route::get('/bank-sampah/tambah-data-bank', [BankController::class, 'tambahDataBank'])->middleware('admin');
+Route::get('/bank-sampah/komposter', [BankController::class, 'tagihanKomposter'])->middleware('admin');
+Route::get('/list-nasabah/{bank:id}', [BankController::class, 'listNasabah'])->middleware('admin');
+Route::get('/update-saldo/{user:id}', [BankController::class, 'updateSaldo'])->middleware('admin');
+Route::post('/simpan-update-saldo', [BankController::class, 'simpanSaldo'])->middleware('admin');
+Route::post('/update-tagihan-komposter', [BankController::class, 'updateTagihanKomposter'])->middleware('admin');
 
 // Resource Route
 Route::resource('/master/data-kategori', DataKategoriController::class)->middleware('admin');
@@ -100,6 +109,7 @@ Route::get('/master/tambah-data-rw', [DataRwController::class, 'tambahDataRw'])-
 Route::get('/master/list-data-rt/{warga:id}', [DataRwController::class, 'listDataRt'])->middleware('admin');
 Route::post('/master/simpan-data-rw', [DataRwController::class, 'simpanDataRw'])->middleware('admin');
 Route::post('/simpan-data-rt', [DataRtController::class, 'simpanDataRt'])->middleware('admin');
+Route::post('/simpan-data-bank', [BankController::class, 'simpanDataBank'])->middleware('admin');
 Route::delete('/master/hapus-data-rw/{warga:id}', [DataRwController::class, 'hapusDataRw'])->middleware('admin');
 Route::delete('/master/hapus-data-rt/{tetangga:id}', [DataRtController::class, 'hapusDataRt'])->middleware('admin');
 Route::delete('/hapus-tagihan/{pengolahan:id}', [PengolahanController::class, 'hapusTagihan'])->middleware('admin');

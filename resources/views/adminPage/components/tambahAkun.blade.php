@@ -50,6 +50,14 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <select class="form-select" required name="bank_id" id="bank_id">
+                                        <option value="">-- Pilih Bank --</option>
+                                        @foreach ($banks as $bank)
+                                            <option value="{{ $bank->id }}">{{ $bank->nama_bank }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
                                     <select class="form-select" required name="rw" id="rw">
                                         <option value="">-- Pilih RW --</option>
                                         @foreach ($wargas as $warga)
@@ -85,7 +93,7 @@
 
                                 <div class="mb-3">
                                     <label class="small mb-1" for="c_password">Confirm Password</label>
-                                    <input class="form-control" id="c_password" type="c_password" name="c_password" />
+                                    <input class="form-control" id="c_password" type="password" name="c_password" />
                                 </div>
 
                                 <!-- Submit button-->

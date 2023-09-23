@@ -16,15 +16,17 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
+            $table->foreignId('bank_id');
             $table->foreignId('rw_id')->nullable();
             $table->foreignId('rt_id')->nullable();
             $table->string('name');
+            $table->double('saldo_bank')->default(0);
+            $table->double('tagihan_komposter')->default(0);
             $table->string('username');
             $table->string('email')->unique();
             $table->string('no_hp');
             $table->string('picture_profile')->nullable();
             $table->string('role');
-            $table->integer('tabungan')->default(0)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

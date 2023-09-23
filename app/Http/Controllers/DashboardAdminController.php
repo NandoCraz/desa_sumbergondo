@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use App\Models\Barang;
 use App\Models\Booking;
 use App\Models\Checkout;
@@ -193,8 +194,10 @@ class DashboardAdminController extends Controller
    public function tambahAkun()
    {
       $wargas = Warga::all();
+      $banks = Bank::all();
       return view('adminPage.components.tambahAkun', [
          'wargas' => $wargas,
+         'banks' => $banks,
       ]);
    }
 
@@ -202,6 +205,7 @@ class DashboardAdminController extends Controller
    {
       $data = $request->validate([
          'name' => 'required|max:255',
+         'bank_id' => 'required',
          'username' => 'required|max:255|unique:users',
          'email' => 'required|email|max:255|unique:users',
          'password' => 'required|min:5',

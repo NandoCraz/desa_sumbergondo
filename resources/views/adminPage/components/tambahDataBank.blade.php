@@ -6,20 +6,18 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="text-primary">
-                        Tambah Tagihan
+                        Tambah Bank Sampah
                     </h4>
                 </div>
                 <div class="card-body">
 
-                    <form method="POST" action="/simpan-update-tagihan">
+                    <form method="POST" action="/simpan-data-bank">
                         @csrf
-                        <input type="hidden" name="olah_id" value="{{ $olah_id }}">
                         <div class="mb-4">
-                            <label for="tagihan_insenator">Tagihan</label>
-                            <input class="form-control @error('tagihan_insenator') is-invalid @enderror"
-                                id="tagihan_insenator" type="text" name="tagihan_insenator"
-                                value="{{ old('tagihan_insenator') }}" required autocomplete="off">
-                            @error('tagihan_insenator')
+                            <label for="nama_bank">Nama Bank Sampah</label>
+                            <input class="form-control @error('nama_bank') is-invalid @enderror" id="nama_bank"
+                                type="text" name="nama_bank" value="{{ old('nama_bank') }}" required autocomplete="off">
+                            @error('nama_bank')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

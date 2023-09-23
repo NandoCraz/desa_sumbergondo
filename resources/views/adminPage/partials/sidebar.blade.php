@@ -74,6 +74,19 @@
             <span>Jadwal Pengangkutan</span>
         </a>
     </li>
+    <li class="nav-item {{ Request::Is('bank-sampah*') ? 'active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bankUtilities"
+            aria-expanded="true" aria-controls="bankUtilities">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            <span>Bank Sampah</span>
+        </a>
+        <div id="bankUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/bank-sampah/data-bank">Data Bank</a>
+                <a class="collapse-item" href="/bank-sampah/komposter">Tagihan Komposter</a>
+            </div>
+        </div>
+    </li>
     <li class="nav-item {{ Request::Is('data-pengolahan') ? 'active' : '' }}">
         <a class="nav-link" href="/data-pengolahan">
             <i class="fa fa-recycle" aria-hidden="true"></i>
