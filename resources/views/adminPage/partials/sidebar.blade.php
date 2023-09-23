@@ -90,7 +90,7 @@
     <li class="nav-item {{ Request::Is('data-pengolahan') ? 'active' : '' }}">
         <a class="nav-link" href="/data-pengolahan">
             <i class="fa fa-recycle" aria-hidden="true"></i>
-            <span>Data Pengolahan</span>
+            <span>Iuran Sampah</span>
         </a>
     </li>
     <li class="nav-item {{ Request::Is('seluruh-user') ? 'active' : '' }}">

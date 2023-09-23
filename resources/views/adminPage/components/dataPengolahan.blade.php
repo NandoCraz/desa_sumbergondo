@@ -22,7 +22,7 @@
                             <th>No.</th>
                             <th>Nomor RW</th>
                             <th>Nomor RT</th>
-                            <th>Tagihan Incenator</th>
+                            <th>Tagihan Iuran Sampah</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>

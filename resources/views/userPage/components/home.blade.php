@@ -14,7 +14,10 @@
                             {{-- <p class="subtitle">Bank Sampah, Komposter, dan Incenerator</p> --}}
                             <div class="hero-btns">
                                 <a href="" class="bordered-btn"
-                                    style="cursor: not-allowed; pointer-events: none;">Desa Sumbergondo telah melakukan pengelolaan sampah mandiri sejak 2018 dan menjadi satu-satunya desa yang tidak membuang sampah ke TPA sejak 2019. Pengolahan sampah di Desa Sumbergondo melibatkan insenerator, komposter, dan bank sampah. Sehingga meningkatkan pendapatan desa.</a>
+                                    style="cursor: not-allowed; pointer-events: none;">Desa Sumbergondo telah melakukan
+                                    pengelolaan sampah mandiri sejak 2018 dan menjadi satu-satunya desa yang tidak membuang
+                                    sampah ke TPA sejak 2019. Pengolahan sampah di Desa Sumbergondo melibatkan insenerator,
+                                    komposter, dan bank sampah. Sehingga meningkatkan pendapatan desa.</a>
                             </div>
 
                         </div>
@@ -36,7 +39,7 @@
                         </div>
                         <div class="content">
                             <h3>Bank Sampah</h3>
-                            <p>Pemilahan sampah organik dan non-organik</p>
+                            <p>Pengelolaan sampah rumah tangga yang bisa didaur ulang dan dimanfaatkan</p>
                         </div>
                     </div>
                 </div>
@@ -47,7 +50,7 @@
                         </div>
                         <div class="content">
                             <h3>Komposter</h3>
-                            <p>Pengolahan sampah menjadi pupuk</p>
+                            <p>Pengelolaan sampah organik menjadi pupuk cair dan pupuk kering</p>
                         </div>
                     </div>
                 </div>
@@ -58,7 +61,8 @@
                         </div>
                         <div class="content">
                             <h3>Incenerator</h3>
-                            <p>Pembakaran sampah yang tidak bisa diolah</p>
+                            <p>Pengelolaan sampah melalui proses pembakaran yang memiliki filter udara yang ramah lingkungan
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -74,7 +78,7 @@
             <div class="row">
                 <div class="col-6 text-center">
                     <div class="section-title">
-                        <h3>Step <span class="orange-text">by</span> Step</h3>
+                        <h3>Pilah <span class="orange-text">Sampah</span></h3>
                         <img src="{{ asset('assets/img/Plan evaluation.png') }}" alt="">
                     </div>
                 </div>
@@ -90,7 +94,6 @@
             </div>
         </div>
     </div>
-  
 @endsection
 @section('script')
     @if (session('success'))

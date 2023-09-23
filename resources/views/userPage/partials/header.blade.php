@@ -15,7 +15,7 @@
                     <nav class="main-menu">
                         <ul>
                             <li><a href="/">Home</a></li>
-                            <li><a href="/produk">Produk</a></li>
+                            <li><a href="/produk">Pupuk Organik</a></li>
                             <li><a href="/booking">Wisata Edukasi</a></li>
                             <li><a href="/kelas-pelatihan">Pelatihan</a></li>
                             @guest

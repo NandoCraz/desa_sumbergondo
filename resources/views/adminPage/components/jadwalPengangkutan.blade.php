@@ -26,9 +26,8 @@
                 </div>
                 <div class="mb-4 d-flex flex-column">
                     <label for="desk">Deskripsi</label>
-                    <textarea name="desk" id="desk">
-                        {{ isset($jadwal->desk) ? $jadwal->desk : '' }}
-                    </textarea>
+                    <input type="text" class="form-control" name="desk" id="desk"
+                        value="{{ isset($jadwal->desk) ? $jadwal->desk : '' }}">
                     @error('desk')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -46,8 +45,8 @@
     <script>
         $(document).ready(function() {
             $(".selector").flatpickr({
-                enableTime: true,
-                dateFormat: "Y-m-d H:i",
+                enableTime: false,
+                dateFormat: "Y-m-d",
             });
         });
     </script>
