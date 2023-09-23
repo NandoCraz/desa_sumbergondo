@@ -18,9 +18,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ProvinceSeeder::class,
             CitiesSeeder::class,
-            KategoriSeeder::class,
-            BarangSeeder::class,
-            WargaTetanggaSeeder::class,
         ]);
     }
 }
