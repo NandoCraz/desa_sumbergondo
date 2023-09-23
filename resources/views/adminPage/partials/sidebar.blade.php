@@ -4,7 +4,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard-admin">
         <div class="sidebar-brand-icon">
-            <img src="{{ asset('assets/img/logo-kim-wm.png') }}" alt="NSParkel" width="90" class="rounded-circle">
+            <img src="{{ asset('assets/img/Logo_Rejeki_Barokah.png') }}" alt="NSParkel" width="185" class="">
         </div>
         {{-- <div class="sidebar-brand-text mx-3">NS<sub>parkel</sub></div> --}}
     </a>

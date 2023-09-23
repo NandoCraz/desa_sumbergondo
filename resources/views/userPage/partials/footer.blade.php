@@ -1,13 +1,13 @@
 <div class="footer-area">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-6">
+            <div class="col-lg-6 col-md-4">
                 <div class="footer-box get-in-touch">
-                    <h2 class="widget-title">Kunjungi Toko Kami</h2>
+                    <h2 class="widget-title">Kunjungi Desa Kami</h2>
                     <ul>
-                        <li>Kampus Ketintang Surabaya 60231</li>
-                        <li>yunesa_dompet@gmail.com</li>
-                        <li>+62821-1234-5678</li>
+                        <li>Jl. Raya Sumbergondo, Sumbergondo, Kec. Bumiaji, Kota Batu, Jawa Timur 65335</li>
+                        <li>rejekibarokah358@gmail.com</li>
+                        <a href="wa.me/+6281353507868">Hubungi WhatsApp Kami</a>
                     </ul>
                 </div>
             </div>

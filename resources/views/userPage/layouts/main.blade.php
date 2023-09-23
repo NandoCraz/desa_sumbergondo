@@ -9,10 +9,10 @@
         content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
     <!-- title -->
-    <title>Yunesa</title>
+    <title>Pengolahan Sampah Desa Sumbergondo</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/img/logo_sugo.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/img/Logo_sugo.png') }}">
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
