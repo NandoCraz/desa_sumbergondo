@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
-                        <p>Perbaiki & Modifikasi</p>
+                        <p>#LikeSumberGondo</p>
                         <h1>Keranjang</h1>
                     </div>
                 </div>
@@ -62,8 +62,8 @@
                                                     @csrf
                                                     @method('patch')
                                                     <input type="number" name="kuantitas" class="kuantitas" id="kuantitas"
-                                                        min="0" max="{{ $keranjang->barang->stok }}" data-id="{{ $keranjang->id }}"
-                                                        value="{{ $keranjang->kuantitas }}">
+                                                        min="0" max="{{ $keranjang->barang->stok }}"
+                                                        data-id="{{ $keranjang->id }}" value="{{ $keranjang->kuantitas }}">
                                                 </form>
                                             </td>
                                             <td class="product-total">Rp.

@@ -20,9 +20,7 @@ class DatabaseSeeder extends Seeder
             CitiesSeeder::class,
             KategoriSeeder::class,
             BarangSeeder::class,
-            MontirSeeder::class,
-            PelayananSeeder::class,
-            KecamatanSeeder::class,
+            WargaTetanggaSeeder::class,
         ]);
     }
 }

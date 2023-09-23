@@ -3,8 +3,6 @@
 namespace App\Services\Midtrans;
 
 use Midtrans\Snap;
-use App\Models\Keranjang;
-use App\Models\Checkout;
 
 class CreateSnapTokenLayanan extends Midtrans
 {
@@ -22,7 +20,7 @@ class CreateSnapTokenLayanan extends Midtrans
         $layanans = [];
         array_push($layanans, [
             'id' => $this->booking->id,
-            'price' => $this->booking->total + $this->booking->total_harga_barang,
+            'price' => $this->booking->total,
             'quantity' => 1,
             'name' => 'Total Layanan'
         ]);

@@ -18,11 +18,11 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'username' => 'adminarno',
-            'email' => 'nsparkeladmin@admin.com',
+            'email' => 'admin@admin.com',
             'no_hp' => '081234567890',
             // 'picture_profile' => 'profilePicture/adminArno.jpg',
             'role' => 'admin',
-            'password' => bcrypt('adminarno2022'),
+            'password' => bcrypt('admin2023'),
         ]);
         User::create([
             'name' => 'ZacharyShin',

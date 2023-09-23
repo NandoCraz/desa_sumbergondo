@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('komentars', function (Blueprint $table) {
+        Schema::create('tetanggas', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
-            $table->foreignId('user_id');
-            $table->text('komentar');
-            $table->text('balasan')->nullable();
+            $table->foreignId('rw_id');
+            $table->string('nomor_rt');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('komentars');
+        Schema::dropIfExists('tetanggas');
     }
 };

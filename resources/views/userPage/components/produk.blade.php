@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
-                        <p>Perbaiki & Modifikasi</p>
+                        <p>#LikeSumberGondo</p>
                         <h1>Produk</h1>
                     </div>
                 </div>

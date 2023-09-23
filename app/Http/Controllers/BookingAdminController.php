@@ -9,58 +9,26 @@ class BookingAdminController extends Controller
 {
     public function index()
     {
-        $menungguKonfirmasi = Booking::where('status', 'Konfirmasi Layanan')->latest()->get();
-        $konfirmasiAdmin = Booking::where('status', 'Menunggu Konfirmasi Admin')->latest()->get();
-        $persetujuanLayanan = Booking::where('status', 'Persetujuan Layanan')->latest()->get();
-        $pembayaran = Booking::where('status', 'Pembayaran')->latest()->get();
-        $sedangDikerjakan = Booking::where('status', 'Sedang Dikerjakan')->latest()->get();
-        $selesai = Booking::where('status', 'Selesai')->latest()->get();
+        $menungguKonfirmasi = Booking::where('status', 'Menunggu Konfirmasi')->latest()->get();
+        $dikonfirmasi = Booking::where('status', 'Dikonfirmasi')->latest()->get();
+        $sudahDibayar = Booking::where('status', 'Sudah Dibayar')->latest()->get();
+        $belumDibayar = Booking::where('payment_status', '1')->latest()->get();
+        $sudahDibayarWeb = Booking::where('payment_status', '2')->latest()->get();
 
         return view('adminPage.components.layananStatus.layananAdmin', [
             'menungguKonfirmasi' => $menungguKonfirmasi,
-            'konfirmasiAdmin' => $konfirmasiAdmin,
-            'persetujuanLayanan' => $persetujuanLayanan,
-            'pembayaran' => $pembayaran,
-            'sedangDikerjakan' => $sedangDikerjakan,
-            'selesai' => $selesai,
+            'dikonfirmasi' => $dikonfirmasi,
+            'sudahDibayar' => $sudahDibayar,
+            'belumDibayar' => $belumDibayar,
+            'sudahDibayarWeb' => $sudahDibayarWeb,
         ]);
     }
 
     public function detailLayananAdmin(Booking $booking)
     {
-        $booking = Booking::where('id', $booking->id)->with(['montir'])->first();
+        $booking = Booking::where('id', $booking->id)->first();
         return view('adminPage.components.layananAdmin.detailLayanan', [
             'booking' => $booking,
         ]);
-    }
-
-    public function keputusanAdmin(Request $request, Booking $booking)
-    {
-        // return $request;
-        if ($request->keputusan == 'setuju') {
-            // $booking = Booking::where('id', $booking->id)->first();
-            if ($booking->penawaran_1 != null) {
-                $booking->update([
-                    'total' => $request->penawaran,
-                    'status_penawaran' => 'Disetujui'
-                ]);
-            } elseif ($booking->penawaran_1 != null && $booking->penawaran_2 != null && $booking->penawaran_3 == null) {
-                $booking->update([
-                    'total' => $request->penawaran,
-                    'status_penawaran' => 'Disetujui'
-                ]);
-            } elseif ($booking->penawaran_2 != null && $booking->penawaran_3 != null) {
-                $booking->update([
-                    'total' => $request->penawaran,
-                    'status_penawaran' => 'Disetujui'
-                ]);
-            }
-            return back()->with('success', 'Berhasil Menyetujui Tawaran');
-        } elseif ($request->keputusan == 'tolak') {
-            $booking->update([
-                'status_penawaran' => 'Ditolak'
-            ]);
-            return back()->with('success', 'Berhasil Menolak Tawaran');
-        }
     }
 }

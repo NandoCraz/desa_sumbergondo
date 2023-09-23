@@ -13,10 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kecamatans', function (Blueprint $table) {
+        Schema::create('pamflets', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
-            $table->string('nama_kecamatan');
+            $table->string('img_pamflet');
+            $table->string('judul');
+            $table->string('deskripsi');
+            $table->string('waktu');
+            $table->string('tempat');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kecamatans');
+        Schema::dropIfExists('pamflets');
     }
 };

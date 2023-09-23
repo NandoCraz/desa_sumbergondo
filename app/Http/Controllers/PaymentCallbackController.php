@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Booking;
 use App\Models\Checkout;
+use App\Models\Pelatihan;
 use App\Services\Midtrans\CallbackService;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,10 @@ class PaymentCallbackController extends Controller
                     Booking::where('uuid', $order->uuid)->update([
                         'payment_status' => 2,
                     ]);
+                } elseif ($pelatihan = Pelatihan::where('uuid', $order->uuid)->first()) {
+                    Pelatihan::where('uuid', $order->uuid)->update([
+                        'payment_status' => 2,
+                    ]);
                 }
             }
 
@@ -45,9 +50,12 @@ class PaymentCallbackController extends Controller
                             'stok' => $barang->stok + $pesanan->kuantitas,
                         ]);
                     }
-                    
                 } elseif ($booking = Booking::where('uuid', $order->uuid)->first()) {
                     Booking::where('uuid', $order->uuid)->update([
+                        'payment_status' => 3,
+                    ]);
+                } elseif ($pelatihan = Pelatihan::where('uuid', $order->uuid)->first()) {
+                    Pelatihan::where('uuid', $order->uuid)->update([
                         'payment_status' => 3,
                     ]);
                 }
@@ -60,6 +68,10 @@ class PaymentCallbackController extends Controller
                     ]);
                 } elseif ($booking = Booking::where('uuid', $order->uuid)->first()) {
                     Booking::where('uuid', $order->uuid)->update([
+                        'payment_status' => 3,
+                    ]);
+                } elseif ($pelatihan = Pelatihan::where('uuid', $order->uuid)->first()) {
+                    Pelatihan::where('uuid', $order->uuid)->update([
                         'payment_status' => 3,
                     ]);
                 }

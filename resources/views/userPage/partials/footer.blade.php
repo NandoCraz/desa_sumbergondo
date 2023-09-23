@@ -5,9 +5,9 @@
                 <div class="footer-box get-in-touch">
                     <h2 class="widget-title">Kunjungi Toko Kami</h2>
                     <ul>
-                        <li>Jl. Rangkah VII/106B, Surabaya</li>
-                        <li>nandocraz18@gmail.com</li>
-                        <li>+62812-3391-1558</li>
+                        <li>Kampus Ketintang Surabaya 60231</li>
+                        <li>yunesa_dompet@gmail.com</li>
+                        <li>+62821-1234-5678</li>
                     </ul>
                 </div>
             </div>

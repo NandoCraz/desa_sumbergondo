@@ -4,7 +4,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard-admin">
         <div class="sidebar-brand-icon">
-            <img src="{{ asset('assets/img/nsparkel_logo.png') }}" alt="NSParkel" width="90" class="rounded-circle">
+            <img src="{{ asset('assets/img/logo-kim-wm.png') }}" alt="NSParkel" width="90" class="rounded-circle">
         </div>
         {{-- <div class="sidebar-brand-text mx-3">NS<sub>parkel</sub></div> --}}
     </a>
@@ -34,8 +34,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="/master/data-kategori">Data Kategori</a>
                 <a class="collapse-item" href="/master/data-barang">Data Barang</a>
-                <a class="collapse-item" href="/master/data-montir">Data Montir</a>
-                <a class="collapse-item" href="/master/data-pelayanan">Data Pelayanan</a>
+                <a class="collapse-item" href="/master/data-rw">Data RW</a>
+                <a class="collapse-item" href="/master/data-pamflet">Pamflet</a>
             </div>
         </div>
     </li>
@@ -62,16 +62,28 @@
             <span>Layanan Booking</span>
         </a>
     </li>
+    <li class="nav-item {{ Request::Is('pelatihan-admin') ? 'active' : '' }}">
+        <a class="nav-link" href="/pelatihan-admin">
+            <i class="fa fa-chalkboard" aria-hidden="true"></i>
+            <span>Kelas Pelatihan</span>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::Is('jadwal-pengangkutan') ? 'active' : '' }}">
+        <a class="nav-link" href="/jadwal-pengangkutan">
+            <i class="fa fa-clock" aria-hidden="true"></i>
+            <span>Jadwal Pengangkutan</span>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::Is('data-pengolahan') ? 'active' : '' }}">
+        <a class="nav-link" href="/data-pengolahan">
+            <i class="fa fa-recycle" aria-hidden="true"></i>
+            <span>Data Pengolahan</span>
+        </a>
+    </li>
     <li class="nav-item {{ Request::Is('seluruh-user') ? 'active' : '' }}">
         <a class="nav-link" href="/seluruh-user">
             <i class="fas fa-solid fa-users"></i>
-            <span>Seluruh User</span>
-        </a>
-    </li>
-    <li class="nav-item {{ Request::Is('seluruh-komentar') ? 'active' : '' }}">
-        <a class="nav-link" href="/seluruh-komentar">
-            <i class="fas fa-solid fa-comment"></i>
-            <span>Komentar User</span>
+            <span>Seluruh Warga</span>
         </a>
     </li>
 

@@ -13,176 +13,70 @@
         </div>
         <div class="card-body">
             <div class="row mb-4">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="font-weight-bold">
                                 Status :
-                                @if ($booking->status == 'Konfirmasi Layanan')
-                                    <p>
-                                        <span
-                                            class="badge fs-6 mt-2 text-light bg-secondary p-2">{{ $booking->status }}</span>
-                                    </p>
-                                @elseif($booking->status == 'Menunggu Konfirmasi Admin')
-                                    <p>
-                                        <span class="badge fs-6 mt-2 bg-info text-light p-2">{{ $booking->status }}</span>
-                                    </p>
-                                @elseif($booking->status == 'Persetujuan Layanan')
-                                    <p>
-                                        <span
-                                            class="badge fs-6 mt-2 bg-primary text-light p-2">{{ $booking->status }}</span>
-                                    </p>
-                                @elseif($booking->status == 'Pembayaran' && $booking->payment_status == 1)
-                                    <p>
-                                        <span
-                                            class="badge fs-6 mt-2 bg-warning text-light p-1">{{ $booking->status }}</span><span
-                                            class="fw-bold"> | </span><span class="badge fs-6 mt-2 text-light p-1"
-                                            style="background-color: orangered">Belum Dibayar</span>
-                                    </p>
-                                @elseif($booking->status == 'Pembayaran' && $booking->payment_status == 2)
-                                    <p>
-                                        <span
-                                            class="badge fs-6 mt-2 bg-warning text-light p-1">{{ $booking->status }}</span><span
-                                            class="fw-bold"> | </span><span class="badge fs-6 mt-2 text-light p-1"
-                                            style="background-color: rgb(102, 255, 0)">Sudah Dibayar</span>
-                                    </p>
-                                @elseif($booking->status == 'Sedang Dikerjakan')
-                                    <p>
-                                        <span class="badge fs-6 mt-2 text-light p-1"
-                                            style="background-color: purple">{{ $booking->status }}</span>
-                                        @if ($booking->payment_status == 1)
-                                            <span class="fw-bold"> | </span><span class="badge fs-6 mt-2 text-light p-1"
-                                                style="background-color: orangered">Belum Dibayar</span>
-                                        @elseif($booking->payment_status == 2)
-                                            <span class="fw-bold"> | </span><span class="badge fs-6 mt-2 text-light p-1"
-                                                style="background-color: rgb(102, 255, 0)">Sudah Dibayar</span>
-                                        @endif
-                                    </p>
-                                @elseif($booking->status == 'Selesai')
-                                    <p>
-                                        <span
-                                            class="badge fs-6 mt-2 bg-success text-light p-1">{{ $booking->status }}</span>
-                                    </p>
+                                @if ($booking->tipe_bayar == 'ditempat')
+                                    @if ($booking->status == 'Menunggu Konfirmasi')
+                                        <p>
+                                            <span
+                                                class="badge fs-6 mt-2 text-light bg-secondary p-2">{{ $booking->status }}</span>
+                                        </p>
+                                    @elseif($booking->status == 'Dikonfirmasi')
+                                        <p>
+                                            <span class="badge fs-6 mt-2 text-light p-2"
+                                                style="background-color: purple">Belum Dibayar</span>
+                                        </p>
+                                    @elseif($booking->status == 'Sudah Dibayar')
+                                        <p>
+                                            <span
+                                                class="badge fs-6 mt-2 bg-success text-light p-1">{{ $booking->status }}</span>
+                                        </p>
+                                    @elseif($booking->status == 'Dibatalkan')
+                                        <p>
+                                            <span
+                                                class="badge fs-6 mt-2 bg-danger text-light p-1">{{ $booking->status }}</span>
+                                        </p>
+                                    @endif
+                                @else
+                                    @if ($booking->payment_status == '1')
+                                        <p>
+                                            <span class="badge fs-6 mt-2 text-light p-1"
+                                                style="background-color: purple">Belum Dibayar</span>
+                                        </p>
+                                    @elseif($booking->payment_status == '2')
+                                        <p>
+                                            <span class="badge fs-6 mt-2 bg-success text-light p-1">Sudah Dibayar</span>
+                                        </p>
+                                    @else
+                                        <p>
+                                            <span class="badge fs-6 mt-2 bg-danger text-light p-1">Kadaluarsa</span>
+                                        </p>
+                                    @endif
                                 @endif
                             </h5>
                             <h5 class="font-weight-bold">Nama Pemesan : <p>{{ $booking->nama_pemesan }}</p>
                             </h5>
                             <h5 class="font-weight-bold">No. Telepon : <p>{{ $booking->no_telp }}</p>
                             </h5>
-                            <h5 class="font-weight-bold">Alamat :<h5>Alamat :
-                                    @if ($booking->alamat == null)
-                                        <p>-</p>
-                                    @else
-                                        <p>{{ $booking->alamat }}, {{ $booking->kecamatan->nama_kecamatan }},
-                                            {{ $booking->kode_pos }}, Surabaya</p>
-                                    @endif
-                                </h5>
-                            </h5>
-                            <h5 class="font-weight-bold">Tipe Mobil : <p>{{ $booking->tipe_mobil }}</p>
-                            </h5>
-                            <h5 class="font-weight-bold">Tempat Perbaikan : <p>
-                                    {{ $booking->tempat_perbaikan == 'dirumah' ? 'Di Rumah' : ' Di Bengkel' }}</p>
-                            </h5>
-                            @if ($booking->tempat_perbaikan == 'dibengkel')
-                                <h5 class="font-weight-bold">Alamat Bengkel : <p>Jl. Rangkah VII/124B, Surabaya</p>
-                                </h5>
-                            @endif
+
                             <h5 class="font-weight-bold">Waktu (Tanggal & Jam) : <p>{{ $booking->waktu }}</p>
                             </h5>
-                            <h5 class="font-weight-bold">Tipe Pembayaran : <p>
-                                    {{ $booking->tipe_bayar == 'website' ? 'Melalui Website' : 'COD' }}</p>
+                            <h5 class="font-weight-bold">Request Makanan : <p>
+                                    {{ $booking->req_makan }}</p>
                             </h5>
-                            <h5 class="font-weight-bold">
-                                Montir Pengerjaan :
-                                <p>{{ $booking->montir->nama }} | {{ $booking->montir->no_telp }}</p>
-                                <p><img src="{{ asset('storage/' . $booking->montir->picture_montir) }}"
-                                        alt="{{ $booking->montir->nama }}" class="rounded" width="120"></p>
+                            <h5 class="font-weight-bold">Total Harga : <p>
+                                    Rp. {{ number_format($booking->total) }}</p>
                             </h5>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive mb-5">
-                                <table class="table">
-                                    <h5 class="font-weight-bold">Pelayanan Dipesan</h5>
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Nama Pelayanan</th>
-                                            <th scope="col">Harga</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($booking->pelayanan as $pelayanan)
-                                            <tr>
-                                                <th scope="row">{{ $loop->iteration }}</th>
-                                                <td>{{ $pelayanan->nama_pelayanan }}</td>
-                                                <td>Rp. {{ number_format($pelayanan->harga) }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot class="mt-4">
-                                        <tr>
-                                            <td colspan="4"><span class="fw-bold fs-6">Kendala Lain</span>
-                                                : {{ $booking->kendala == null ? '-' : $booking->kendala }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4"><span class="fw-bold fs-6">Total Biaya
-                                                    Pelayanan</span> : Rp. {{ number_format($booking->total) }}
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <h5 class="font-weight-bold">Barang Dipesan</h5>
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col"></th>
-                                            <th scope="col">Nama Barang</th>
-                                            <th scope="col">Harga</th>
-                                            <th scope="col">Kuantitas</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($booking->barang as $barang)
-                                            <tr>
-                                                <th><img src="{{ asset('storage/' . $barang->picture_barang) }}"
-                                                        alt="{{ $booking->nama_barang }}" width="40"></th>
-                                                <td>{{ $barang->nama_barang }}</td>
-                                                <td>Rp. {{ number_format($barang->harga) }}</td>
-                                                <td>{{ $barang->pivot->kuantitas }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="5"><span class="fw-bold fs-6">Total Harga Barang</span>
-                                                : Rp. {{ number_format($booking->total_harga_barang) }}
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="card-footer mt-3">
-                            <h4>
-                                Total Biaya (Sementara) : Rp.
-                                {{ number_format($booking->total + $booking->total_harga_barang) }}
-                            </h4>
-                        </div>
-                    </div>
-                    {{-- @if ($checkout->payment_status == '1')
-                        <button class="btn btn-lg btn-warning text-light mt-4" id="bayar">Bayar</button>
-                    @endif --}}
                 </div>
             </div>
             <div class="row mt-5">
                 <div class="col-lg-6">
-                    @if ($booking->status == 'Menunggu Konfirmasi Admin')
+                    @if ($booking->status == 'Menunggu Konfirmasi')
                         <div class="d-flex">
                             <form action="/changeLayanan/{{ $booking->id }}" method="post">
                                 @csrf
@@ -190,93 +84,16 @@
                                 <button type="submit" class="btn btn-primary ms-3">Konfirmasi</button>
                             </form>
                         </div>
-                    @elseif($booking->status == 'Pembayaran')
-                        <form action="/changeLayanan/{{ $booking->id }}" method="post">
-                            @csrf
-                            <input type="hidden" name="status" value="dikerjakan">
-                            <button type="submit" class="btn btn-primary ms-3">Kerjakan</button>
-                        </form>
+                    @elseif($booking->status == 'Dikonfirmasi')
+                        <div class="d-flex">
+                            <form action="/changeLayanan/{{ $booking->id }}" method="post">
+                                @csrf
+                                <input type="hidden" name="status" value="sudahDibayar">
+                                <button type="submit" class="btn btn-primary ms-3">Sudah Bayar</button>
+                            </form>
+                        </div>
                     @endif
                 </div>
-                @if ($booking->status == 'Menunggu Konfirmasi Admin')
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <form action="/hargaAkhir/{{ $booking->id }}" method="post">
-                                    @csrf
-                                    <div class="mb-4">
-                                        <label for="harga_akhir" class="fw-bold">Tetapkan Biaya (Untuk Biaya
-                                            Pelayanan)</label>
-                                        <div class="input-group">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    Rp.
-                                                </span>
-                                            </div>
-                                            <input class="form-control @error('harga_akhir') is-invalid @enderror"
-                                                id="harga_akhir" type="text" name="harga_akhir"
-                                                value="{{ old('harga_akhir', $booking->upd_biaya == true ? $booking->total : '') }}"
-                                                required autocomplete="off"
-                                                {{ $booking->upd_biaya == true ? 'readonly' : '' }}>
-                                        </div>
-                                        @error('harga_akhir')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    @if ($booking->upd_biaya == false)
-                                        <button type="submit" class="btn btn-primary">Ubah</button>
-                                    @endif
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-                @if (
-                    $booking->status == 'Persetujuan Layanan' &&
-                        $booking->status_penawaran == 'Diajukan' &&
-                        ($booking->penawaran_1 != null || $booking->penawaran_2 != null || $booking->penawaran_3 != null))
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <form action="/keputusan/{{ $booking->id }}" method="post">
-                                    @csrf
-                                    <div class="mb-4">
-                                        <label for="penawaran" class="fw-bold">Customer Mengajukan (Untuk Biaya
-                                            Pelayanan)</label>
-                                        <div class="input-group">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    Rp.
-                                                </span>
-                                            </div>
-                                            @if ($booking->penawaran_1 != null && $booking->penawaran_2 == null)
-                                                <input class="form-control" name="penawaran" id="penawaran"
-                                                    type="text" value="{{ $booking->penawaran_1 }}" readonly
-                                                    autocomplete="off">
-                                            @elseif($booking->penawaran_1 != null && $booking->penawaran_2 != null && $booking->penawaran_3 == null)
-                                                <input class="form-control" name="penawaran" id="penawaran"
-                                                    type="text" value="{{ $booking->penawaran_2 }}" readonly
-                                                    autocomplete="off">
-                                            @elseif($booking->penawaran_2 != null && $booking->penawaran_3 != null)
-                                                <input class="form-control" name="penawaran" id="penawaran"
-                                                    type="text" value="{{ $booking->penawaran_3 }}" readonly
-                                                    autocomplete="off">
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <button type="submit" name="keputusan" class="btn btn-danger"
-                                            value="tolak">Tolak</button>
-                                        <button type="submit" name="keputusan" class="btn btn-success ml-2"
-                                            value="setuju">Setuju</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @endif
             </div>
         </div>
     </div>

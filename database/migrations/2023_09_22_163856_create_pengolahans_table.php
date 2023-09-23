@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('barang_bookings', function (Blueprint $table) {
+        Schema::create('pengolahans', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
-            $table->foreignId('booking_id')->nullable();
-            $table->foreignId('barang_id')->nullable();
-            $table->integer('kuantitas')->default('1')->nullable();
+            $table->foreignId('rw_id');
+            $table->foreignId('rt_id');
+            $table->double('tagihan_insenator')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang_bookings');
+        Schema::dropIfExists('pengolahans');
     }
 };

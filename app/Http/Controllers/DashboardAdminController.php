@@ -9,7 +9,10 @@ use App\Models\Kategori;
 use App\Models\Komentar;
 use App\Models\Montir;
 use App\Models\Pelayanan;
+use App\Models\Pengangkutan;
+use App\Models\Tetangga;
 use App\Models\User;
+use App\Models\Warga;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,8 +26,6 @@ class DashboardAdminController extends Controller
       $kategoris = Kategori::all();
       $barangs = Barang::all();
       $barangSiap = Barang::where('stok', '!=', 0)->get();
-      $montirs = Montir::all();
-      $pelayanans = Pelayanan::all();
 
       // penjualan
       $belumDibayar = Checkout::where('payment_status', '1')->get();
@@ -38,27 +39,23 @@ class DashboardAdminController extends Controller
       }
 
       // booking
-      $menungguAdmin = Booking::where('status', 'Menunggu Konfirmasi Admin')->get();
-      $penawaran = Booking::where('status_penawaran', 'Diajukan')->get();
-      $pembayaran = Booking::where('status', 'Pembayaran')->get();
-      $dikerjakan = Booking::where('status', 'Sedang Dikerjakan')->get();
-      $selesai = Booking::where('status', 'Selesai')->get();
+      $menungguKonfirmasiBooking = Booking::where('status', 'Menunggu Konfirmasi')->get();
+      $dikonfirmasi = Booking::where('status', 'Dikonfirmasi')->get();
+      $sudahDibayar = Booking::where('status', 'Sudah Dibayar')->get();
       $hasilBooking = 0;
-      foreach ($selesai as $sls) {
+      foreach ($sudahDibayar as $sls) {
          $hasilBooking += $sls->total;
-         $hasilBooking += $sls->total_harga_barang;
       }
 
       // data lainnya
       $users = User::where('role', 'user')->get();
-      $komentars = Komentar::all();
 
       $pesanans = Checkout::withTrashed()->where('status', 4)->select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
          ->whereYear('created_at', date('Y'))
          ->groupBy(DB::raw("Month(created_at)"))
          ->pluck('count', 'month_name');
 
-      $bookings = Booking::withTrashed()->where('status', 'Selesai')->select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
+      $bookings = Booking::withTrashed()->where('status', 'Sudah Dibayar')->select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
          ->whereYear('created_at', date('Y'))
          ->groupBy(DB::raw("Month(created_at)"))
          ->pluck('count', 'month_name');
@@ -72,22 +69,17 @@ class DashboardAdminController extends Controller
          'kategoris' => $kategoris,
          'barangs' => $barangs,
          'barangSiap' => $barangSiap,
-         'montirs' => $montirs,
-         'pelayanans' => $pelayanans,
          'belumDibayar' => $belumDibayar,
          'menungguKonfirmasi' => $menungguKonfirmasi,
          'diproses' => $diproses,
          'dikirim' => $dikirim,
          'penjualanSelesai' => $penjualanSelesai,
          'hasilPenjualan' => $hasilPenjualan,
-         'menungguAdmin' => $menungguAdmin,
-         'penawaran' => $penawaran,
-         'pembayaran' => $pembayaran,
-         'dikerjakan' => $dikerjakan,
-         'selesai' => $selesai,
+         'menungguKonfirmasiBooking' => $menungguKonfirmasiBooking,
+         'dikonfirmasi' => $dikonfirmasi,
+         'sudahDibayar' => $sudahDibayar,
          'hasilBooking' => $hasilBooking,
          'users' => $users,
-         'komentars' => $komentars,
          'labelPesanan' => $labelPesanan,
          'labelBooking' => $labelBooking,
          'dataPesanan' => $dataPesanan,
@@ -97,7 +89,7 @@ class DashboardAdminController extends Controller
 
    public function seluruhUser()
    {
-      $users = User::where('role', 'user')->get();
+      $users = User::where('role', 'keluarga')->get();
       return view('adminPage.components.seluruhUser.seluruhUser', [
          'users' => $users,
       ]);
@@ -198,4 +190,77 @@ class DashboardAdminController extends Controller
       return $pdf->download('laporanLayanan_' . $awal . '-' . $akhir . '.pdf');
    }
 
+   public function tambahAkun()
+   {
+      $wargas = Warga::all();
+      return view('adminPage.components.tambahAkun', [
+         'wargas' => $wargas,
+      ]);
+   }
+
+   public function proses_akun(Request $request)
+   {
+      $data = $request->validate([
+         'name' => 'required|max:255',
+         'username' => 'required|max:255|unique:users',
+         'email' => 'required|email|max:255|unique:users',
+         'password' => 'required|min:5',
+         'c_password' => 'required|same:password',
+         'role' => 'required',
+         'no_hp' => 'required|numeric',
+         'picture_profile' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      ]);
+
+      $data['password'] = bcrypt($request->password);
+
+      if ($request->hasFile('picture_profile')) {
+         $data['picture_profile'] = $request->file('picture_profile')->store('profilePicture', 'public');
+      }
+
+      User::create($data);
+
+      return redirect('/seluruh-user')->with('success', 'Akun berhasil ditambahkan');
+   }
+
+   public function get_rt(Request $request)
+   {
+      $rt = Tetangga::where('rw_id', $request->rw_id)->get();
+      $response = $rt;
+      return response()->json($response);
+   }
+
+   public function jadwalPengangkutan()
+   {
+      $jadwal = Pengangkutan::first();
+      return view('adminPage.components.jadwalPengangkutan', [
+         'jadwal' => $jadwal,
+      ]);
+   }
+
+   public function simpan_jadwal(Request $request)
+   {
+      $data = $request->validate([
+         'waktu' => 'required',
+         'desk' => 'nullable',
+      ]);
+
+      $angkut = Pengangkutan::first();
+
+      if (isset($angkut)) {
+         Pengangkutan::first()->update($data);
+      } else {
+         Pengangkutan::create($data);
+      }
+
+
+      return redirect('/jadwal-pengangkutan')->with('success', 'Jadwal berhasil disimpan');
+   }
+
+   public function dataRw()
+   {
+      $data_rw = Warga::all();
+      return view('adminPage.components.dataRw', [
+         'data_rw' => $data_rw,
+      ]);
+   }
 }

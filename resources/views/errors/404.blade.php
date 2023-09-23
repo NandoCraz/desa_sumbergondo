@@ -8,7 +8,7 @@
     <title>404</title>
     {{-- <link rel="stylesheet" href="assets/css/404.css"> --}}
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"rel="stylesheet");
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet");
 
         @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
 
@@ -154,7 +154,7 @@
             color: #092532;
         }
     </style>
-    <link rel="shortcut icon" href="{{ asset('assets/img/logo_ukk.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/img/logo_sugo.png') }}" type="image/x-icon">
 </head>
 
 <body>

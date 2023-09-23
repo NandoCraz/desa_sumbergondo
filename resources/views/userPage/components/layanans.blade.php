@@ -7,8 +7,8 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
-                        <p>Perbaiki & Modifikasi</p>
-                        <h1>Layanan Perbaikan Saya</h1>
+                        <p>#LikeSumberGondo</p>
+                        <h1>Bookingan Layanan Saya</h1>
                     </div>
                 </div>
             </div>
@@ -29,8 +29,6 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nama Pemesan</th>
-                            <th scope="col">Tempat Perbaikan</th>
-                            <th scope="col">Alamat</th>
                             <th scope="col">Total Harga</th>
                             <th scope="col">Status</th>
                             <th scope="col">Aksi</th>
@@ -42,33 +40,35 @@
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $booking->nama_pemesan }}</td>
-                                    <td>{{ $booking->tempat_perbaikan == 'dirumah' ? 'Di Rumah' : 'Di Bengkel' }}</td>
-                                    <td>{{ $booking->alamat == null ? '-' : $booking->alamat }}</td>
-                                    <td>Rp. {{ number_format($booking->total + $booking->total_harga_barang) }}</td>
+                                    <td>Rp. {{ number_format($booking->total) }}</td>
                                     <td>
-                                        @if ($booking->status == 'Konfirmasi Layanan')
-                                            <span class="badge bg-secondary p-1">{{ $booking->status }}</span>
-                                        @elseif($booking->status == 'Menunggu Konfirmasi Admin')
-                                            <span
-                                                class="badge fs-6 mt-2 bg-info text-light p-1">{{ $booking->status }}</span>
-                                        @elseif($booking->status == 'Persetujuan Layanan')
-                                            <span
-                                                class="badge fs-6 mt-2 bg-primary text-light p-1">{{ $booking->status }}</span>
-                                        @elseif($booking->status == 'Pembayaran')
-                                            <span
-                                                class="badge fs-6 mt-2 bg-warning text-light p-1">{{ $booking->status }}</span>
-                                        @elseif($booking->status == 'Sedang Dikerjakan')
-                                            <span class="badge fs-6 mt-2 text-light p-1"
-                                                style="background-color: purple">{{ $booking->status }}</span>
-                                        @elseif($booking->status == 'Selesai')
-                                            <span
-                                                class="badge fs-6 mt-2 bg-success text-light p-1">{{ $booking->status }}</span>
+                                        @if ($booking->tipe_bayar == 'ditempat')
+                                            @if ($booking->status == 'Menunggu Konfirmasi')
+                                                <span
+                                                    class="badge fs-6 mt-2 bg-warning text-light p-1">{{ $booking->status }}</span>
+                                            @elseif($booking->status == 'Dikonfirmasi')
+                                                <span class="badge fs-6 mt-2 text-light p-1"
+                                                    style="background-color: purple">Belum Dibayar</span>
+                                            @elseif($booking->status == 'Sudah Dibayar')
+                                                <span
+                                                    class="badge fs-6 mt-2 bg-success text-light p-1">{{ $booking->status }}</span>
+                                            @endif
+                                        @endif
+                                        @if ($booking->tipe_bayar == 'website')
+                                            @if ($booking->payment_status == '1')
+                                                <span class="badge fs-6 mt-2 text-light p-1"
+                                                    style="background-color: purple">Belum Dibayar</span>
+                                            @elseif($booking->payment_status == '2')
+                                                <span class="badge fs-6 mt-2 bg-success text-light p-1">Sudah Dibayar</span>
+                                            @else
+                                                <span class="badge fs-6 mt-2 bg-danger text-light p-1">Kadaluarsa</span>
+                                            @endif
                                         @endif
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <a href="/layanan/{{ $booking->uuid }}" class="btn btn-primary">Detail</a>
-                                            @if ($booking->status == 'Konfirmasi Layanan')
+                                            @if ($booking->status == 'Menunggu Konfirmasi' || $booking->status == 'Dikonfirmasi' || $booking->payment_status == '1')
                                                 <form action="/hapusLayanan/{{ $booking->id }}" method="post">
                                                     @csrf
                                                     @method('delete')

@@ -6,7 +6,7 @@
                     <!-- logo -->
                     <div class="site-logo">
                         <a href="/">
-                            <img src="{{ asset('assets/img/nsparkel_logo.png') }}">
+                            <img src="{{ asset('assets/img/logo-kim-wm.png') }}">
                         </a>
                     </div>
                     <!-- logo -->
@@ -17,6 +17,7 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="/produk">Produk</a></li>
                             <li><a href="/booking">Booking</a></li>
+                            <li><a href="/kelas-pelatihan">Pelatihan</a></li>
                             @guest
                                 <li><a href="/login">Login</a></li>
                             @endguest
@@ -27,6 +28,7 @@
                                         <li><a href="/pengaturan">Pengaturan</a></li>
                                         <li><a href="/pesanan">Pesanan Saya</a></li>
                                         <li><a href="/layanans">Layanan Saya</a></li>
+                                        <li><a href="/pelatihans">Kelas Saya</a></li>
                                         <li>
                                             <form action="/logout" method="post">
                                                 @csrf

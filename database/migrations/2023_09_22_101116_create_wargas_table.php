@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('booking_pelayanans', function (Blueprint $table) {
+        Schema::create('wargas', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
-            $table->foreignId('booking_id')->nullable();
-            $table->foreignId('pelayanan_id')->nullable();
+            $table->string('nomor_rw');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('booking_pelayanans');
+        Schema::dropIfExists('wargas');
     }
 };

@@ -9,6 +9,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Seluruh User</h6>
+            <a href="/tambah-akun" class="btn btn-sm btn-primary mt-3">Tambah Akun Keluarga</a>
         </div>
         @include('adminPage.partials.modals.userDetail')
         <div class="card-body">

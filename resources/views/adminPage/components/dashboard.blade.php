@@ -57,46 +57,10 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card shadow h-100 py-2" style="border-left: 4px solid red">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: red">
-                                    Data Montir
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($montirs) }}</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fa fa-user-circle fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card shadow h-100 py-2" style="border-left: 4px solid cadetblue">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: cadetblue">
-                                    Total Pelayanan
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($pelayanans) }}</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fa fa-wrench fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="container mb-4">
-        <h2 class="fw-bolder" style="font-weight: bold">Data Penjualan Sparepart</h2>
+        <h2 class="fw-bolder" style="font-weight: bold">Data Penjualan Produk</h2>
         <div class="row mt-3">
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card shadow h-100 py-2" style="border-left: 4px solid coral">
@@ -207,51 +171,18 @@
         <h2 class="fw-bolder" style="font-weight: bold">Data Booking Layanan</h2>
         <div class="row mt-3">
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card shadow h-100 py-2" style="border-left: 4px solid orange">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: orange">
-                                    Menunggu Konfirmasi Admin
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($menungguAdmin) }}</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fa fa-exclamation-circle fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card shadow h-100 py-2" style="border-left: 4px solid gray">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: gray">
-                                    Penawaran
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($penawaran) }}</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fa fa-question-circle fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card shadow h-100 py-2" style="border-left: 4px solid indigo">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: indigo">
-                                    Pembayaran
+                                    Menunggu Konfirmasi
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($pembayaran) }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($menungguKonfirmasiBooking) }}
+                                </div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-credit-card fa-2x text-gray-300"></i>
+                                <i class="fa fa-spinner fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -263,12 +194,12 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: lawngreen">
-                                    Sedang Dikerjakan
+                                    Dikonfirmasi
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($dikerjakan) }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($dikonfirmasi) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-spinner fa-2x text-gray-300"></i>
+                                <i class="fa fa-check-square fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -280,12 +211,12 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: salmon">
-                                    Selesai
+                                    Sudah Dibayar
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($selesai) }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($sudahDibayar) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fa fa-check-square fa-2x text-gray-300"></i>
+                                <i class="fa fa-credit-card fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -297,7 +228,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: tomato">
-                                    Hasil Pelayanan Service
+                                    Hasil Booking
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{ number_format($hasilBooking) }}
                                 </div>
@@ -331,27 +262,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card shadow h-100 py-2" style="border-left: 4px solid purple">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: purple">
-                                    Total Ulasan User
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($komentars) }}</div>
-                            </div>
-                            <div class="col-auto" style="color: rgb(52, 52, 255)">
-                                <i class="fa fa-comments fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="container mt-5">
-        <h2 class="mb-4 text-center" style="font-weight: bold">Total Penjualan Sparepart & Layanan Service</h2>
+        <h2 class="mb-4 text-center" style="font-weight: bold">Total Penjualan Produk & Sewa Booking</h2>
         <canvas id="myChart" class="mb-5" height="100px"></canvas>
     </div>
 @endsection
@@ -412,13 +326,13 @@
         const data = {
             labels: labelPesanan,
             datasets: [{
-                    label: 'Total Penjualan Sparepart',
+                    label: 'Total Penjualan Produk',
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 99, 132)',
                     data: dataPesanan,
                 },
                 {
-                    label: 'Total Layanan Service',
+                    label: 'Total Sewa Booking',
                     backgroundColor: 'rgb(52, 52, 255)',
                     borderColor: 'rgb(52, 52, 255)',
                     data: dataBooking,
