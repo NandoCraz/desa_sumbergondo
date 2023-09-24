@@ -79,6 +79,12 @@
                                             value="{{ auth()->user()->email }}" disabled readonly />
                                     </div>
 
+                                    <div class="mb-3">
+                                        <label class="small mb-1" for="saldo_bank">Saldo Bank</label>
+                                        <input class="form-control" id="saldo_bank" type="saldo_bank"
+                                            value="{{ auth()->user()->saldo_bank }}" disabled readonly />
+                                    </div>
+
                                     <!-- Submit button-->
 
                                 </div>
