@@ -1,11 +1,10 @@
 @extends('adminPage.layouts.main')
 @section('content')
-    <a href="/data-pengolahan" class=" btn btn-secondary text-decoration-none my-4">Kembali</a>
     <div class="row">
         <div class="col-lg-10">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="text-primary">
+                    <h4 class="text-dark" style="font-weight: 700">
                         Tambah Bank Sampah
                     </h4>
                 </div>
@@ -23,11 +22,14 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="mb-4 mt-5">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        <div class="text-right mb-2 mt-3">
+                            <button type="submit" class="btn btn-info">Simpan</button>
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="mb-4 mt-2">
+                <a href="/bank-sampah/data-bank" class=" btn btn-outline-dark btn-warning text-decoration-none my-4" style="font-weight: 700">Kembali</a>
             </div>
         </div>
     </div>

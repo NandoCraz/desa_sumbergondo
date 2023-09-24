@@ -8,8 +8,10 @@
     @endif --}}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Seluruh User</h6>
-            <a href="/tambah-akun" class="btn btn-sm btn-primary mt-3">Tambah Akun Keluarga</a>
+            <div class="text-center">
+                <h6 class="m-0 font-weight-bold text-dark mb-2" style="font-weight: 700;">Seluruh User</h6>
+            </div>
+            <a href="/tambah-akun" class="btn btn-sm btn-info mt-3">Tambah Akun Keluarga</a>
         </div>
         @include('adminPage.partials.modals.userDetail')
         <div class="card-body">

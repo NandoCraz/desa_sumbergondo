@@ -8,7 +8,7 @@
                     <div class="col-xl-4">
                         <!-- Profile picture card-->
                         <div class="card mb-4 mb-xl-0">
-                            <div class="card-header">Foto Profile</div>
+                            <div class="card-header" style="font-weight: 700">Foto Profile</div>
                             <div class="card-body text-center">
                                 <form method="POST" action="/proses-akun" enctype="multipart/form-data">
                                     @csrf
@@ -34,58 +34,59 @@
                     </div>
                     <div class="col-xl-8">
                         <!-- Account details card-->
-                        <div class="card mb-4">
-                            <div class="card-header">User Details</div>
+                        <div class="card mb-1">
+                            <div class="card-header" style="font-weight: 700">User Details</div>
                             <div class="card-body">
                                 <input type="hidden" name="role" value="keluarga">
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="nama">Nama</label>
-                                    <input class="form-control @error('name') is-invalid @enderror" id="nama"
-                                        name="name" type="text" placeholder="Masukkan nama" required />
-                                    @error('name')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <select class="form-select" required name="bank_id" id="bank_id">
-                                        <option value="">-- Pilih Bank --</option>
-                                        @foreach ($banks as $bank)
-                                            <option value="{{ $bank->id }}">{{ $bank->nama_bank }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <select class="form-select" required name="rw" id="rw">
-                                        <option value="">-- Pilih RW --</option>
-                                        @foreach ($wargas as $warga)
-                                            <option value="{{ $warga->id }}">{{ $warga->nomor_rw }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <select class="form-select" required name="rt" id="rt">
-                                        <option value="">-- Pilih RT --</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
+                                <div class="row">
+                                    <div class="mb-3 col-6">
+                                        <label class="small mb-1" for="nama">Nama</label>
+                                        <input class="form-control @error('name') is-invalid @enderror" id="nama"
+                                            name="name" type="text" placeholder="Masukkan nama" required />
+                                        @error('name')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-6">
                                     <label class="small mb-1" for="username">Username</label>
                                     <input class="form-control" name="username" id="username" type="text" />
                                 </div>
-
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="no_hp">No. Handphone</label>
-                                    <input class="form-control" name="no_hp" id="no_hp" type="text" />
                                 </div>
-
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="email">Email</label>
-                                    <input class="form-control" id="email" type="email" name="email" />
+                                <div class="row">
+                                    <div class="col-4 mb-3">
+                                        <select class="form-select" required name="bank_id" id="bank_id">
+                                            <option value="">-- Pilih Bank --</option>
+                                            @foreach ($banks as $bank)
+                                                <option value="{{ $bank->id }}">{{ $bank->nama_bank }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-4 mb-3">
+                                        <select class="form-select" required name="rw" id="rw">
+                                            <option value="">-- Pilih RW --</option>
+                                            @foreach ($wargas as $warga)
+                                                <option value="{{ $warga->id }}">{{ $warga->nomor_rw }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-4 mb-3">
+                                        <select class="form-select" required name="rt" id="rt">
+                                            <option value="">-- Pilih RT --</option>
+                                        </select>
+                                    </div>
                                 </div>
-
+                                <div class="row">
+                                    <div class="col-8 mb-3">
+                                        <label class="small col-8 mb-1" for="email">Email</label>
+                                        <input class="form-control" id="email" type="email" name="email" />
+                                    </div>
+                                    <div class="col-4 mb-3">
+                                        <label class="small mb-1" for="no_hp">No. Handphone</label>
+                                        <input class="form-control" name="no_hp" id="no_hp" type="text" />
+                                    </div>
+                                </div>
                                 <div class="mb-3">
                                     <label class="small mb-1" for="password">Password</label>
                                     <input class="form-control" id="password" type="password" name="password" />
@@ -97,12 +98,15 @@
                                 </div>
 
                                 <!-- Submit button-->
-                                <div class="text-end mt-5">
-                                    <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
+                                <div class="text-right mt-2">
+                                    <button class="btn btn-success btn-outline-dark" style="font-weight: 700" type="submit">Simpan Perubahan</button>
                                 </div>
                                 </form>
 
                             </div>
+                        </div>
+                        <div class="mb-4">
+                            <a href="/seluruh-user" class=" btn btn-outline-dark btn-warning text-decoration-none my-2" style="font-weight: 700">Kembali</a>
                         </div>
                     </div>
                 </div>
